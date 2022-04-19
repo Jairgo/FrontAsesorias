@@ -4,9 +4,9 @@ function LogoTitle() {
     return (
         <Image
         style={styles.tinyLogo}
-        source={{
-        uri: 'https://reactnative.dev/img/tiny_logo.png',
-        }}
+        source={
+            require('../pictures/perfil.jpeg')
+        }
         />
     );
 }
@@ -15,6 +15,8 @@ const styles = StyleSheet.create({
     tinyLogo: {
         width: 50,
         height: 50,
+        borderRadius: 50,
+        marginLeft: 12,
     }
 });
 
