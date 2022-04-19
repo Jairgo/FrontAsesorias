@@ -1,0 +1,72 @@
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { MaterialCommunityIcons, FontAwesome5, Feather } from '@expo/vector-icons';
+import HomeScreen from '../screens/HomeScreen';
+import SubjectsScreens from '../screens/SubjectsScreens';
+import ScheduleScreen from '../screens/ScheduleScreen';
+import MessageScreen from '../screens/MessageScreen';
+import ProfileScreen from '../screens/ProfileScreen';
+
+const Tab = createMaterialBottomTabNavigator();
+
+export default function BottomApp() {
+    return (
+        <NavigationContainer>
+            <Tab.Navigator
+                initialRouteName="Inicio"
+                activeColor="#fe5700"
+                inactiveColor="#747D8C"
+                barStyle={{ backgroundColor: '#f2f2f2' }}
+            >
+                <Tab.Screen
+                    name="Inicio"
+                    component={HomeScreen}
+                    options={{
+                        tabBarLabel: 'Inicio',
+                        tabBarIcon: ({ color }) => (
+                            <MaterialCommunityIcons name="home" color={color} size={24} />
+                        ),
+                    }}
+                />
+                <Tab.Screen
+                    name="Horario"
+                    component={ScheduleScreen}
+                    options={{
+                        tabBarLabel: 'Horario',
+                        tabBarIcon: ({ color }) => (
+                            <MaterialCommunityIcons name="clock-outline" color={color} size={24} />
+                        ),
+                    }}
+                />
+                <Tab.Screen
+                    name="Materias"
+                    component={SubjectsScreens}
+                    options={{
+                        tabBarLabel: 'Materias',
+                        tabBarIcon: ({ color }) => (
+                            <Feather name="book-open" color={color} size={24} />
+                        ),
+                    }} />
+                <Tab.Screen
+                    name="Mensajes"
+                    component={MessageScreen}
+                    options={{
+                        tabBarLabel: 'Mensajes',
+                        tabBarIcon: ({ color }) => (
+                            <MaterialCommunityIcons name="message-text-outline" color={color} size={24} />
+                        ),
+                    }} />
+                <Tab.Screen
+                    name="Cuenta"
+                    component={ProfileScreen}
+                    options={{
+                        tabBarLabel: 'Cuenta',
+                        tabBarIcon: ({ color }) => (
+                            <FontAwesome5 name="user-circle" color={color} size={24} />
+                        ),
+                    }} />
+            </Tab.Navigator>
+        </NavigationContainer>
+    );
+}
