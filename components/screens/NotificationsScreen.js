@@ -1,11 +1,11 @@
 import { View, Text } from 'react-native';
 
-function HomeScreen() {
+function NotificationsScreen() {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Home Screen</Text>
+        <Text>Notifications Screen</Text>
       </View>
     );
 }
 
-export default HomeScreen;
+export default NotificationsScreen;
