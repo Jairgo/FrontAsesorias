@@ -22,7 +22,7 @@ function SolicitudAsesoria() {
                         <Text style={styles.siguienteText} >{Strings.nextButton}</Text>
             </TouchableOpacity>
         </View>
-    );
+    ); 
 }
 
 const styles = StyleSheet.create({
