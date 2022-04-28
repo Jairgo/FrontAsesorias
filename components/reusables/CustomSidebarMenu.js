@@ -10,6 +10,7 @@ import {
   ImageBackground,
   Text,
   Linking,
+  TouchableOpacity,
 } from 'react-native';
 
 import {
@@ -17,6 +18,7 @@ import {
   DrawerItemList,
   DrawerItem,
 } from '@react-navigation/drawer';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import NotificationsScreen from '../screens/NotificationsScreen';
 
 // import NotificationsScreen from '../stacks/NotificationsStack';
@@ -72,7 +74,7 @@ const CustomSidebarMenu = (props) => {
             </View>
           </View>
         </View>
-        <View style={{flex: 1, backgroundColor: '#f4511e', paddingTop: 10}}>
+        <View style={{flex: 1, backgroundColor: 'white', paddingTop: 10}}>
           <DrawerItemList {...props} />
         </View>
         {/* <DrawerItem 
@@ -124,14 +126,20 @@ const CustomSidebarMenu = (props) => {
           </Text>
         </View> */}
       </DrawerContentScrollView>
-      <Text
-        style={{
-          fontSize: 16,
-          textAlign: 'center',
-          color: 'grey'
-        }}>
-        App Asesorías
-      </Text>
+      <View style={{padding: 20, borderTopWidth: 1, borderTopColor: '#f4511e'}}>
+        <TouchableOpacity onPress={() => {}} style={{paddingVertical: 15}}>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <Ionicons name="exit-outline" size={22} />
+            <Text
+              style={{
+                fontSize: 15,
+                marginLeft: 5,
+              }}>
+              Sign Out
+            </Text>
+          </View>
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 };
