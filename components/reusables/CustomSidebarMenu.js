@@ -7,6 +7,7 @@ import {
   View,
   StyleSheet,
   Image,
+  ImageBackground,
   Text,
   Linking,
 } from 'react-native';
@@ -16,7 +17,7 @@ import {
   DrawerItemList,
   DrawerItem,
 } from '@react-navigation/drawer';
-import NotificationsStack from '../stacks/NotificationsStack';
+import NotificationsScreen from '../screens/NotificationsScreen';
 
 // import NotificationsScreen from '../stacks/NotificationsStack';
 // import ProfileScreen from '../stacks/ProfileStack';
@@ -32,14 +33,48 @@ const CustomSidebarMenu = (props) => {
   return (
     <SafeAreaView style={{flex: 1}}>
       {/*Top Large Image */}
-      <Image
+      {/* <Image
         source={
             require('../pictures/perfil.jpeg')
         }
         style={styles.tinyLogo}
-      />
-      <DrawerContentScrollView {...props}>
-        <DrawerItemList {...props} />
+      /> */}
+      <DrawerContentScrollView 
+      {...props}
+      contentContainerStyle={{backgroundColor: '#f4511e'}}
+      >
+      <View
+          // source={require('../pictures/orange_Background.png')}
+          style={{padding: 20, backgroundColor: '#f4511e'}}
+          >
+          <View style={{flexDirection: 'row'}}>
+            <Image
+              source={require('../pictures/perfil.jpeg')}
+              style={{height: 80, width: 80, borderRadius: 40, marginBottom: 10, opacity: 1}}
+            />
+            <View style={{flexDirection: 'column', marginLeft: 10}}>
+              <Text
+                style={{
+                  color: '#fff',
+                  fontSize: 18,
+                  marginBottom: 5,
+                }}>
+                Jessica Ramírez
+              </Text>
+              <Text
+                style={{
+                  color: '#fff',
+                  marginRight: 5,
+                }}>
+                Ing. Industrial
+              </Text>
+                {/* <FontAwesome5 name="coins" size={14} color="#fff" /> */}
+            </View>
+          </View>
+        </View>
+        <View style={{flex: 1, backgroundColor: '#f4511e', paddingTop: 10}}>
+          <DrawerItemList {...props} />
+        </View>
         {/* <DrawerItem 
           style={styles.colorItem}
           label="Profile"
@@ -64,14 +99,14 @@ const CustomSidebarMenu = (props) => {
           name="Terms and conditions" 
           component={TermsAndConditionsScreen} 
         />*/}
-        <DrawerItem 
+        {/* <DrawerItem 
           style={styles.colorItem}
           label="Notifications"
           name="Notifications" 
-          onPress={() => {NotificationsStack}}
+          onPress={() => {NotificationsScreen}}
           // component={NotificationsScreen} 
-        /> 
-        <DrawerItem
+        />  */}
+        {/* <DrawerItem
           style={styles.colorItem}
           label="Visit Us"
           onPress={() => Linking.openURL('https://aboutreact.com/')}
@@ -87,7 +122,7 @@ const CustomSidebarMenu = (props) => {
             }}>
             Rate Us
           </Text>
-        </View>
+        </View> */}
       </DrawerContentScrollView>
       <Text
         style={{

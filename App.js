@@ -1,13 +1,13 @@
-// import React from 'react';
-// import HeaderApp from './components/reusables/HeaderApp';
+import React from 'react';
+import HeaderApp from './components/reusables/HeaderApp';
 
-// function App() {
-//   return (
-//     <HeaderApp />
-//   );
-// }
+function App() {
+  return (
+    <HeaderApp />
+  );
+}
 
-// export default App;
+export default App;
 
 
 
@@ -193,17 +193,21 @@
 
 
 
-import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
 
-import DrawerNavigator from "./components/navigation/DrawerNavigator";
 
-const App = () => {
-  return (
-    <NavigationContainer>
-      <DrawerNavigator />
-    </NavigationContainer>
-  );
-};
 
-export default App;
+
+// import React from "react";
+// import { NavigationContainer } from "@react-navigation/native";
+
+// import DrawerNavigator from "./components/navigation/DrawerNavigator";
+
+// const App = () => {
+//   return (
+//     <NavigationContainer>
+//       <DrawerNavigator />
+//     </NavigationContainer>
+//   );
+// };
+
+// export default App;

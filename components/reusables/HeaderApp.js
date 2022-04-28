@@ -87,8 +87,10 @@ function HeaderApp() {
                         backgroundColor: 'white',
                         width: 250,
                         shadowColor: '#f4511e',
-                        colo
                     },
+                    // drawerType: isLargeScreen ? 'permanent' : 'back',
+                    // drawerStyle: isLargeScreen ? null : { width: '100%' },
+                    overlayColor: 1,
                 }}
                 drawerContent={(props) => <CustomSidebarMenu {...props} />}
             >
