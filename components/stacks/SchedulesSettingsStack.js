@@ -18,8 +18,8 @@ function SchedulesSettingsStack() {
                 },
             }}
         >
-            <Stack.Screen 
-                name="Home"
+            <Stack.Screen
+                name="SchedulesSettingsStacks"
                 component={SchedulesSettingsScreen}
                 options={({ navigation, route }) => ({
                     headerLeft: (props) => <LogoTitle {...props} />,

@@ -18,8 +18,8 @@ function SecurityStack() {
                 },
             }}
         >
-            <Stack.Screen 
-                name="Home"
+            <Stack.Screen
+                name="SecurityStack"
                 component={SecurityScreen}
                 options={({ navigation, route }) => ({
                     headerLeft: (props) => <LogoTitle {...props} />,

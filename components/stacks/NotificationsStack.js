@@ -18,8 +18,8 @@ function NotificationsStack() {
                 },
             }}
         >
-            <Stack.Screen 
-                name="Home"
+            <Stack.Screen
+                name="NotificationsStack"
                 component={NotificationsScreen}
                 options={({ navigation, route }) => ({
                     headerLeft: (props) => <LogoTitle {...props} />,

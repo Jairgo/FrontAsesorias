@@ -18,9 +18,8 @@ function ProfileStack() {
                 },
             }}
         >
-            <Stack.Screen 
-                name="Home"
-                // component={HomeScreen}
+            <Stack.Screen
+                name="ProfileStack"
                 component={ProfileScreen}
                 options={({ navigation, route }) => ({
                     headerLeft: (props) => <LogoTitle {...props} />,

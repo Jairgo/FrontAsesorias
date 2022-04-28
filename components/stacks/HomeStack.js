@@ -1,5 +1,5 @@
 import React from 'react';
-import TermsAndConditionsScreen from '../screens/TermsAndConditionsScreen';
+import BottomApp from '../reusables/BottomApp';
 import LogoTitle from '../items/LogoTitle';
 import UserName from '../items/UserName';
 import Notifications from '../items/Notifications';
@@ -8,7 +8,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
 
-function TermsAndConditionsStack() {
+function HomeStack() {
     return (
         <Stack.Navigator
             screenOptions={{
@@ -19,8 +19,8 @@ function TermsAndConditionsStack() {
             }}
         >
             <Stack.Screen
-                name="TermsAndConditionsStack"
-                component={TermsAndConditionsScreen}
+                name="HomeStack"
+                component={BottomApp}
                 options={({ navigation, route }) => ({
                     headerLeft: (props) => <LogoTitle {...props} />,
                     headerTitle: (props) => <UserName {...props} />,
@@ -28,9 +28,8 @@ function TermsAndConditionsStack() {
                     headerRight: () => <Notifications />,
                 })}
             />
-            {/* <Stack.Screen name="Settings" component={SettingsScreen} /> */}
         </Stack.Navigator>
     );
 }
 
-export default TermsAndConditionsStack;
+export default HomeStack;
