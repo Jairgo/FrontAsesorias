@@ -7,6 +7,7 @@ import ProfileScreen from '../stacks/ProfileStack';
 import SchedulesSettingsScreen from '../stacks/SchedulesSettingsStack';
 import SecurityScreen from '../stacks/SecurityStack';
 import TermsAndConditionsScreen from '../stacks/TermsAndConditionsStack';
+import CustomSidebarMenu from './CustomSidebarMenu';
 
 
 
@@ -76,16 +77,20 @@ function HeaderApp() {
             <Drawer.Navigator
                 useLegacyImplementation
                 initialRouteName="Profile"
-                activeTintColor='green'
+                drawerContentOptions={{
+                activeTintColor: '#f4511e',
+                itemStyle: {marginVertical: 5},
+                }}
                 screenOptions={{
                     headerShown: false, 
                     drawerStyle: {
-                        Color: '#c6cbef',
+                        backgroundColor: 'white',
                         width: 250,
-                        // activeTintColor: 'green'
-                        // activeBackgroundColor: 'green',
+                        shadowColor: '#f4511e',
+                        colo
                     },
                 }}
+                drawerContent={(props) => <CustomSidebarMenu {...props} />}
             >
                 {/* <Drawer.Screen name="Root" component={Root} /> */}
                 <Drawer.Screen name="Profile" component={ProfileScreen}/>
@@ -95,6 +100,27 @@ function HeaderApp() {
                 <Drawer.Screen name="Notifications" component={NotificationsScreen} />
             </Drawer.Navigator>
         </NavigationContainer>
+        // <NavigationContainer>
+        //     <Drawer.Navigator
+        //         drawerContentOptions={{
+        //         activeTintColor: '#e91e63',
+        //         itemStyle: {marginVertical: 5},
+        //         }}
+        //         screenOptions={{
+        //             headerShown: false, 
+        //             drawerStyle: {
+        //                 width: 250,
+        //             },
+        //         }}
+        //         drawerContent={(props) => <CustomSidebarMenu {...props} />}>
+        //         {/* <Drawer.Screen
+        //         name="FirstPage"
+        //         options={{drawerLabel: 'First page Option'}}
+        //         component={firstScreenStack}
+        //         /> */}
+        //         <Drawer.Screen name="Profile" component={ProfileScreen}/>
+        //     </Drawer.Navigator>
+        // </NavigationContainer>
     );
 }
 

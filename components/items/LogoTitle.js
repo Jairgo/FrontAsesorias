@@ -1,6 +1,7 @@
+import React from 'react';
 import {Image, StyleSheet} from 'react-native';
 
-function LogoTitle() {
+function LogoTitle( props ) {
     return (
         <Image
         style={styles.tinyLogo}
