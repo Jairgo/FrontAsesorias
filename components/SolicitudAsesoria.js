@@ -24,17 +24,9 @@ function SolicitudAsesoria() {
     );
 }
 
-function TextoAmplio() {
-    return (
-        <NativeBaseProvider>
-            <TextArea h={20} placeholder="Ingresa información acerca del tema que te gustaría revisar" w="75%" maxW="300" />
-        </NativeBaseProvider>
-    );
-}
-
 const styles = StyleSheet.create({
     screen: {
-        padding: 50
+        padding: 70
     },
     siguienteButton: {
         marginRight: 40,
