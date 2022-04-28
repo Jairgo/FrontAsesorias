@@ -12,4 +12,6 @@ export default {
     removeButton: 'Eliminar',
     editButton: 'Editar',
     seleccionarHorario: 'Selecciona un horario',
+    seleccionarAsesor: 'Selecciona un asesor',
+    solicitarAsesoria: 'Solicitar asesoría',
 }

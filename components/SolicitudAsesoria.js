@@ -2,27 +2,34 @@ import React, { useState } from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
 import Strings from '../constants/Strings';
 import Colors from '../constants/Colors';
+import { NativeBaseProvider, TextArea } from 'native-base';
+
 
 function SolicitudAsesoria() {
 
     return (
-        <View style={styles.screen}>
-            <Text style={styles.tituloText}>{Strings.seleccionarHorario}</Text>
-            <Text style={styles.descripcionText}>Describe el tema que te gustaría revisar:</Text>
-            <TextInput 
-                editable
-                multiline
-                numberOfLines={6}
-                maxLength={40} 
-                placeholder="Ingresa información acerca del tema que te gustaría revisar"
-            />
-            <TouchableOpacity
+        <NativeBaseProvider>
+            <View style={styles.screen}>
+                <Text style={styles.tituloText}>{Strings.seleccionarHorario}</Text>
+                <Text style={styles.descripcionText}>Describe el tema que te gustaría revisar:</Text>
+                <TextArea color={Colors.negroColor} bg={Colors.naranjaSecundarioColor} h={40} placeholder="Ingresa información acerca del tema que te gustaría revisar" w="100%" maxW="350" />
+                <TouchableOpacity
                     style={styles.siguienteButton}
                     underlayColor='#fff'>
-                        <Text style={styles.siguienteText} >{Strings.nextButton}</Text>
-            </TouchableOpacity>
-        </View>
-    ); 
+                    <Text style={styles.siguienteText} >{Strings.nextButton}</Text>
+                </TouchableOpacity>
+            </View>
+        </NativeBaseProvider>
+
+    );
+}
+
+function TextoAmplio() {
+    return (
+        <NativeBaseProvider>
+            <TextArea h={20} placeholder="Ingresa información acerca del tema que te gustaría revisar" w="75%" maxW="300" />
+        </NativeBaseProvider>
+    );
 }
 
 const styles = StyleSheet.create({
@@ -30,17 +37,17 @@ const styles = StyleSheet.create({
         padding: 50
     },
     siguienteButton: {
-        marginRight:40,
-        marginLeft:40,
-        marginTop:10,
-        paddingTop:12,
-        paddingBottom:12,
+        marginRight: 40,
+        marginLeft: 40,
+        marginTop: 10,
+        paddingTop: 12,
+        paddingBottom: 12,
         backgroundColor: Colors.naranjaColor,
-        borderRadius:10,
+        borderRadius: 10,
     },
-    siguienteText:{
-        color:'#fff',
-        textAlign:'center',
+    siguienteText: {
+        color: '#fff',
+        textAlign: 'center',
         fontWeight: 'bold',
         fontSize: 20
     },
@@ -48,13 +55,14 @@ const styles = StyleSheet.create({
         fontSize: 35,
         fontWeight: 'bold',
         textAlign: 'center',
-        marginBottom: 20
+        marginBottom: 20,
+        color: Colors.naranjaColor
     },
     descripcionText: {
         fontSize: 20,
         textAlign: 'center',
         marginBottom: 20
-    },
+    }
 });
 
 export default SolicitudAsesoria;
