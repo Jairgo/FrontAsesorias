@@ -25,11 +25,6 @@ const ProfileScreen = () => {
 
       <View style={styles.userInfoSection}>
         <View style={{flexDirection: 'row', marginTop: 15}}>
-          <Image 
-            source={{
-              uri: 'https://source.unsplash.com/random/140x140',
-            }}
-          />
           <View style={{marginLeft: 20}}>
             <Text style={[styles.title, {
               marginTop:15,
@@ -43,15 +38,27 @@ const ProfileScreen = () => {
       <View style={styles.userInfoSection}>
         <View style={styles.row}>
           <Icon name="map-marker-radius" color="#777777" size={20}/>
-          <Text style={{color:"#777777", marginLeft: 20}}>Oaxaca, México</Text>
+          <Text style={styles.listText}>Oaxaca, México</Text>
         </View>
         <View style={styles.row}>
           <Icon name="phone" color="#777777" size={20}/>
-          <Text style={{color:"#777777", marginLeft: 20}}>+91-900000009</Text>
+          <Text style={styles.listText}>+91-900000009</Text>
         </View>
         <View style={styles.row}>
           <Icon name="email" color="#777777" size={20}/>
-          <Text style={{color:"#777777", marginLeft: 20}}>john_doe@email.com</Text>
+          <Text style={styles.listText}>john_doe@anahuac.mx</Text>
+        </View>
+        <View style={styles.row}>
+          <Icon name="face" color="#777777" size={20}/>
+          <Text style={styles.listText}>6° semestre</Text>
+        </View>
+        <View style={styles.row}>
+          <Icon name="card-account-details" color="#777777" size={20}/>
+          <Text style={styles.listText}>Estudiante</Text>
+        </View>
+        <View style={styles.row}>
+          <Icon name="card-account-details-outline" color="#777777" size={20}/>
+          <Text style={styles.listText}>Ingeniería Biomédica</Text>
         </View>
       </View>
 
@@ -82,4 +89,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginBottom: 10,
   },
+  listText:{
+    color:"#777777",
+    marginLeft: 20,
+    fontSize: 18,
+  }
 });

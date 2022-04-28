@@ -1,17 +1,24 @@
 import React from 'react'
-import { View, Text, StyleSheet, Image } from 'react-native'
+import { View, Text, StyleSheet, Image, Pressable, ScrollView } from 'react-native'
+import MateriaList from './MateriaList';
 const AddMaterias = ()=>{
     return (
-    <View style={styles.screen}>
-    </View>
+        <ScrollView style={styles.listM}>
+            <MateriaList name="Algoritmos y programación"></MateriaList>
+            <MateriaList name="Cálculo diferencial"></MateriaList>
+            <MateriaList name="Desarrollo de Software"/>
+            <MateriaList name="Arquitectura de Computadoras"/>
+            <MateriaList name="Sistemas Operativos"/>
+            <MateriaList name="Bases de datos"/>
+            <MateriaList name="Algoritmos y Programación"/>
+        </ScrollView>
     );
 }
 
 const styles = StyleSheet.create({
-    screen: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
+    
+    listM:{
+        flexDirection: 'column',
     },
 });
 export default AddMaterias;
