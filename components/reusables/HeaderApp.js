@@ -8,6 +8,7 @@ import SchedulesSettingsScreen from '../stacks/SchedulesSettingsStack';
 import SecurityScreen from '../stacks/SecurityStack';
 import TermsAndConditionsScreen from '../stacks/TermsAndConditionsStack';
 import HomeStack from '../stacks/HomeStack';
+import CustomSidebarMenu from './CustomSidebarMenu';
 
 const Drawer = createDrawerNavigator();
 
@@ -28,7 +29,9 @@ function HeaderApp() {
                         width: 250,
                         shadowColor: '#f4511e',
                     },
-                }}>
+
+                }}
+                drawerContent={(props) => <CustomSidebarMenu {...props} />}>
                 <Drawer.Screen name="Home" component={HomeStack} />
                 <Drawer.Screen name="Profile" component={ProfileScreen} />
                 <Drawer.Screen name="Schedule Settings" component={SchedulesSettingsScreen} />
