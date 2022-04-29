@@ -1,12 +1,14 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import NotificationsScreen from '../stacks/NotificationsStack';
 import ProfileScreen from '../stacks/ProfileStack';
 import SchedulesSettingsScreen from '../stacks/SchedulesSettingsStack';
 import SecurityScreen from '../stacks/SecurityStack';
 import TermsAndConditionsScreen from '../stacks/TermsAndConditionsStack';
+import CustomSidebarMenu from './CustomSidebarMenu';
 
 
 
@@ -74,27 +76,98 @@ function HeaderApp() {
     return (
         <NavigationContainer>
             <Drawer.Navigator
-                useLegacyImplementation
-                initialRouteName="Profile"
-                activeTintColor='green'
+                // useLegacyImplementation
+                // initialRouteName="Profile"
+                // drawerContentOptions={{
+                // activeTintColor: '#f4511e',
+                // itemStyle: {marginVertical: 5},
+                // }}
+                // screenOptions={{
+                //     headerShown: false, 
+                //     drawerStyle: {
+                //         backgroundColor: 'white',
+                //         width: 250,
+                //         shadowColor: '#f4511e',
+                //     },
+                //     // drawerType: isLargeScreen ? 'permanent' : 'back',
+                //     // drawerStyle: isLargeScreen ? null : { width: '100%' },
+                //     overlayColor: 1,
+                // }}
+                drawerContent={(props) => <CustomSidebarMenu {...props} />}
                 screenOptions={{
-                    headerShown: false, 
-                    drawerStyle: {
-                        Color: '#c6cbef',
-                        width: 250,
-                        // activeTintColor: 'green'
-                        // activeBackgroundColor: 'green',
+                    headerShown: false,
+                    drawerActiveBackgroundColor: '#f4511e',
+                    drawerActiveTintColor: '#fff',
+                    drawerInactiveTintColor: '#333',
+                    drawerLabelStyle: {
+                      marginLeft: -25,
+                      fontSize: 15,
                     },
-                }}
-            >
+                }}>
                 {/* <Drawer.Screen name="Root" component={Root} /> */}
-                <Drawer.Screen name="Profile" component={ProfileScreen}/>
-                <Drawer.Screen name="Schedule Settings" component={SchedulesSettingsScreen} />
-                <Drawer.Screen name="Security" component={SecurityScreen} />
-                <Drawer.Screen name="Terms and conditions" component={TermsAndConditionsScreen} />
-                <Drawer.Screen name="Notifications" component={NotificationsScreen} />
+                <Drawer.Screen 
+                    name="Profile" 
+                    component={ProfileScreen}
+                    options={{
+                        drawerIcon: ({color}) => (
+                          <Ionicons name="home-outline" size={22} color={color} />
+                        ),
+                    }}/>
+                <Drawer.Screen 
+                    name="Schedule Settings" 
+                    component={SchedulesSettingsScreen} 
+                    options={{
+                        drawerIcon: ({color}) => (
+                          <Ionicons name="home-outline" size={22} color={color} />
+                        ),
+                    }}/>
+                <Drawer.Screen 
+                    name="Security" 
+                    component={SecurityScreen} 
+                    options={{
+                        drawerIcon: ({color}) => (
+                          <Ionicons name="home-outline" size={22} color={color} />
+                        ),
+                    }}/>
+                <Drawer.Screen 
+                    name="Terms and conditions" 
+                    component={TermsAndConditionsScreen} 
+                    options={{
+                        drawerIcon: ({color}) => (
+                          <Ionicons name="home-outline" size={22} color={color} />
+                        ),
+                    }}/>
+                <Drawer.Screen 
+                    name="Notifications" 
+                    component={NotificationsScreen} 
+                    options={{
+                        drawerIcon: ({color}) => (
+                          <Ionicons name="home-outline" size={22} color={color} />
+                        ),
+                    }}/>
             </Drawer.Navigator>
         </NavigationContainer>
+        // <NavigationContainer>
+        //     <Drawer.Navigator
+        //         drawerContentOptions={{
+        //         activeTintColor: '#e91e63',
+        //         itemStyle: {marginVertical: 5},
+        //         }}
+        //         screenOptions={{
+        //             headerShown: false, 
+        //             drawerStyle: {
+        //                 width: 250,
+        //             },
+        //         }}
+        //         drawerContent={(props) => <CustomSidebarMenu {...props} />}>
+        //         {/* <Drawer.Screen
+        //         name="FirstPage"
+        //         options={{drawerLabel: 'First page Option'}}
+        //         component={firstScreenStack}
+        //         /> */}
+        //         <Drawer.Screen name="Profile" component={ProfileScreen}/>
+        //     </Drawer.Navigator>
+        // </NavigationContainer>
     );
 }
 

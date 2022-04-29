@@ -3,6 +3,7 @@ import ProfileScreen from '../screens/ProfileScreen';
 import LogoTitle from '../items/LogoTitle';
 import UserName from '../items/UserName';
 import Notifications from '../items/Notifications';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -19,11 +20,14 @@ function ProfileStack() {
             }}
         >
             <Stack.Screen 
-                name="Home"
+                name="ProfileStack"
                 // component={HomeScreen}
                 component={ProfileScreen}
                 options={({ navigation, route }) => ({
-                    headerLeft: (props) => <LogoTitle {...props} />,
+                    headerLeft: (props) => 
+                    <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
+                        <LogoTitle {...props}/>
+                    </TouchableOpacity>,
                     headerTitle: (props) => <UserName {...props} />,
                     headerTitleAlign: 'center',
                     headerRight: () => <Notifications />,
