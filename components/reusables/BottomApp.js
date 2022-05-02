@@ -20,21 +20,11 @@ export default function BottomApp() {
         >
             <Tab.Screen
                 name="Inicio"
-                component={HomeScreen}
+                component={ScheduleScreen}
                 options={{
                     tabBarLabel: 'Inicio',
                     tabBarIcon: ({ color }) => (
                         <MaterialCommunityIcons name="home" color={color} size={24} />
-                    ),
-                }}
-            />
-            <Tab.Screen
-                name="Horario"
-                component={ScheduleScreen}
-                options={{
-                    tabBarLabel: 'Horario',
-                    tabBarIcon: ({ color }) => (
-                        <MaterialCommunityIcons name="clock-outline" color={color} size={24} />
                     ),
                 }}
             />
@@ -45,15 +35,6 @@ export default function BottomApp() {
                     tabBarLabel: 'Materias',
                     tabBarIcon: ({ color }) => (
                         <Feather name="book-open" color={color} size={24} />
-                    ),
-                }} />
-            <Tab.Screen
-                name="Mensajes"
-                component={MessageScreen}
-                options={{
-                    tabBarLabel: 'Mensajes',
-                    tabBarIcon: ({ color }) => (
-                        <MaterialCommunityIcons name="message-text-outline" color={color} size={24} />
                     ),
                 }} />
             <Tab.Screen

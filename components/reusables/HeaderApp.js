@@ -29,45 +29,45 @@ function HeaderApp() {
                     },
                 }}>
                 {/* <Drawer.Screen name="Root" component={Root} /> */}
-                <Drawer.Screen name="Home" component={HomeStack} />
+                <Drawer.Screen 
+                    name="Inicio" 
+                    component={HomeStack}
+                    options={{
+                        drawerIcon: ({ color }) => (
+                            <Ionicons name="home-outline" size={22} color={color} />
+                        ),
+                    }} 
+                />
                 <Drawer.Screen
-                    name="Profile"
+                    name="Perfil"
                     component={ProfileScreen}
                     options={{
                         drawerIcon: ({ color }) => (
-                            <Ionicons name="home-outline" size={22} color={color} />
+                            <Ionicons name="person-outline" size={22} color={color} />
                         ),
                     }} />
                 <Drawer.Screen
-                    name="Schedule Settings"
+                    name="Configuración de horario"
                     component={SchedulesSettingsScreen}
                     options={{
                         drawerIcon: ({ color }) => (
-                            <Ionicons name="home-outline" size={22} color={color} />
+                            <Ionicons name="settings-outline" size={22} color={color} />
                         ),
                     }} />
                 <Drawer.Screen
-                    name="Security"
+                    name="Seguridad"
                     component={SecurityScreen}
                     options={{
                         drawerIcon: ({ color }) => (
-                            <Ionicons name="home-outline" size={22} color={color} />
+                            <Ionicons name="lock-closed-outline" size={22} color={color} />
                         ),
                     }} />
                 <Drawer.Screen
-                    name="Terms and conditions"
+                    name="Terminos y condiciones"
                     component={TermsAndConditionsScreen}
                     options={{
                         drawerIcon: ({ color }) => (
-                            <Ionicons name="home-outline" size={22} color={color} />
-                        ),
-                    }} />
-                <Drawer.Screen
-                    name="Notifications"
-                    component={NotificationsScreen}
-                    options={{
-                        drawerIcon: ({ color }) => (
-                            <Ionicons name="home-outline" size={22} color={color} />
+                            <Ionicons name="information-circle-outline" size={22} color={color} />
                         ),
                     }} />
             </Drawer.Navigator>

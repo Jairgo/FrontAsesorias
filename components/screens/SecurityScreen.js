@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 function SecurityScreen() {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Security Screen</Text>
+        <Text>Vista de seguridad</Text>
       </View>
     );
 }

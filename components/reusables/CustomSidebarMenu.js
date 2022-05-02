@@ -77,54 +77,6 @@ const CustomSidebarMenu = (props) => {
         <View style={{flex: 1, backgroundColor: 'white', paddingTop: 10}}>
           <DrawerItemList {...props} />
         </View>
-        {/* <DrawerItem 
-          style={styles.colorItem}
-          label="Profile"
-          name="Profile" 
-          component={ProfileScreen}
-        />
-        <DrawerItem 
-          style={styles.colorItem}
-          label="Schedule Settings"
-          // name="Schedule Settings" 
-          component={SchedulesSettingsScreen} 
-        />
-        <DrawerItem 
-          style={styles.colorItem}
-          label="Security"
-          name="Security" 
-          component={SecurityScreen} 
-        />
-        <DrawerItem 
-          style={styles.colorItem}
-          label="Terms and conditions"
-          name="Terms and conditions" 
-          component={TermsAndConditionsScreen} 
-        />*/}
-        {/* <DrawerItem 
-          style={styles.colorItem}
-          label="Notifications"
-          name="Notifications" 
-          onPress={() => {NotificationsScreen}}
-          // component={NotificationsScreen} 
-        />  */}
-        {/* <DrawerItem
-          style={styles.colorItem}
-          label="Visit Us"
-          onPress={() => Linking.openURL('https://aboutreact.com/')}
-        /> 
-        <View style={styles.customItem}>
-          <Image
-            source={{uri: BASE_PATH + 'star_filled.png'}}
-            style={styles.iconStyle}
-          />
-          <Text
-            onPress={() => {
-              Linking.openURL('https://aboutreact.com/');
-            }}>
-            Rate Us
-          </Text>
-        </View> */}
       </DrawerContentScrollView>
       <View style={{padding: 20, borderTopWidth: 1, borderTopColor: '#f4511e'}}>
         <TouchableOpacity onPress={() => {}} style={{paddingVertical: 15}}>
@@ -135,7 +87,7 @@ const CustomSidebarMenu = (props) => {
                 fontSize: 15,
                 marginLeft: 5,
               }}>
-              Sign Out
+              Cerrar Sesión
             </Text>
           </View>
         </TouchableOpacity>
