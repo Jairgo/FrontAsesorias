@@ -4,7 +4,8 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import { MaterialCommunityIcons, FontAwesome5, Feather } from '@expo/vector-icons';
 import HomeScreen from '../screens/HomeScreen';
 import SubjectsScreens from '../screens/SubjectsScreens';
-import ScheduleScreen from '../screens/ScheduleScreen';
+// import ScheduleScreen from '../screens/ScheduleScreen';
+import HorarioScreen from '../screens/Horario/Horario';
 import MessageScreen from '../screens/MessageScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 
@@ -20,7 +21,7 @@ export default function BottomApp() {
         >
             <Tab.Screen
                 name="Inicio"
-                component={ScheduleScreen}
+                component={HorarioScreen}
                 options={{
                     tabBarLabel: 'Inicio',
                     tabBarIcon: ({ color }) => (
