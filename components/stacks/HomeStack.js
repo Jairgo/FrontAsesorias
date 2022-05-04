@@ -1,5 +1,5 @@
 import React from 'react';
-import NotificationsScreen from '../screens/NotificationsScreen';
+import BottomApp from '../reusables/BottomApp';
 import LogoTitle from '../items/LogoTitle';
 import UserName from '../items/UserName';
 import Notifications from '../items/Notifications';
@@ -9,7 +9,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
 
-function NotificationsStack() {
+function HomeStack() {
     return (
         <Stack.Navigator
             screenOptions={{
@@ -20,8 +20,8 @@ function NotificationsStack() {
             }}
         >
             <Stack.Screen
-                name="NotificationsStack"
-                component={NotificationsScreen}
+                name="HomeStack"
+                component={BottomApp}
                 options={({ navigation, route }) => ({
                     headerLeft: (props) =>
                         <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
@@ -32,9 +32,8 @@ function NotificationsStack() {
                     headerRight: () => <Notifications />,
                 })}
             />
-            {/* <Stack.Screen name="Settings" component={SettingsScreen} /> */}
         </Stack.Navigator>
     );
 }
 
-export default NotificationsStack;
+export default HomeStack;

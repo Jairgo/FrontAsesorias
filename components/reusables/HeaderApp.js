@@ -1,98 +1,75 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import NotificationsScreen from '../stacks/NotificationsStack';
 import ProfileScreen from '../stacks/ProfileStack';
 import SchedulesSettingsScreen from '../stacks/SchedulesSettingsStack';
 import SecurityScreen from '../stacks/SecurityStack';
 import TermsAndConditionsScreen from '../stacks/TermsAndConditionsStack';
-
-
-
-// function SettingsScreen({ route, navigation }) {
-//   const { user } = route.params;
-//   return (
-//     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-//       <Text>Settings Screen</Text>
-//       <Text>userParam: {JSON.stringify(user)}</Text>
-//       <Button
-//         title="Go to Profile"
-//         onPress={() => navigation.navigate('Profile')}
-//       />
-//     </View>
-//   );
-// }
-
-// function HomeScreen({ navigation }) {
-//   return (
-//     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-//       <Text>Home Screen</Text>
-//       <Button
-//         title="Go to Settings"
-//         onPress={() =>
-//           navigation.navigate('Root', {
-//             screen: 'Settings',
-//             params: { user: 'jane' },
-//           })
-//         }
-//       />
-//     </View>
-//   );
-// }
+import HomeStack from '../stacks/HomeStack';
+import CustomSidebarMenu from './CustomSidebarMenu';
 
 const Drawer = createDrawerNavigator();
-// const Stack = createStackNavigator();
-
-// function Root() {
-//   return (
-//     <Stack.Navigator
-//         screenOptions={{
-//             headerTintColor: 'white',
-//             headerStyle: {
-//                 backgroundColor: '#f4511e'
-//             },
-//         }}
-//     >
-//         <Stack.Screen 
-//             name="Home"
-//             // component={HomeScreen}
-//             component={HomeScreen}
-//             options={({ navigation, route }) => ({
-//                 headerLeft: (props) => <LogoTitle {...props} />,
-//                 headerTitle: (props) => <UserName {...props} />,
-//                 headerTitleAlign: 'center',
-//                 headerRight: () => <Notifications />,
-//             })}
-//         />
-//         <Stack.Screen name="Settings" component={SettingsScreen} />
-//     </Stack.Navigator>
-//   );
-// }
 
 function HeaderApp() {
     return (
         <NavigationContainer>
             <Drawer.Navigator
-                useLegacyImplementation
-                initialRouteName="Profile"
-                activeTintColor='green'
+                drawerContent={(props) => <CustomSidebarMenu {...props} />}
                 screenOptions={{
-                    headerShown: false, 
-                    drawerStyle: {
-                        Color: '#c6cbef',
-                        width: 250,
-                        // activeTintColor: 'green'
-                        // activeBackgroundColor: 'green',
+                    headerShown: false,
+                    drawerActiveBackgroundColor: '#f4511e',
+                    drawerActiveTintColor: '#fff',
+                    drawerInactiveTintColor: '#333',
+                    drawerLabelStyle: {
+                        marginLeft: -25,
+                        fontSize: 15,
                     },
-                }}
-            >
+                }}>
                 {/* <Drawer.Screen name="Root" component={Root} /> */}
-                <Drawer.Screen name="Profile" component={ProfileScreen}/>
-                <Drawer.Screen name="Schedule Settings" component={SchedulesSettingsScreen} />
-                <Drawer.Screen name="Security" component={SecurityScreen} />
-                <Drawer.Screen name="Terms and conditions" component={TermsAndConditionsScreen} />
-                <Drawer.Screen name="Notifications" component={NotificationsScreen} />
+                <Drawer.Screen 
+                    name="Inicio" 
+                    component={HomeStack}
+                    options={{
+                        drawerIcon: ({ color }) => (
+                            <Ionicons name="home-outline" size={22} color={color} />
+                        ),
+                    }} 
+                />
+                <Drawer.Screen
+                    name="Perfil"
+                    component={ProfileScreen}
+                    options={{
+                        drawerIcon: ({ color }) => (
+                            <Ionicons name="person-outline" size={22} color={color} />
+                        ),
+                    }} />
+                <Drawer.Screen
+                    name="Configuración de horario"
+                    component={SchedulesSettingsScreen}
+                    options={{
+                        drawerIcon: ({ color }) => (
+                            <Ionicons name="settings-outline" size={22} color={color} />
+                        ),
+                    }} />
+                <Drawer.Screen
+                    name="Seguridad"
+                    component={SecurityScreen}
+                    options={{
+                        drawerIcon: ({ color }) => (
+                            <Ionicons name="lock-closed-outline" size={22} color={color} />
+                        ),
+                    }} />
+                <Drawer.Screen
+                    name="Terminos y condiciones"
+                    component={TermsAndConditionsScreen}
+                    options={{
+                        drawerIcon: ({ color }) => (
+                            <Ionicons name="information-circle-outline" size={22} color={color} />
+                        ),
+                    }} />
             </Drawer.Navigator>
         </NavigationContainer>
     );

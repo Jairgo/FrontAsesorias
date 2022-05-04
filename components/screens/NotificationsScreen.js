@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 function NotificationsScreen() {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Notifications Screen</Text>
+        <Text>Vista de notificaciones</Text>
       </View>
     );
 }
