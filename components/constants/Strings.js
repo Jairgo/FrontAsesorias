@@ -1,0 +1,17 @@
+export default {
+    nextButton: 'Siguiente',
+    prevButton: 'Anterior',
+    finishButton: 'Finalizar',
+    cancelButton: 'Cancelar',
+    confirmButton: 'Confirmar',
+    closeButton: 'Cerrar',
+    submitButton: 'Enviar',
+    searchButton: 'Buscar',
+    selectButton: 'Seleccionar',
+    addButton: 'Agregar',
+    removeButton: 'Eliminar',
+    editButton: 'Editar',
+    seleccionarHorario: 'Selecciona un horario',
+    seleccionarAsesor: 'Selecciona un asesor',
+    solicitarAsesoria: 'Solicitar asesoría',
+}
