@@ -6,15 +6,18 @@ import {
     ScrollView,
     StyleSheet,
     Pressable,
+    TextInput,
 } from "react-native";
 
 import { Picker } from "@react-native-picker/picker";
 
 import Colors from "../constants/Colors";
 import { FontAwesome5 } from "@expo/vector-icons";
+import { Input } from "@rneui/themed";
 
 export default function SubjectsScreens() {
     const [ materiaSelected, setMateriaSelected ] = useState(0);
+    const [ materiaEdit, setMateriaEdit ] = useState(false);
 
     const Materias = {
         0: {
@@ -111,13 +114,82 @@ export default function SubjectsScreens() {
                     </View>
                 </View>
                 <View style={styles.editButtonContainer}>
-                    <Pressable>
+                    <Pressable onPress={() => setMateriaEdit(true) }>
                         <FontAwesome5 name={"edit"} color={"black"} size={25} solid />
                     </Pressable>
                 </View>
             </View>
-            <Modal visible={false} transparent={true}>
-
+            <Modal visible={materiaEdit} transparent={true}>
+                <View style={{
+                    height: '100%',
+                    width: '100%',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                }}>
+                    <View style={{
+                        display: 'flex',
+                        backgroundColor: 'white',
+                        width: '80%',
+                        borderRadius: 20,
+                        elevation: 10,
+                        padding: 30,
+                        paddingTop: 35,
+                        position: 'relative'
+                    }}>
+                        <View style={{
+                            position: 'absolute',
+                            top: 15,
+                            right: 20
+                        }}>
+                            <Pressable onPress={() => setMateriaEdit(false)}>
+                                <FontAwesome5 name={"times"} color={"black"} size={16} solid/>
+                            </Pressable>
+                        </View>
+                        <View>
+                            <View style={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                alignItems: 'center',
+                                borderRadius: 20,
+                                borderColor: Colors.orange,
+                                paddingLeft: 10,
+                                width: 180
+                            }}>
+                                <Text>
+                                    Limite temas:
+                                </Text>
+                                <TextInput />
+                            </View>
+                            <View style={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                alignItems: 'center',
+                                borderRadius: 20,
+                                borderColor: Colors.orange,
+                                paddingLeft: 10,
+                            }}>
+                                <Text style={{
+                                    display: 'flex',
+                                    flex: 1,
+                                }}>
+                                    Limite temas:
+                                </Text>
+                                <TextInput 
+                                    keyboardType='number-pad'
+                                    style={{
+                                        borderRadius: 20,
+                                        paddingHorizontal: 10,
+                                        width: 80,
+                                        marginLeft: 20,
+                                        borderWidth: 1,
+                                        borderColor: Colors.orange
+                                    }}
+                                />
+                            </View>
+                        </View>
+                    </View>
+                </View>
             </Modal>
         </View>
     );

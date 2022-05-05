@@ -27,6 +27,7 @@ export default function BottomApp() {
                         <MaterialCommunityIcons name="home" color={color} size={24} />
                     ),
                 }}
+                
             />
             <Tab.Screen
                 name="Materias"
