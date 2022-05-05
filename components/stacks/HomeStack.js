@@ -9,7 +9,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
 
-function HomeStack() {
+function HomeStack(props) {
     return (
         <Stack.Navigator
             screenOptions={{
@@ -21,7 +21,7 @@ function HomeStack() {
         >
             <Stack.Screen
                 name="HomeStack"
-                component={BottomApp}
+                component={props.screen}
                 options={({ navigation, route }) => ({
                     headerLeft: (props) =>
                         <TouchableOpacity onPress={() => navigation.toggleDrawer()}>

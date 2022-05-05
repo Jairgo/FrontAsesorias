@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import { MaterialCommunityIcons, FontAwesome5, Feather } from '@expo/vector-icons';
+import { MaterialCommunityIcons, FontAwesome5, Feather, Ionicons } from '@expo/vector-icons';
 import HomeScreen from '../screens/HomeScreen';
 import SubjectsScreens from '../screens/SubjectsScreens';
+import PerfilAsesor from '../screens/PerfilAsesor';
 import MessageScreen from '../screens/MessageScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import ScheduleScreen from '../screens/ScheduleScreen';
 
 const Tab = createMaterialBottomTabNavigator();
 
-export default function BottomApp() {
+export default function BottomApp(props) {
+    const [IsAsesor, setIsAsesor] = useState(false);
     return (
         <Tab.Navigator
             initialRouteName="Inicio"
@@ -29,7 +31,8 @@ export default function BottomApp() {
                 }}
                 
             />
-            <Tab.Screen
+            {IsAsesor ? 
+                <Tab.Screen
                 name="Materias"
                 component={SubjectsScreens}
                 options={{
@@ -37,7 +40,17 @@ export default function BottomApp() {
                     tabBarIcon: ({ color }) => (
                         <Feather name="book-open" color={color} size={24} />
                     ),
+                }} /> :
+                <Tab.Screen
+                name="Asesores"
+                component={PerfilAsesor}
+                options={{
+                    tabBarLabel: 'Asesores',
+                    tabBarIcon: ({ color }) => (
+                        <Feather name="book-open" color={color} size={24} />
+                    ),
                 }} />
+            }
             <Tab.Screen
                 name="Cuenta"
                 component={ProfileScreen}

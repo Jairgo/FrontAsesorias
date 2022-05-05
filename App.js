@@ -4,6 +4,6 @@ import HeaderApp from './components/reusables/HeaderApp';
 
 export default function App() {
   return (
-    <HeaderApp />
+    <HeaderApp asesor={true}/>
   );
 }
