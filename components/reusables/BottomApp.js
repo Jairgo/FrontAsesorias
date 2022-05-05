@@ -5,6 +5,7 @@ import { MaterialCommunityIcons, FontAwesome5, Feather, Ionicons } from '@expo/v
 import HomeScreen from '../screens/HomeScreen';
 import SubjectsScreens from '../screens/SubjectsScreens';
 import PerfilAsesor from '../screens/PerfilAsesor';
+import ListaAsesores from '../screens/ListaAsesores';
 import MessageScreen from '../screens/MessageScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import ScheduleScreen from '../screens/ScheduleScreen';
@@ -42,7 +43,7 @@ export default function BottomApp(props) {
                 }} /> :
                 <Tab.Screen
                 name="Asesores"
-                component={PerfilAsesor}
+                component={ListaAsesores}
                 options={{
                     tabBarLabel: 'Asesores',
                     tabBarIcon: ({ color }) => (
