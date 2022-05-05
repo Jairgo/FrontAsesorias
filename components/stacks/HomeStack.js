@@ -21,7 +21,6 @@ function HomeStack(props) {
         >
             <Stack.Screen
                 name="HomeStack"
-                component={props.screen}
                 options={({ navigation, route }) => ({
                     headerLeft: (props) =>
                         <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
@@ -31,7 +30,9 @@ function HomeStack(props) {
                     headerTitleAlign: 'center',
                     headerRight: () => <Notifications />,
                 })}
-            />
+            >
+                {(_) => <props.screen asesor={props.asesor} />}
+            </Stack.Screen>
         </Stack.Navigator>
     );
 }

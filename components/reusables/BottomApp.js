@@ -8,11 +8,11 @@ import PerfilAsesor from '../screens/PerfilAsesor';
 import MessageScreen from '../screens/MessageScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import ScheduleScreen from '../screens/ScheduleScreen';
+import SearchScreen from '../screens/SearchScreen';
 
 const Tab = createMaterialBottomTabNavigator();
 
 export default function BottomApp(props) {
-    const [IsAsesor, setIsAsesor] = useState(false);
     return (
         <Tab.Navigator
             initialRouteName="Inicio"
@@ -22,7 +22,7 @@ export default function BottomApp(props) {
         >
             <Tab.Screen
                 name="Inicio"
-                component={ScheduleScreen}
+                component={props.asesor ? ScheduleScreen : SearchScreen}
                 options={{
                     tabBarLabel: 'Inicio',
                     tabBarIcon: ({ color }) => (
@@ -31,25 +31,26 @@ export default function BottomApp(props) {
                 }}
                 
             />
-            {IsAsesor ? 
+            {props.asesor ? 
                 <Tab.Screen
-                name="Materias"
-                component={SubjectsScreens}
-                options={{
-                    tabBarLabel: 'Materias',
-                    tabBarIcon: ({ color }) => (
-                        <Feather name="book-open" color={color} size={24} />
-                    ),
-                }} /> :
-                <Tab.Screen
-                name="Asesores"
-                component={PerfilAsesor}
-                options={{
-                    tabBarLabel: 'Asesores',
-                    tabBarIcon: ({ color }) => (
-                        <Feather name="book-open" color={color} size={24} />
-                    ),
-                }} />
+                    name="Materias"
+                    component={SubjectsScreens}
+                    options={{
+                        tabBarLabel: 'Materias',
+                        tabBarIcon: ({ color }) => (
+                            <Feather name="book-open" color={color} size={24} />
+                        ),
+                    }} /> :
+                    <Tab.Screen
+                    name="Asesores"
+                    component={PerfilAsesor}
+                    options={{
+                        tabBarLabel: 'Asesores',
+                        tabBarIcon: ({ color }) => (
+                            <Feather name="book-open" color={color} size={24} />
+                        ),
+                    }} 
+                />
             }
             <Tab.Screen
                 name="Cuenta"

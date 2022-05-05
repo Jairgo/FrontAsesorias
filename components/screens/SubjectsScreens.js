@@ -6,14 +6,15 @@ import {
     ScrollView,
     StyleSheet,
     Pressable,
-    TextInput,
+    TextInput, 
+    Button,
 } from "react-native";
 
 import { Picker } from "@react-native-picker/picker";
 
 import Colors from "../constants/Colors";
 import { FontAwesome5 } from "@expo/vector-icons";
-import { Input } from "@rneui/themed";
+import ModalEdit from "./Subjects/ModalEdit";
 
 export default function SubjectsScreens() {
     const [ materiaSelected, setMateriaSelected ] = useState(0);
@@ -119,77 +120,8 @@ export default function SubjectsScreens() {
                     </Pressable>
                 </View>
             </View>
-            <Modal visible={materiaEdit} transparent={true}>
-                <View style={{
-                    height: '100%',
-                    width: '100%',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                }}>
-                    <View style={{
-                        display: 'flex',
-                        backgroundColor: 'white',
-                        width: '80%',
-                        borderRadius: 20,
-                        elevation: 10,
-                        padding: 30,
-                        paddingTop: 35,
-                        position: 'relative'
-                    }}>
-                        <View style={{
-                            position: 'absolute',
-                            top: 15,
-                            right: 20
-                        }}>
-                            <Pressable onPress={() => setMateriaEdit(false)}>
-                                <FontAwesome5 name={"times"} color={"black"} size={16} solid/>
-                            </Pressable>
-                        </View>
-                        <View>
-                            <View style={{
-                                display: 'flex',
-                                flexDirection: 'row',
-                                alignItems: 'center',
-                                borderRadius: 20,
-                                borderColor: Colors.orange,
-                                paddingLeft: 10,
-                                width: 180
-                            }}>
-                                <Text>
-                                    Limite temas:
-                                </Text>
-                                <TextInput />
-                            </View>
-                            <View style={{
-                                display: 'flex',
-                                flexDirection: 'row',
-                                alignItems: 'center',
-                                borderRadius: 20,
-                                borderColor: Colors.orange,
-                                paddingLeft: 10,
-                            }}>
-                                <Text style={{
-                                    display: 'flex',
-                                    flex: 1,
-                                }}>
-                                    Limite temas:
-                                </Text>
-                                <TextInput 
-                                    keyboardType='number-pad'
-                                    style={{
-                                        borderRadius: 20,
-                                        paddingHorizontal: 10,
-                                        width: 80,
-                                        marginLeft: 20,
-                                        borderWidth: 1,
-                                        borderColor: Colors.orange
-                                    }}
-                                />
-                            </View>
-                        </View>
-                    </View>
-                </View>
+            <Modal visible={materiaEdit} transparent={true} animationType="slide">
+                <ModalEdit onClose={() => setMateriaEdit(false)} onAccept={() => setMateriaEdit(false)}/>
             </Modal>
         </View>
     );
