@@ -13,7 +13,11 @@ import Colors from '../constants/Colors';
 const AsesorView = (props) => {
     return (
         <Pressable
-            onPress={() => props.navigation.navigate('PerfilAsesor')}
+            onPress={() => props.navigation.navigate('PerfilAsesor', {
+                asesor: props.asesorName,
+                carrera: props.asesorCarrera,
+                semestre: props.asesorSemestre,
+            })}
             style={({ pressed }) => [{
                 borderRadius: 10,
                 overflow: 'hidden',

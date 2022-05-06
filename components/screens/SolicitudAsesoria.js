@@ -5,7 +5,8 @@ import Colors from '../constants/Colors';
 import { NativeBaseProvider, TextArea } from 'native-base';
 
 
-function SolicitudAsesoria() {
+function SolicitudAsesoria({ route, navigation }) {
+    const { asesor} = route.params;
 
     return (
         <NativeBaseProvider>
@@ -14,6 +15,9 @@ function SolicitudAsesoria() {
                 <Text style={styles.descripcionText}>Describe el tema que te gustaría revisar:</Text>
                 <TextArea color={Colors.negroColor} bg={Colors.naranjaSecundarioColor} h={40} placeholder="Ingresa información acerca del tema que te gustaría revisar" w="100%" maxW="350" />
                 <TouchableOpacity
+                    onPress={() => navigation.navigate('SolicitudAsesoriaAgendada', {
+                        asesor: asesor,
+                    })}
                     style={styles.siguienteButton}
                     underlayColor='#fff'>
                     <Text style={styles.siguienteText} >{Strings.nextButton}</Text>

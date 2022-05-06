@@ -11,9 +11,12 @@ const Stack = createStackNavigator();
 
 function AsesorStack() {
     return (
-        <Stack.Navigator>
+        <Stack.Navigator
+            screenOptions={{
+                headerShown: false
+            }}>
             <Stack.Screen
-                name="ListaAsesores"
+                name="Lista Asesores"
                 component={ListaAsesores}
             />
             <Stack.Screen name="PerfilAsesor" component={PerfilAsesor} />

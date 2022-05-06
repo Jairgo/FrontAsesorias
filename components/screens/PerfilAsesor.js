@@ -5,19 +5,27 @@ import Colors from '../constants/Colors';
 import { VStack, Box, NativeBaseProvider } from 'native-base';
 // import DateTimePicker from '@react-native-community/datetimepicker';
 
-function PerfilAsesor() {
+function PerfilAsesor({ route, navigation }) {
+    const { asesor, carrera, semestre } = route.params;
 
     return (
         <View style={{ paddingTop: 70 }}>
             <View style={styles.screen}>
                 <Image style={styles.image} source={require('../../assets/avatar-2.png')} />
-                <Text style={styles.tituloText}>  Daniel Diaz</Text>
+                <Text style={styles.tituloText}>  {asesor}</Text>
             </View>
             <View style={styles.screen}>
-                <CardInfoPersonal />
+                <CardInfoPersonal 
+                    asesor={asesor}
+                    carrera={carrera}
+                    semestre={semestre}
+                />
             </View>
             <View>
                 <TouchableOpacity
+                    onPress={() => navigation.navigate('SolicitudAsesoria', {
+                        asesor: asesor,
+                    })}
                     style={styles.siguienteButton}
                     underlayColor='#fff'>
                     <Text style={styles.siguienteText} >{Strings.solicitarAsesoria}</Text>
@@ -27,7 +35,7 @@ function PerfilAsesor() {
     );
 }
 
-function CardInfoPersonal() {
+function CardInfoPersonal(props) {
     return (
         <NativeBaseProvider>
             <Box border="1" borderRadius="md">
@@ -39,15 +47,15 @@ function CardInfoPersonal() {
                         <VStack space="3" >
                             <Text>
                                 <Text style={styles.boldText}>  Nombre: </Text>
-                                <Text> Daniel Diaz Gonzalez</Text>
+                                <Text> {props.asesor}</Text>
                             </Text>
                             <Text>
                                 <Text style={styles.boldText}>  Carerra: </Text>
-                                <Text> Ing. Industrial para la dirección</Text>
+                                <Text> {props.carrera}</Text>
                             </Text>
                             <Text>
                                 <Text style={styles.boldText}>  Semestre: </Text>
-                                <Text> Octavo</Text>
+                                <Text> {props.semestre}</Text>
                             </Text>
                         </VStack>
                     </Box>

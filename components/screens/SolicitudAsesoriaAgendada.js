@@ -5,7 +5,8 @@ import Colors from '../constants/Colors';
 import { VStack, Box, NativeBaseProvider } from 'native-base';
 import { Feather } from '@expo/vector-icons';
 
-function SolicitudAsesoriaAgendada() {
+function SolicitudAsesoriaAgendada({ route, navigation }) {
+    const { asesor} = route.params;
 
     return (
         <NativeBaseProvider>
@@ -34,7 +35,7 @@ function SolicitudAsesoriaAgendada() {
                                 </Text>
                                 <Text>
                                     <Text style={styles.boldText}>  Asesor: </Text>
-                                    <Text> Daniel Díaz</Text>
+                                    <Text> {asesor}</Text>
                                 </Text>
                             </VStack>
                         </Box>

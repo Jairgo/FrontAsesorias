@@ -8,15 +8,15 @@ import AsesorView from "./AsesorView";
 const SolicitudAsesoria = ({ navigation }) => {
 
     let Asesores = [
-        { asesorName: "Adelaida Piñero", asesorCarrera: "Ing. Civil" },
-        { asesorName: "Daniel Diaz", asesorCarrera: "Ing. Industrial para la dirección" },
-        { asesorName: "Jose-Luis Soria", asesorCarrera: "Ing. Mecatrónica" },
-        { asesorName: "Fabiola Segui", asesorCarrera: "Ing. En sistemas y TI" },
-        { asesorName: "Jeronimo Arevalo", asesorCarrera: "Ing. Ambiental" },
-        { asesorName: "Maria-Ines Jaime", asesorCarrera: "Ing. Biomédica" },
-        { asesorName: "Raúl Revuelta", asesorCarrera: "Ing. En animación digital" },
-        { asesorName: "Maria Arnaiz", asesorCarrera: "Ing. En dirección de negocios" },
-        { asesorName: "Gerardo Macias", asesorCarrera: "Ing. En sistemas y TI" },
+        { asesorName: "Adelaida Piñero", asesorCarrera: "Ing. Civil", asesorSemestre: "1ro" },
+        { asesorName: "Daniel Diaz", asesorCarrera: "Ing. Industrial para la dirección", asesorSemestre: "2do" },
+        { asesorName: "Jose-Luis Soria", asesorCarrera: "Ing. Mecatrónica", asesorSemestre: "3ro" },
+        { asesorName: "Fabiola Segui", asesorCarrera: "Ing. En sistemas y TI", asesorSemestre: "4to" },
+        { asesorName: "Jeronimo Arevalo", asesorCarrera: "Ing. Ambiental", asesorSemestre: "5to" },
+        { asesorName: "Maria-Ines Jaime", asesorCarrera: "Ing. Biomédica", asesorSemestre: "6to" },
+        { asesorName: "Raúl Revuelta", asesorCarrera: "Ing. En animación digital", asesorSemestre: "7mo" },
+        { asesorName: "Maria Arnaiz", asesorCarrera: "Ing. En dirección de negocios", asesorSemestre: "8vo" },
+        { asesorName: "Gerardo Macias", asesorCarrera: "Ing. En sistemas y TI", asesorSemestre: "9no" },
     ];
 
     return (
@@ -31,6 +31,7 @@ const SolicitudAsesoria = ({ navigation }) => {
                             key={idx}
                             asesorName={asesor.asesorName}
                             asesorCarrera={asesor.asesorCarrera}
+                            asesorSemestre={asesor.asesorSemestre}
                             navigation={navigation}
                         />
                     ))
