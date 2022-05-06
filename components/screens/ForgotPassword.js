@@ -6,7 +6,7 @@ import ButtonGradient from './ButtonGradient';
 import * as Animatable from 'react-native-animatable';
 const { width, height } = Dimensions.get('window')
 
-export default function App() {
+export default function ForgotPassword() {
 
   function SvgTop() {
     return (

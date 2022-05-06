@@ -4,9 +4,10 @@ import { StyleSheet, Text, View, TextInput, Dimensions, TouchableOpacity, Scroll
 import Svg, { Path, Defs, LinearGradient, Stop } from "react-native-svg"
 import ButtonGradient from './ButtonGradient';
 import * as Animatable from 'react-native-animatable';
+import { Button } from 'react-native-paper';
 const { width, height } = Dimensions.get('window')
 
-export default function App() {
+export default function Login(props) {
 
   function SvgTop() {
     return (
@@ -74,7 +75,7 @@ export default function App() {
         />
         <Text style={styles.forgotPassword}>Olvidaste tu contraseña?</Text>
       <Animatable.View animation="fadeInUp">
-        <ButtonGradient/>
+        <ButtonGradient changeView={() => props.changeView(true)}/>
         </Animatable.View>
         <Text style={styles.forgotPassword}>Aún no tienes cuenta?</Text>
         <StatusBar style="auto" />  

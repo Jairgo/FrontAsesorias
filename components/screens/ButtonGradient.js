@@ -2,12 +2,13 @@ import React from "react";
 import { StyleSheet, Text, View, TextInput, Dimensions, TouchableOpacity} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
-export default function  ButtonGradient () {
+import HeaderApp from "../reusables/HeaderApp";
+
+export default function  ButtonGradient (props) {
     return (
-        <TouchableOpacity style={styles.container}>
+        <TouchableOpacity style={styles.container} onPress={() => props.changeView()}>
             <LinearGradient
                 colors={['#f49e73', '#ff5900']}
-                
                 style={styles.button}
             >
                 <Text style={styles.text}>Enviar</Text>

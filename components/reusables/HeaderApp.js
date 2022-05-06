@@ -18,7 +18,7 @@ function HeaderApp(props) {
     return (
         <NavigationContainer>
             <Drawer.Navigator
-                drawerContent={(props) => <CustomSidebarMenu {...props} />}
+                drawerContent={(propsInt) => <CustomSidebarMenu {...propsInt} changeView={() => props.changeView(false)} />}
                 screenOptions={{
                     headerShown: false,
                     drawerActiveBackgroundColor: '#f4511e',
