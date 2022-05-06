@@ -1,10 +1,11 @@
+import { useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-function UserName() {
+function UserName(props) {
     return(
         <View style={styles.contentStyle}>
             <Text style={styles.user}>
-                Estudiante
+                {props.title}
             </Text>
             <Text style={styles.userText}>
                 Jessica Ramirez

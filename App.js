@@ -9,7 +9,7 @@ import Login from './components/screens/Login';
 
 
 export default function App() {
-  const [isLoguedIn, setIsLoguedIn] = useState(false);
+  const [isLoguedIn, setIsLoguedIn] = useState(true);
 
   const handlerLoguedIn = (val) => setIsLoguedIn(val);
 
