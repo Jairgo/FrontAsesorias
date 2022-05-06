@@ -5,9 +5,11 @@ import { MaterialCommunityIcons, FontAwesome5, Feather, Ionicons } from '@expo/v
 import HomeScreen from '../screens/HomeScreen';
 import SubjectsScreens from '../screens/SubjectsScreens';
 import PerfilAsesor from '../screens/PerfilAsesor';
+import ListaAsesores from '../screens/ListaAsesores';
 import MessageScreen from '../screens/MessageScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import ScheduleScreen from '../screens/ScheduleScreen';
+import AsesorStack from '../stacks/AsesorStack';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -42,7 +44,7 @@ export default function BottomApp(props) {
                 }} /> :
                 <Tab.Screen
                 name="Asesores"
-                component={PerfilAsesor}
+                component={AsesorStack}
                 options={{
                     tabBarLabel: 'Asesores',
                     tabBarIcon: ({ color }) => (
