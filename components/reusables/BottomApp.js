@@ -9,6 +9,7 @@ import ListaAsesores from '../screens/ListaAsesores';
 import MessageScreen from '../screens/MessageScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import ScheduleScreen from '../screens/ScheduleScreen';
+import AsesorStack from '../stacks/AsesorStack';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -43,7 +44,7 @@ export default function BottomApp(props) {
                 }} /> :
                 <Tab.Screen
                 name="Asesores"
-                component={ListaAsesores}
+                component={AsesorStack}
                 options={{
                     tabBarLabel: 'Asesores',
                     tabBarIcon: ({ color }) => (

@@ -4,7 +4,8 @@ import Colors from '../constants/Colors';
 import AsesorView from "./AsesorView";
 
 
-function SolicitudAsesoria() {
+// function SolicitudAsesoria() {
+const SolicitudAsesoria = ({ navigation }) => {
 
     let Asesores = [
         { asesorName: "Adelaida Piñero", asesorCarrera: "Ing. Civil" },
@@ -30,6 +31,7 @@ function SolicitudAsesoria() {
                             key={idx}
                             asesorName={asesor.asesorName}
                             asesorCarrera={asesor.asesorCarrera}
+                            navigation={navigation}
                         />
                     ))
                 }
