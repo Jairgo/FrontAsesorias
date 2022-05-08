@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
 import Strings from '../constants/Strings';
 import Colors from '../constants/Colors';
+import Calendar from '../reusables/Calendar';
 import { VStack, Box, NativeBaseProvider } from 'native-base';
-// import DateTimePicker from '@react-native-community/datetimepicker';
 
 function PerfilAsesor({ route, navigation }) {
     const { asesor, carrera, semestre } = route.params;
+    const [date, setDate] = useState(new Date())
 
     return (
-        <View style={{ paddingTop: 70 }}>
+        <ScrollView style={{ paddingTop: 20 }}>
             <View style={styles.screen}>
                 <Image style={styles.image} source={require('../../assets/avatar-2.png')} />
                 <Text style={styles.tituloText}>  {asesor}</Text>
@@ -22,6 +23,10 @@ function PerfilAsesor({ route, navigation }) {
                 />
             </View>
             <View>
+                {/* TODO: Hacer que regrese la fecha y hora para que se puedan enviar a la siguiente screen */}
+                <Calendar />
+            </View>
+            <View>
                 <TouchableOpacity
                     onPress={() => navigation.navigate('SolicitudAsesoria', {
                         asesor: asesor,
@@ -31,7 +36,7 @@ function PerfilAsesor({ route, navigation }) {
                     <Text style={styles.siguienteText} >{Strings.solicitarAsesoria}</Text>
                 </TouchableOpacity>
             </View>
-        </View>
+        </ScrollView>
     );
 }
 
@@ -91,7 +96,8 @@ const styles = StyleSheet.create({
     siguienteButton: {
         marginRight:70,
         marginLeft:70,
-        marginTop:70,
+        marginTop:10,
+        marginBottom:50,
         paddingTop:12,
         paddingBottom:12,
         backgroundColor: Colors.naranjaColor,

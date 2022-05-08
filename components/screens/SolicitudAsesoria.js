@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import Strings from '../constants/Strings';
 import Colors from '../constants/Colors';
 import { NativeBaseProvider, TextArea } from 'native-base';
@@ -10,7 +10,7 @@ function SolicitudAsesoria({ route, navigation }) {
 
     return (
         <NativeBaseProvider>
-            <View style={styles.screen}>
+            <ScrollView style={styles.screen}>
                 <Text style={styles.tituloText}>{Strings.seleccionarHorario}</Text>
                 <Text style={styles.descripcionText}>Describe el tema que te gustaría revisar:</Text>
                 <TextArea color={Colors.negroColor} bg={Colors.naranjaSecundarioColor} h={40} placeholder="Ingresa información acerca del tema que te gustaría revisar" w="100%" maxW="350" />
@@ -22,7 +22,7 @@ function SolicitudAsesoria({ route, navigation }) {
                     underlayColor='#fff'>
                     <Text style={styles.siguienteText} >{Strings.nextButton}</Text>
                 </TouchableOpacity>
-            </View>
+            </ScrollView>
         </NativeBaseProvider>
 
     );
