@@ -1,12 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import Strings from '../constants/Strings';
 import Colors from '../constants/Colors';
 import { VStack, Box, NativeBaseProvider } from 'native-base';
 import { Feather } from '@expo/vector-icons';
+import axios from 'axios';
 
 function SolicitudAsesoriaAgendada({ route, navigation }) {
-    const { asesor} = route.params;
+    const { asesor, materia } = route.params;
+
+    useEffect(() => {
+        async function postAsesoria() {
+            try {
+                const response = await axios.post(`http://becasdeploy.pythonanywhere.com/asesorias/`, {
+                    estado: 1,
+                    evaluacion: 'Desde APP',
+                    fecha: '2022-05-08',
+                    horario: 1,
+                    asesor: 6,
+                    materia: 2
+                });
+                if (response.status === 201) {
+                    console.log(`Haz agregado una nueva asesoria: ${JSON.stringify(response.data)}`);
+                } else {
+                    console.log(`Error al agregar la asesoria: ${JSON.stringify(response.data)}`);
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        postAsesoria();
+    }, []);
 
     return (
         <NativeBaseProvider>
@@ -19,7 +43,7 @@ function SolicitudAsesoriaAgendada({ route, navigation }) {
                             <VStack space="3" >
                                 <Text>
                                     <Text style={styles.boldText}>  Materia: </Text>
-                                    <Text> Ecuaciones diferenciales</Text>
+                                    <Text> {materia}</Text>
                                 </Text>
                                 <Text>
                                     <Text style={styles.boldText}>  Día: </Text>
@@ -82,7 +106,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginBottom: 20
     },
-    boldText:{
+    boldText: {
         fontSize: 14,
         fontWeight: 'bold',
         color: Colors.naranjaColor

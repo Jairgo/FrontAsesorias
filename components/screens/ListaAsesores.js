@@ -1,23 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, ScrollView } from 'react-native';
 import Colors from '../constants/Colors';
 import AsesorView from "./AsesorView";
+import axios from 'axios';
 
+// Vista para mostrar la lista de asesores, obtenida de la base de datos en el backend
+// Propiedades:
+// - asesores: lista de asesores
+// - navigation: objeto de navegación
+// - setAsesores: función para actualizar la lista de asesores
 
-// function SolicitudAsesoria() {
 const SolicitudAsesoria = ({ navigation }) => {
-
-    let Asesores = [
-        { asesorName: "Adelaida Piñero", asesorCarrera: "Ing. Civil", asesorSemestre: "1ro" },
-        { asesorName: "Daniel Diaz", asesorCarrera: "Ing. Industrial para la dirección", asesorSemestre: "2do" },
-        { asesorName: "Jose-Luis Soria", asesorCarrera: "Ing. Mecatrónica", asesorSemestre: "3ro" },
-        { asesorName: "Fabiola Segui", asesorCarrera: "Ing. En sistemas y TI", asesorSemestre: "4to" },
-        { asesorName: "Jeronimo Arevalo", asesorCarrera: "Ing. Ambiental", asesorSemestre: "5to" },
-        { asesorName: "Maria-Ines Jaime", asesorCarrera: "Ing. Biomédica", asesorSemestre: "6to" },
-        { asesorName: "Raúl Revuelta", asesorCarrera: "Ing. En animación digital", asesorSemestre: "7mo" },
-        { asesorName: "Maria Arnaiz", asesorCarrera: "Ing. En dirección de negocios", asesorSemestre: "8vo" },
-        { asesorName: "Gerardo Macias", asesorCarrera: "Ing. En sistemas y TI", asesorSemestre: "9no" },
-    ];
+    const [asesores, setAsesores] = useState([]);
+    useEffect(() => {
+        async function getAsesores() {
+            try {
+                const asesores = await axios.get('http://becasdeploy.pythonanywhere.com/asesores/');
+                setAsesores(asesores.data);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        getAsesores();
+    }, []);
 
     return (
         <View style={styles.screen}>
@@ -26,12 +31,14 @@ const SolicitudAsesoria = ({ navigation }) => {
             </Text>
             <ScrollView>
                 {
-                    Asesores.map((asesor, idx) => (
+                    // TODO: Agregar ID unico para cada asesor desde la base de datos
+                    asesores.map((asesor, idx) => (
                         <AsesorView
                             key={idx}
-                            asesorName={asesor.asesorName}
-                            asesorCarrera={asesor.asesorCarrera}
-                            asesorSemestre={asesor.asesorSemestre}
+                            asesorName={asesor.nombre}
+                            // TODO: Hay que agregar la carrera como campo de asesor en la base de datos
+                            asesorCarrera={asesor.apellido_paterno + " " + asesor.apellido_materno} 
+                            asesorSemestre={asesor.semestre}
                             navigation={navigation}
                         />
                     ))
