@@ -7,7 +7,7 @@ import { Feather } from '@expo/vector-icons';
 import axios from 'axios';
 
 function SolicitudAsesoriaAgendada({ route, navigation }) {
-    const { asesor, materia } = route.params;
+    const { asesor, materia, horario, dia } = route.params;
 
     useEffect(() => {
         async function postAsesoria() {
@@ -15,9 +15,9 @@ function SolicitudAsesoriaAgendada({ route, navigation }) {
                 const response = await axios.post(`http://becasdeploy.pythonanywhere.com/asesorias/`, {
                     estado: 1,
                     evaluacion: 'Desde APP',
-                    fecha: '2022-05-08',
-                    horario: 1,
-                    asesor: 6,
+                    fecha: '2022-05-25',
+                    horario: horario,
+                    asesor: 1,
                     materia: 2
                 });
                 if (response.status === 201) {
@@ -47,13 +47,14 @@ function SolicitudAsesoriaAgendada({ route, navigation }) {
                                 </Text>
                                 <Text>
                                     <Text style={styles.boldText}>  Día: </Text>
-                                    <Text> 20 de mayo de 2022</Text>
+                                    <Text> {dia}</Text>
                                 </Text>
                                 <Text>
                                     <Text style={styles.boldText}>  Hora: </Text>
-                                    <Text> 10:00 hrs</Text>
+                                    <Text> {horario.hora_inicio}</Text>
                                 </Text>
                                 <Text>
+                                    {/* TODO: Agregar lugar en el serializer del back */}
                                     <Text style={styles.boldText}>  Lugar: </Text>
                                     <Text> Salón cisco</Text>
                                 </Text>

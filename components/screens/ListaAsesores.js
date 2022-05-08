@@ -7,22 +7,52 @@ import axios from 'axios';
 // Vista para mostrar la lista de asesores, obtenida de la base de datos en el backend
 // Propiedades:
 // - asesores: lista de asesores
+// - carreras: lista de carreras
 // - navigation: objeto de navegación
 // - setAsesores: función para actualizar la lista de asesores
+// - setCarreras: función para actualizar la lista de carreras
 
 const SolicitudAsesoria = ({ navigation }) => {
     const [asesores, setAsesores] = useState([]);
-    useEffect(() => {
-        async function getAsesores() {
-            try {
-                const asesores = await axios.get('http://becasdeploy.pythonanywhere.com/asesores/');
-                setAsesores(asesores.data);
-            } catch (error) {
-                console.log(error);
-            }
+    const [carreras, setCarreras] = useState([]);
+
+    const getData = () => {
+        let endpoints = [
+            'http://becasdeploy.pythonanywhere.com/asesores/',
+            'http://becasdeploy.pythonanywhere.com/carreras/'
+        ];
+
+        // axios.all(endpoints.map(endpoint => axios.get(endpoint)))
+        //     .then(axios.spread((asesores, carreras) => {
+        //         setAsesores(asesores.data);
+        //         setCarreras(carreras.data);
+        //     }))
+        //     .catch(err => {
+        //         console.log(err);
+        //     }
+        //     );
+
+        Promise.all(endpoints.map(endpoint => axios.get(endpoint))).then(([{ data: asesores }, { data: carreras }]) => {
+            setAsesores(asesores)
+            setCarreras(carreras)
+        }).catch(err => {
+            console.log(err);
         }
-        getAsesores();
+        );
+    }
+
+    useEffect(() => {
+        getData();
     }, []);
+
+    const findCarrera = (idCarrera) => {
+        if (carreras.length > 0 && carreras !== undefined && idCarrera !== undefined && idCarrera !== null) {
+            let carrera = carreras.find(e => e.id === idCarrera);
+            return carrera.nombre;
+        } else {
+            return "-";
+        }
+    };
 
     return (
         <View style={styles.screen}>
@@ -31,13 +61,14 @@ const SolicitudAsesoria = ({ navigation }) => {
             </Text>
             <ScrollView>
                 {
-                    // TODO: Agregar ID unico para cada asesor desde la base de datos
-                    asesores.map((asesor, idx) => (
+                    asesores.map((asesor) => (
                         <AsesorView
-                            key={idx}
+                            key={asesor.id}
+                            asesorId={asesor.id}
                             asesorName={asesor.nombre}
-                            // TODO: Hay que agregar la carrera como campo de asesor en la base de datos
-                            asesorCarrera={asesor.apellido_paterno + " " + asesor.apellido_materno} 
+                            asesorApellidoPat={asesor.apellido_paterno}
+                            asesorApellidoMat={asesor.apellido_materno}
+                            asesorCarrera={findCarrera(asesor.carrera)}
                             asesorSemestre={asesor.semestre}
                             navigation={navigation}
                         />

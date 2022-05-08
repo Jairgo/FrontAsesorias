@@ -6,7 +6,7 @@ import { NativeBaseProvider, TextArea, FormControl, Select, CheckIcon, WarningOu
 import axios from 'axios';
 
 function SolicitudAsesoria({ route, navigation }) {
-    const { asesor } = route.params;
+    const { asesor, horario, dia } = route.params;
     const [materia, setMateria] = React.useState("");
     const [selected, setSelected] = useState(false);
 
@@ -66,7 +66,9 @@ function SolicitudAsesoria({ route, navigation }) {
                 <TouchableOpacity
                     onPress={() => navigation.navigate('SolicitudAsesoriaAgendada', {
                         asesor: asesor,
-                        materia: materia
+                        materia: materia,
+                        horario: horario,
+                        dia: dia,
                     })}
                     style={styles.siguienteButton}
                     underlayColor='#fff'>

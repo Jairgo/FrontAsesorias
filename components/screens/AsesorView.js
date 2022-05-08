@@ -14,9 +14,10 @@ const AsesorView = (props) => {
     return (
         <Pressable
             onPress={() => props.navigation.navigate('PerfilAsesor', {
-                asesor: props.asesorName,
+                asesor: props.asesorName + " " + props.asesorApellidoPat + " " + props.asesorApellidoMat,
                 carrera: props.asesorCarrera,
                 semestre: props.asesorSemestre,
+                asesorId: props.asesorId,
             })}
             style={({ pressed }) => [{
                 borderRadius: 10,
@@ -35,10 +36,10 @@ const AsesorView = (props) => {
                 </View>
                 <View style={styles.contentContainer}>
                     <Text style={styles.asesorName}>
-                        {props.asesorName}
+                        {props.asesorName} {props.asesorApellidoPat}
                     </Text>
                     <Text style={styles.asesorCarrera}>
-                        {props.asesorCarrera}
+                        {props.asesorCarrera}, {props.asesorSemestre} semestre
                     </Text>
                 </View>
 
