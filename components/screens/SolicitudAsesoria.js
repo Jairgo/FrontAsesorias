@@ -6,8 +6,9 @@ import { NativeBaseProvider, TextArea, FormControl, Select, CheckIcon, WarningOu
 import axios from 'axios';
 
 function SolicitudAsesoria({ route, navigation }) {
-    const { asesor, horario, dia } = route.params;
-    const [materia, setMateria] = React.useState("");
+    const { asesor, horarioId, horarioNombre, dia } = route.params;
+    const [materiaId, setMateriaId] = React.useState("");
+    const [materiaNombre, setMateriaNombre] = React.useState("");
     const [selected, setSelected] = useState(false);
 
     // const onChange = (event, itemValue) => {
@@ -19,6 +20,7 @@ function SolicitudAsesoria({ route, navigation }) {
     useEffect(() => {
         async function getMaterias() {
             try {
+                // TODO: Arreglar el horario para que tome la fecha de uno de los dias actuales
                 const materias = await axios.get('http://becasdeploy.pythonanywhere.com/materias/');
                 setMaterias(materias.data);
             } catch (error) {
@@ -27,6 +29,14 @@ function SolicitudAsesoria({ route, navigation }) {
         }
         getMaterias();
     }, []);
+
+    const findMateria = (idMateria) => {
+        if (materias.length > 0 && materias !== undefined && idMateria !== undefined && idMateria !== null) {
+            let materia = materias.find(e => e.id === idMateria);
+            setMateriaNombre(materia.nombre);
+            setMateriaId(idMateria);
+        }
+    };
 
     return (
         <NativeBaseProvider>
@@ -38,12 +48,12 @@ function SolicitudAsesoria({ route, navigation }) {
                     <Select minWidth="200" accessibilityLabel="Elegir materia" placeholder="Elige la materia que desees" _selectedItem={{
                         bg: "teal.600",
                         endIcon: <CheckIcon size={5} />
-                    }} mt="1" onValueChange={itemValue => setMateria(itemValue)}>
+                    }} mt="1" onValueChange={itemValue => findMateria(itemValue)}>
                         {
-                            materias.map((materia, idx) => (
+                            materias.map((materia) => (
                                 <Select.Item
                                     label={materia.nombre}
-                                    value={materia.nombre}
+                                    value={materia.id}
                                     key={materia.id}
                                     materiaName={materia.nombre}
                                     materiaDescripcion={materia.descripcion}
@@ -66,8 +76,11 @@ function SolicitudAsesoria({ route, navigation }) {
                 <TouchableOpacity
                     onPress={() => navigation.navigate('SolicitudAsesoriaAgendada', {
                         asesor: asesor,
-                        materia: materia,
-                        horario: horario,
+                        materiaId: materiaId,
+                        materiaNombre: materiaNombre,
+                        horarioId: horarioId,
+                        horarioNombre: horarioNombre,
+                        lugar: "Lugar predefinido",
                         dia: dia,
                     })}
                     style={styles.siguienteButton}

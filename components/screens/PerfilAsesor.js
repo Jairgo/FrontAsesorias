@@ -10,7 +10,9 @@ function PerfilAsesor({ route, navigation }) {
     const { asesor, carrera, semestre, asesorId } = route.params;
     const [date, setDate] = useState(new Date())
     const [horarios, setHorarios] = useState([]);
-    const [horario, setHorario] = React.useState("");
+    const [horarioId, setHorarioId] = React.useState("");
+    const [horarioNombre, setHorarioNombre] = React.useState("");
+    const [disabled, setDisabled] = useState(false);
     var dia = "no definido";
 
     useEffect(() => {
@@ -19,6 +21,11 @@ function PerfilAsesor({ route, navigation }) {
                 const horarios = await axios.get('http://becasdeploy.pythonanywhere.com/horarios/?asesor=' + asesorId);
                 // console.log(horarios.data);
                 setHorarios(horarios.data);
+                if (horarios.data.length > 0) {
+                    setDisabled(false);
+                } else {
+                    setDisabled(true);
+                }
             } catch (error) {
                 console.log(error);
             }
@@ -56,6 +63,14 @@ function PerfilAsesor({ route, navigation }) {
         return dia;
     };
 
+    const detailsHorario = (idHorario) => {
+        if (horarios.length > 0 && horarios !== undefined && idHorario !== undefined && idHorario !== null) {
+            let horario = horarios.find(e => e.id === idHorario);
+            setHorarioNombre(horario.hora_inicio + " - " + horario.hora_fin);
+            setHorarioId(idHorario);
+        }
+    };
+
     return (
         <NativeBaseProvider>
             <ScrollView style={{ paddingTop: 20 }}>
@@ -70,40 +85,42 @@ function PerfilAsesor({ route, navigation }) {
                         semestre={semestre}
                     />
                 </View>
-                <View >
-                    <Text style={styles.instruccionText}>Selecciona una fecha y hora:</Text>
-                    {/* TODO: Hacer que regrese la fecha y hora para que se puedan enviar a la siguiente screen */}
-                    {/* <Calendar /> */}
-                </View>
-                <View style={styles.screen}>
-                    {/* <Horarios horarios={horarios} navigation={navigation} /> */}
-                    <FormControl maxW="100%" isRequired>
-                        <Select minWidth="200" accessibilityLabel="Elige el horario que mas te convenga" placeholder="Elige el horario que mas te convenga" _selectedItem={{
-                            bg: "teal.600",
-                            endIcon: <CheckIcon size={5} />
-                        }} mt="1" onValueChange={itemValue => setHorario(itemValue)}>
-                            {
-                                horarios.map((horario) => (
-                                    <Select.Item style={{ color: Colors.naranjaColor, fontWeight: "bold" }}
-                                        label={findDia(horario.dia) + ": " + horario.hora_inicio + " - " + horario.hora_fin}
-                                        value={horario.id}
-                                        key={horario.id}
-                                        navigation={navigation}
-                                    />
-                                ))
-                            }
-                        </Select>
-                    </FormControl>
-
-                </View>
+                <Text style={styles.instruccionText}>Selecciona una fecha y hora:</Text>
+                {horarios.length > 0 ?
+                    (
+                        <View style={styles.screen}>
+                            <FormControl maxW="100%" isRequired>
+                                <Select minWidth="200" accessibilityLabel="Elige el horario que mas te convenga" placeholder="Elige el horario que mas te convenga" _selectedItem={{
+                                    bg: "teal.600",
+                                    endIcon: <CheckIcon size={5} />
+                                }} mt="1" onValueChange={itemValue => detailsHorario(itemValue)}>
+                                    {
+                                        horarios.map((horario) => (
+                                            <Select.Item style={{ color: Colors.naranjaColor, fontWeight: "bold" }}
+                                                label={findDia(horario.dia) + ": " + horario.hora_inicio + " - " + horario.hora_fin}
+                                                value={horario.id}
+                                                key={horario.id}
+                                                navigation={navigation}
+                                            />
+                                        ))
+                                    }
+                                </Select>
+                            </FormControl>
+                        </View>
+                    ) : (
+                        <Text style={styles.noDisponibleText}>No hay horarios disponibles</Text>
+                    )
+                }
                 <View>
                     <TouchableOpacity
                         onPress={() => navigation.navigate('SolicitudAsesoria', {
                             asesor: asesor,
-                            horario: horario,
+                            horarioId: horarioId,
+                            horarioNombre: horarioNombre,
                             dia: dia,
                         })}
-                        style={styles.siguienteButton}
+                        disabled={disabled}
+                        style={disabled ? styles.siguienteButtonDisabled : styles.siguienteButton}
                         underlayColor='#fff'>
                         <Text style={styles.siguienteText} >{Strings.solicitarAsesoria}</Text>
                     </TouchableOpacity>
@@ -112,31 +129,6 @@ function PerfilAsesor({ route, navigation }) {
         </NativeBaseProvider>
     );
 }
-
-// function Horarios(props) {
-//     // const [horario, setHorario] = React.useState("");
-
-//     return (
-//         <NativeBaseProvider>
-//             <Select minWidth="200" accessibilityLabel="Elegir materia" placeholder="Elige el horario que mas te convenga" _selectedItem={{
-//                 bg: "teal.600",
-//                 endIcon: <CheckIcon size={5} />
-//             }} mt="1" onValueChange={itemValue => setHorario(itemValue)}>
-//                 {
-//                     props.horarios.map((horario, idx) => (
-//                         <Select.Item
-//                             label={horario.dia}
-//                             value={horario.dia}
-//                             key={horario.id}
-//                             navigation={props.navigation}
-//                         />
-//                     ))
-//                 }
-//             </Select>
-//         </NativeBaseProvider>
-//     );
-
-// }
 
 function CardInfoPersonal(props) {
     return (
@@ -194,6 +186,13 @@ const styles = StyleSheet.create({
         fontSize: 15,
         marginTop: 20
     },
+    noDisponibleText: {
+        color: Colors.redColor,
+        textAlign: 'center',
+        fontWeight: 'bold',
+        fontSize: 15,
+        marginTop: 10
+    },
     image: {
         width: 50, height: 50,
         borderRadius: 1000,
@@ -206,6 +205,16 @@ const styles = StyleSheet.create({
         paddingTop: 12,
         paddingBottom: 12,
         backgroundColor: Colors.naranjaColor,
+        borderRadius: 10,
+    },
+    siguienteButtonDisabled: {
+        marginRight: 70,
+        marginLeft: 70,
+        marginTop: 10,
+        marginBottom: 50,
+        paddingTop: 12,
+        paddingBottom: 12,
+        backgroundColor: Colors.lightOrange,
         borderRadius: 10,
     },
     siguienteText: {

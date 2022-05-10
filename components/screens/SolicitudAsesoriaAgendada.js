@@ -7,7 +7,7 @@ import { Feather } from '@expo/vector-icons';
 import axios from 'axios';
 
 function SolicitudAsesoriaAgendada({ route, navigation }) {
-    const { asesor, materia, horario, dia } = route.params;
+    const { asesor, materiaId, materiaNombre, horarioId, horarioNombre, dia, lugar } = route.params;
 
     useEffect(() => {
         async function postAsesoria() {
@@ -16,9 +16,10 @@ function SolicitudAsesoriaAgendada({ route, navigation }) {
                     estado: 1,
                     evaluacion: 'Desde APP',
                     fecha: '2022-05-25',
-                    horario: horario,
+                    horario: horarioId,
                     asesor: 1,
-                    materia: 2
+                    materia: materiaId,
+                    lugar: lugar
                 });
                 if (response.status === 201) {
                     console.log(`Haz agregado una nueva asesoria: ${JSON.stringify(response.data)}`);
@@ -43,7 +44,7 @@ function SolicitudAsesoriaAgendada({ route, navigation }) {
                             <VStack space="3" >
                                 <Text>
                                     <Text style={styles.boldText}>  Materia: </Text>
-                                    <Text> {materia}</Text>
+                                    <Text> {materiaNombre}</Text>
                                 </Text>
                                 <Text>
                                     <Text style={styles.boldText}>  Día: </Text>
@@ -51,12 +52,12 @@ function SolicitudAsesoriaAgendada({ route, navigation }) {
                                 </Text>
                                 <Text>
                                     <Text style={styles.boldText}>  Hora: </Text>
-                                    <Text> {horario.hora_inicio}</Text>
+                                    <Text> {horarioNombre}</Text>
                                 </Text>
                                 <Text>
                                     {/* TODO: Agregar lugar en el serializer del back */}
                                     <Text style={styles.boldText}>  Lugar: </Text>
-                                    <Text> Salón cisco</Text>
+                                    <Text> {lugar}</Text>
                                 </Text>
                                 <Text>
                                     <Text style={styles.boldText}>  Asesor: </Text>
