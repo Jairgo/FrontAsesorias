@@ -1,23 +1,58 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, ScrollView } from 'react-native';
 import Colors from '../constants/Colors';
 import AsesorView from "./AsesorView";
+import axios from 'axios';
 
+// Vista para mostrar la lista de asesores, obtenida de la base de datos en el backend
+// Propiedades:
+// - asesores: lista de asesores
+// - carreras: lista de carreras
+// - navigation: objeto de navegación
+// - setAsesores: función para actualizar la lista de asesores
+// - setCarreras: función para actualizar la lista de carreras
 
-// function SolicitudAsesoria() {
 const SolicitudAsesoria = ({ navigation }) => {
+    const [asesores, setAsesores] = useState([]);
+    const [carreras, setCarreras] = useState([]);
 
-    let Asesores = [
-        { asesorName: "Adelaida Piñero", asesorCarrera: "Ing. Civil" },
-        { asesorName: "Daniel Diaz", asesorCarrera: "Ing. Industrial para la dirección" },
-        { asesorName: "Jose-Luis Soria", asesorCarrera: "Ing. Mecatrónica" },
-        { asesorName: "Fabiola Segui", asesorCarrera: "Ing. En sistemas y TI" },
-        { asesorName: "Jeronimo Arevalo", asesorCarrera: "Ing. Ambiental" },
-        { asesorName: "Maria-Ines Jaime", asesorCarrera: "Ing. Biomédica" },
-        { asesorName: "Raúl Revuelta", asesorCarrera: "Ing. En animación digital" },
-        { asesorName: "Maria Arnaiz", asesorCarrera: "Ing. En dirección de negocios" },
-        { asesorName: "Gerardo Macias", asesorCarrera: "Ing. En sistemas y TI" },
-    ];
+    const getData = () => {
+        let endpoints = [
+            'http://becasdeploy.pythonanywhere.com/asesores/',
+            'http://becasdeploy.pythonanywhere.com/carreras/'
+        ];
+
+        // axios.all(endpoints.map(endpoint => axios.get(endpoint)))
+        //     .then(axios.spread((asesores, carreras) => {
+        //         setAsesores(asesores.data);
+        //         setCarreras(carreras.data);
+        //     }))
+        //     .catch(err => {
+        //         console.log(err);
+        //     }
+        //     );
+
+        Promise.all(endpoints.map(endpoint => axios.get(endpoint))).then(([{ data: asesores }, { data: carreras }]) => {
+            setAsesores(asesores)
+            setCarreras(carreras)
+        }).catch(err => {
+            console.log(err);
+        }
+        );
+    }
+
+    useEffect(() => {
+        getData();
+    }, []);
+
+    const findCarrera = (idCarrera) => {
+        if (carreras.length > 0 && carreras !== undefined && idCarrera !== undefined && idCarrera !== null) {
+            let carrera = carreras.find(e => e.id === idCarrera);
+            return carrera.nombre;
+        } else {
+            return "-";
+        }
+    };
 
     return (
         <View style={styles.screen}>
@@ -26,11 +61,15 @@ const SolicitudAsesoria = ({ navigation }) => {
             </Text>
             <ScrollView>
                 {
-                    Asesores.map((asesor, idx) => (
+                    asesores.map((asesor) => (
                         <AsesorView
-                            key={idx}
-                            asesorName={asesor.asesorName}
-                            asesorCarrera={asesor.asesorCarrera}
+                            key={asesor.id}
+                            asesorId={asesor.id}
+                            asesorName={asesor.nombre}
+                            asesorApellidoPat={asesor.apellido_paterno}
+                            asesorApellidoMat={asesor.apellido_materno}
+                            asesorCarrera={findCarrera(asesor.carrera)}
+                            asesorSemestre={asesor.semestre}
                             navigation={navigation}
                         />
                     ))

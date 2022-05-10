@@ -1,11 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import Strings from '../constants/Strings';
 import Colors from '../constants/Colors';
 import { VStack, Box, NativeBaseProvider } from 'native-base';
 import { Feather } from '@expo/vector-icons';
+import axios from 'axios';
 
-function SolicitudAsesoriaAgendada() {
+function SolicitudAsesoriaAgendada({ route, navigation }) {
+    const { asesor, materia, horario, dia } = route.params;
+
+    useEffect(() => {
+        async function postAsesoria() {
+            try {
+                const response = await axios.post(`http://becasdeploy.pythonanywhere.com/asesorias/`, {
+                    estado: 1,
+                    evaluacion: 'Desde APP',
+                    fecha: '2022-05-25',
+                    horario: horario,
+                    asesor: 1,
+                    materia: 2
+                });
+                if (response.status === 201) {
+                    console.log(`Haz agregado una nueva asesoria: ${JSON.stringify(response.data)}`);
+                } else {
+                    console.log(`Error al agregar la asesoria: ${JSON.stringify(response.data)}`);
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        postAsesoria();
+    }, []);
 
     return (
         <NativeBaseProvider>
@@ -18,23 +43,24 @@ function SolicitudAsesoriaAgendada() {
                             <VStack space="3" >
                                 <Text>
                                     <Text style={styles.boldText}>  Materia: </Text>
-                                    <Text> Ecuaciones diferenciales</Text>
+                                    <Text> {materia}</Text>
                                 </Text>
                                 <Text>
                                     <Text style={styles.boldText}>  Día: </Text>
-                                    <Text> 20 de mayo de 2022</Text>
+                                    <Text> {dia}</Text>
                                 </Text>
                                 <Text>
                                     <Text style={styles.boldText}>  Hora: </Text>
-                                    <Text> 10:00 hrs</Text>
+                                    <Text> {horario.hora_inicio}</Text>
                                 </Text>
                                 <Text>
+                                    {/* TODO: Agregar lugar en el serializer del back */}
                                     <Text style={styles.boldText}>  Lugar: </Text>
                                     <Text> Salón cisco</Text>
                                 </Text>
                                 <Text>
                                     <Text style={styles.boldText}>  Asesor: </Text>
-                                    <Text> Daniel Díaz</Text>
+                                    <Text> {asesor}</Text>
                                 </Text>
                             </VStack>
                         </Box>
@@ -81,7 +107,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         marginBottom: 20
     },
-    boldText:{
+    boldText: {
         fontSize: 14,
         fontWeight: 'bold',
         color: Colors.naranjaColor
