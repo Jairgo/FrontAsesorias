@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import { MaterialCommunityIcons, FontAwesome5, Feather, Ionicons } from '@expo/vector-icons';
+import { MaterialCommunityIcons, FontAwesome5, Feather} from '@expo/vector-icons';
 import HomeScreen from '../screens/HomeScreen';
 import SubjectsScreens from '../screens/SubjectsScreens';
 import PerfilAsesor from '../screens/PerfilAsesor';
+import ListaAsesores from '../screens/ListaAsesores';
 import MessageScreen from '../screens/MessageScreen';
-import ProfileScreen from '../screens/ProfileScreen';
 import ScheduleScreen from '../screens/ScheduleScreen';
-import SearchScreen from '../screens/SearchScreen';
+import AsesorStack from '../stacks/AsesorStack';
+import NotificationsScreen from '../screens/NotificationsScreen';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -34,32 +35,31 @@ export default function BottomApp(props) {
             </Tab.Screen>
             {props.asesor ? 
                 <Tab.Screen
-                    name="Materias"
-                    component={SubjectsScreens}
-                    options={{
-                        tabBarLabel: 'Materias',
-                        tabBarIcon: ({ color }) => (
-                            <Feather name="book-open" color={color} size={24} />
-                        ),
-                    }} /> :
-                    <Tab.Screen
-                    name="Asesores"
-                    component={PerfilAsesor}
-                    options={{
-                        tabBarLabel: 'Asesores',
-                        tabBarIcon: ({ color }) => (
-                            <Feather name="book-open" color={color} size={24} />
-                        ),
-                    }} 
-                />
+                name="Materias"
+                component={SubjectsScreens}
+                options={{
+                    tabBarLabel: 'Materias',
+                    tabBarIcon: ({ color }) => (
+                        <Feather name="book-open" color={color} size={24} />
+                    ),
+                }} /> :
+                <Tab.Screen
+                name="Asesores"
+                component={AsesorStack}
+                options={{
+                    tabBarLabel: 'Asesores',
+                    tabBarIcon: ({ color }) => (
+                        <Feather name="book-open" color={color} size={24} />
+                    ),
+                }} />
             }
             <Tab.Screen
-                name="Cuenta"
-                component={ProfileScreen}
+                name="Notificaciones"
+                component={NotificationsScreen}
                 options={{
-                    tabBarLabel: 'Cuenta',
+                    tabBarLabel: 'Notificaciones',
                     tabBarIcon: ({ color }) => (
-                        <FontAwesome5 name="user-circle" color={color} size={24} />
+                        <FontAwesome5 name="bell" color={color} size={24} />
                     ),
                 }} />
         </Tab.Navigator>
