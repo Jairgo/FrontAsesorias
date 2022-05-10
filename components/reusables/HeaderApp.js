@@ -8,7 +8,6 @@ import CustomSidebarMenu from './CustomSidebarMenu';
 
 import BottomApp from '../reusables/BottomApp';
 import SchedulesSettingsScreen from '../screens/SchedulesSettingsScreen';
-import SecurityScreen from '../screens/SecurityScreen';
 import About from '../screens/About';
 import UserProfile from '../screens/UserProfile';
 
@@ -57,15 +56,6 @@ function HeaderApp(props) {
                         ),
                     }} >
                         {(_) => <HomeStack asesor={props.asesor} screen={SchedulesSettingsScreen} />}
-                    </Drawer.Screen>
-                <Drawer.Screen
-                    name="Seguridad"
-                    options={{
-                        drawerIcon: ({ color }) => (
-                            <Ionicons name="lock-closed-outline" size={22} color={color} />
-                        ),
-                    }} >
-                        {(_) => <HomeStack asesor={props.asesor} screen={SecurityScreen} />}
                     </Drawer.Screen>
                 <Drawer.Screen
                     name="Acerca de"
