@@ -22,7 +22,6 @@ export default function BottomApp(props) {
         >
             <Tab.Screen
                 name="Inicio"
-                component={props.asesor ? ScheduleScreen : SearchScreen}
                 options={{
                     tabBarLabel: 'Inicio',
                     tabBarIcon: ({ color }) => (
@@ -30,7 +29,9 @@ export default function BottomApp(props) {
                     ),
                 }}
                 
-            />
+            >
+                {(_) => <ScheduleScreen asesor={props.asesor} />}
+            </Tab.Screen>
             {props.asesor ? 
                 <Tab.Screen
                     name="Materias"

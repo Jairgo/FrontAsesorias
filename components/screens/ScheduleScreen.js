@@ -1,4 +1,4 @@
-import react, { useState } from "react";
+import react, { useEffect, useState } from "react";
 import { 
     View,
     Text,
@@ -12,10 +12,36 @@ import WeekDay from "./Schedule/WeekDay";
 import SubjectView from "./Schedule/SubjectView";
 import InfoModal from "./Schedule/ModalInfo";
 
-export default function ScheduleScreen() {
+import { endpoints } from "../constants/Backend";
+import axios from "axios";
+
+const ASESOR_ID = 1;
+
+export default function ScheduleScreen(props) {
     const [selectedDay, setSelectedDay] = useState(0);
     const [infoOpen, setInfoOpen] = useState(false);
     const [materiaSelected, setMateriaSelected] = useState(-1);
+
+    useEffect(() => {
+        if (props.asesor) {
+            axios.get(endpoints.horarioAsesor(ASESOR_ID), {
+                params: {
+                    day: week[selectedDay].day
+                }
+            }).then(
+                (response) => {
+                    // console.log(JSON.stringify(Object.keys(response)))
+                    console.log(JSON.stringify(response.data));
+                },
+                (err) => {
+                    console.log(err);
+                }
+            )
+        }
+        else {
+            // axios.get(endpoints.horarioAlumno())
+        }
+    }, [selectedDay])
 
     const week = [ ...Array(7).keys() ].map((i) => {
         let date = new Date();
@@ -23,13 +49,13 @@ export default function ScheduleScreen() {
         return {
             day: (() => {
                 switch(date.getDay()) {
-                    case 0: return 'Lun';
-                    case 1: return 'Mar';
-                    case 2: return 'Mie';
-                    case 3: return 'Jue';
-                    case 4: return 'Vie';
-                    case 5: return 'Sab';
-                    case 6: return 'Dom';
+                    case 0: return 'Dom';
+                    case 1: return 'Lun';
+                    case 2: return 'Mar';
+                    case 3: return 'Mie';
+                    case 4: return 'Jue';
+                    case 5: return 'Vie';
+                    case 6: return 'Sab';
                 }
             })(),
             num: date.getDate()
