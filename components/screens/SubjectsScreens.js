@@ -6,15 +6,19 @@ import {
     ScrollView,
     StyleSheet,
     Pressable,
+    TextInput, 
+    Button,
 } from "react-native";
 
 import { Picker } from "@react-native-picker/picker";
 
 import Colors from "../constants/Colors";
 import { FontAwesome5 } from "@expo/vector-icons";
+import ModalEdit from "./Subjects/ModalEdit";
 
 export default function SubjectsScreens() {
     const [ materiaSelected, setMateriaSelected ] = useState(0);
+    const [ materiaEdit, setMateriaEdit ] = useState(false);
 
     const Materias = {
         0: {
@@ -111,13 +115,13 @@ export default function SubjectsScreens() {
                     </View>
                 </View>
                 <View style={styles.editButtonContainer}>
-                    <Pressable>
+                    <Pressable onPress={() => setMateriaEdit(true) }>
                         <FontAwesome5 name={"edit"} color={"black"} size={25} solid />
                     </Pressable>
                 </View>
             </View>
-            <Modal visible={false} transparent={true}>
-
+            <Modal visible={materiaEdit} transparent={true} animationType="slide">
+                <ModalEdit onClose={() => setMateriaEdit(false)} onAccept={() => setMateriaEdit(false)}/>
             </Modal>
         </View>
     );

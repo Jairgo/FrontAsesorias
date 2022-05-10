@@ -14,7 +14,6 @@ import NotificationsScreen from '../screens/NotificationsScreen';
 const Tab = createMaterialBottomTabNavigator();
 
 export default function BottomApp(props) {
-    const [IsAsesor, setIsAsesor] = useState(false);
     return (
         <Tab.Navigator
             initialRouteName="Inicio"
@@ -24,15 +23,17 @@ export default function BottomApp(props) {
         >
             <Tab.Screen
                 name="Inicio"
-                component={ScheduleScreen}
                 options={{
                     tabBarLabel: 'Inicio',
                     tabBarIcon: ({ color }) => (
                         <MaterialCommunityIcons name="home" color={color} size={24} />
                     ),
                 }}
-            />
-            {IsAsesor ? 
+                
+            >
+                {(_) => <ScheduleScreen asesor={props.asesor} />}
+            </Tab.Screen>
+            {props.asesor ? 
                 <Tab.Screen
                 name="Materias"
                 component={SubjectsScreens}
