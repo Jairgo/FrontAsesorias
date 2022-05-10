@@ -26,7 +26,8 @@ export default function ScheduleScreen(props) {
         if (props.asesor) {
             axios.get(endpoints.horarioAsesor(ASESOR_ID), {
                 params: {
-                    day: week[selectedDay].day
+                    day: week[selectedDay].day,
+                    offset_days: week[selectedDay].offset
                 }
             }).then(
                 (response) => {
@@ -58,7 +59,8 @@ export default function ScheduleScreen(props) {
                     case 6: return 'Sab';
                 }
             })(),
-            num: date.getDate()
+            num: date.getDate(),
+            offset: i
         };
     });
     
