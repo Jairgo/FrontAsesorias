@@ -120,7 +120,8 @@ const styles = StyleSheet.create({
   forgotPassword: {
     fontSize: 14,
     color: 'gray',
-    marginTop: 20
+    marginTop: 15,
+    marginBottom: 15
   },
 
   
