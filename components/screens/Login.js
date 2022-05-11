@@ -73,11 +73,16 @@ export default function Login(props) {
           style={styles.textInput}
           secureTextEntry={true}
         />
+        <TouchableOpacity>
         <Text style={styles.forgotPassword}>Olvidaste tu contraseña?</Text>
+        </TouchableOpacity>
+        
       <Animatable.View animation="fadeInUp">
         <ButtonGradient changeView={() => props.changeView(true)}/>
         </Animatable.View>
+        <TouchableOpacity>
         <Text style={styles.forgotPassword}>Aún no tienes cuenta?</Text>
+        </TouchableOpacity>
         <StatusBar style="auto" />  
       </View>
     </View>
