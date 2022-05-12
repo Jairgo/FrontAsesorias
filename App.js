@@ -14,7 +14,7 @@ export default function App() {
   const [user, setUser] = useState(null);
   const value = useMemo(() => ({user, setUser}), [user, setUser]);
 
-  const [isLoguedIn, setIsLoguedIn] = useState(true);
+  const [isLoguedIn, setIsLoguedIn] = useState(false);
   const handlerLoguedIn = (val) => setIsLoguedIn(val);
 
   useEffect(() => {
