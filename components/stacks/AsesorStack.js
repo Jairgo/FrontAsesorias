@@ -1,8 +1,8 @@
 import React from 'react';
 import ListaAsesores from '../screens/ListaAsesores';
 import PerfilAsesor from '../screens/PerfilAsesor';
-import SoliciudAsesoria from '../screens/SoliciudAsesoria';
-import SoliciudAsesoriaAgendada from '../screens/SoliciudAsesoriaAgendada';
+import SolicitudAsesoria from '../screens/SolicitudAsesoria';
+import SolicitudAsesoriaAgendada from '../screens/SolicitudAsesoriaAgendada';
 
 
 import { createStackNavigator } from '@react-navigation/stack';
@@ -10,13 +10,22 @@ import { createStackNavigator } from '@react-navigation/stack';
 const Stack = createStackNavigator();
 
 function AsesorStack() {
-    <Stack.Navigator>
-        <Stack.Screen name="ListaAsesores" component={ListaAsesores}/>
-        <Stack.Screen name="PerfilAsesor" component={PerfilAsesor}/>
-        <Stack.Screen name="SoliciudAsesoria" component={SoliciudAsesoria}/>
-        <Stack.Screen name="SoliciudAsesoriaAgendada" component={SoliciudAsesoriaAgendada}/>
+    return (
+        <Stack.Navigator
+            screenOptions={{
+                headerShown: false
+            }}>
+            <Stack.Screen
+                name="Lista Asesores"
+                component={ListaAsesores}
+            />
+            <Stack.Screen name="PerfilAsesor" component={PerfilAsesor} />
+            <Stack.Screen name="SolicitudAsesoria" component={SolicitudAsesoria} />
+            <Stack.Screen name="SolicitudAsesoriaAgendada" component={SolicitudAsesoriaAgendada} />
 
-    </Stack.Navigator>
+        </Stack.Navigator>
+    );
+
 }
 
 export default AsesorStack;

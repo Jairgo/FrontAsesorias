@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import { MaterialCommunityIcons, FontAwesome5, Feather, Ionicons } from '@expo/vector-icons';
+import { MaterialCommunityIcons, FontAwesome5, Feather} from '@expo/vector-icons';
 import HomeScreen from '../screens/HomeScreen';
 import SubjectsScreens from '../screens/SubjectsScreens';
 import PerfilAsesor from '../screens/PerfilAsesor';
 import ListaAsesores from '../screens/ListaAsesores';
 import MessageScreen from '../screens/MessageScreen';
-import ProfileScreen from '../screens/ProfileScreen';
 import ScheduleScreen from '../screens/ScheduleScreen';
+import AsesorStack from '../stacks/AsesorStack';
+import NotificationsScreen from '../screens/NotificationsScreen';
 
 const Tab = createMaterialBottomTabNavigator();
 
 export default function BottomApp(props) {
-    const [IsAsesor, setIsAsesor] = useState(false);
     return (
         <Tab.Navigator
             initialRouteName="Inicio"
@@ -23,15 +23,17 @@ export default function BottomApp(props) {
         >
             <Tab.Screen
                 name="Inicio"
-                component={ScheduleScreen}
                 options={{
                     tabBarLabel: 'Inicio',
                     tabBarIcon: ({ color }) => (
                         <MaterialCommunityIcons name="home" color={color} size={24} />
                     ),
                 }}
-            />
-            {IsAsesor ? 
+                
+            >
+                {(_) => <ScheduleScreen asesor={props.asesor} />}
+            </Tab.Screen>
+            {props.asesor ? 
                 <Tab.Screen
                 name="Materias"
                 component={SubjectsScreens}
@@ -43,7 +45,7 @@ export default function BottomApp(props) {
                 }} /> :
                 <Tab.Screen
                 name="Asesores"
-                component={ListaAsesores}
+                component={AsesorStack}
                 options={{
                     tabBarLabel: 'Asesores',
                     tabBarIcon: ({ color }) => (
@@ -52,12 +54,12 @@ export default function BottomApp(props) {
                 }} />
             }
             <Tab.Screen
-                name="Cuenta"
-                component={ProfileScreen}
+                name="Notificaciones"
+                component={NotificationsScreen}
                 options={{
-                    tabBarLabel: 'Cuenta',
+                    tabBarLabel: 'Notificaciones',
                     tabBarIcon: ({ color }) => (
-                        <FontAwesome5 name="user-circle" color={color} size={24} />
+                        <FontAwesome5 name="bell" color={color} size={24} />
                     ),
                 }} />
         </Tab.Navigator>

@@ -1,7 +1,7 @@
 // Custom Navigation Drawer / Sidebar with Image and Icon in Menu Options
 // https://aboutreact.com/custom-navigation-drawer-sidebar-with-image-and-icon-in-menu-options/
 
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   SafeAreaView,
   View,
@@ -20,6 +20,7 @@ import {
 } from '@react-navigation/drawer';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import NotificationsScreen from '../screens/NotificationsScreen';
+import { UserContext } from "../UserContext";
 
 // import NotificationsScreen from '../stacks/NotificationsStack';
 // import ProfileScreen from '../stacks/ProfileStack';
@@ -28,6 +29,8 @@ import NotificationsScreen from '../screens/NotificationsScreen';
 // import TermsAndConditionsScreen from '../stacks/TermsAndConditionsStack';
 
 const CustomSidebarMenu = (props) => {
+  const {user, setUser} = useContext(UserContext);
+  
   const BASE_PATH =
     'https://raw.githubusercontent.com/AboutReact/sampleresource/master/';
   const proileImage = 'react_logo.png';
@@ -51,7 +54,7 @@ const CustomSidebarMenu = (props) => {
           >
           <View style={{flexDirection: 'row'}}>
             <Image
-              source={require('../pictures/perfil.jpeg')}
+              source={{uri: user ? user.link : 'https://www.jing.fm/clipimg/detail/375-3757880_my-account-profile-icon-transparent-white.png'}}
               style={{height: 80, width: 80, borderRadius: 40, marginBottom: 10, opacity: 1}}
             />
             <View style={{flexDirection: 'column', marginLeft: 10}}>
@@ -79,7 +82,7 @@ const CustomSidebarMenu = (props) => {
         </View>
       </DrawerContentScrollView>
       <View style={{padding: 20, borderTopWidth: 1, borderTopColor: '#f4511e'}}>
-        <TouchableOpacity onPress={() => {}} style={{paddingVertical: 15}}>
+        <TouchableOpacity onPress={() => props.changeView()} style={{paddingVertical: 15}}>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <Ionicons name="exit-outline" size={22} />
             <Text

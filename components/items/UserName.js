@@ -1,13 +1,18 @@
+import { useState, useContext } from "react";
 import { View, Text, StyleSheet } from "react-native";
+import { UserContext } from "../UserContext";
 
-function UserName() {
+
+function UserName(props) {
+    const {user, setUser} = useContext(UserContext);
+    
     return(
         <View style={styles.contentStyle}>
             <Text style={styles.user}>
-                Estudiante
+                {props.title}
             </Text>
             <Text style={styles.userText}>
-                Jessica Ramirez
+                {user ? user.name : "Cargando..." }
             </Text>
         </View>
     );
