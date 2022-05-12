@@ -11,6 +11,8 @@ import {
 import { FontAwesome5 } from '@expo/vector-icons';
 
 import Colors from "../../constants/Colors";
+import axios from "axios";
+import { endpoints } from "../../constants/Backend";
 
 const ModalInfo = (props) => {
 
@@ -67,7 +69,16 @@ const ModalInfo = (props) => {
                             </Text>
                         </TouchableOpacity>
                         <TouchableOpacity
-                            onPress={() => {props.close()}}
+                            onPress={() => {
+                                props.close();
+                                axios.delete(
+                                    endpoints.horarioAsesorView(props.materiaInfo.id)
+                                ).then((response) => {
+                                    props.onRemove(props.materiaInfo.id);
+                                }, (error) => {
+                                    console.log(error);
+                                })
+                            }}
                             style={{...styles.ButtonStyle, backgroundColor: Colors.white, marginLeft: 10, }}
                         >
                             <FontAwesome5 name={"check"} color={Colors.orange} size={16} solid/>

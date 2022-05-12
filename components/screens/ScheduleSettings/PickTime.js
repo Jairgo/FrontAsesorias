@@ -7,7 +7,7 @@ import {
     StyleSheet,
     TouchableOpacity,
     SafeAreaView,
-} from  'react-native';
+} from 'react-native';
 
 import { FontAwesome5 } from '@expo/vector-icons';
 
@@ -22,10 +22,14 @@ const PickTime = (props) => {
     const [hours, setHours] = useState(0);
     const [minutes, setMinutes] = useState(0);
 
-    const handleChange = ( {hours, minutes }) => {
+    const handleChange = ({ hours, minutes }) => {
+        props.setHoursInfo({
+            hour: hours,
+            minutes: minutes
+        });
         setHours(hours);
         setMinutes(minutes);
-      };
+    };
 
     const handleReset = () => {
         setHours(0);
@@ -34,8 +38,8 @@ const PickTime = (props) => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <View style={{marginTop: 5, ustifyContent: 'center', alignItems: 'center' }}>
-                <Text style={{fontSize: 19, color: Colors.black}}>
+            <View style={{ marginTop: 5, ustifyContent: 'center', alignItems: 'center' }}>
+                <Text style={{ fontSize: 19, color: Colors.black }}>
                     {props.title}: {hours}:{minutes}
                 </Text>
                 <TimePicker
@@ -69,19 +73,19 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     ButtonStyle: {
-        marginTop: 15, 
+        marginTop: 15,
         backgroundColor: Colors.orange,
-        paddingHorizontal: 10, 
+        paddingHorizontal: 10,
         paddingVertical: 8,
         borderRadius: 50,
         flexDirection: 'row',
         alignItems: 'center',
-        borderColor: Colors.orange, 
+        borderColor: Colors.orange,
         borderWidth: 3,
         width: 120,
     },
     textStyle: {
-        color: 'white', 
+        color: 'white',
         fontSize: 20,
         marginLeft: 5,
     },

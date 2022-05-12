@@ -6,6 +6,7 @@ import UserChange from '../items/UserChange';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import { createStackNavigator } from '@react-navigation/stack';
+import { Platform } from 'react-native';
 
 const Stack = createStackNavigator();
 
@@ -20,7 +21,7 @@ function HomeStack(props) {
                 headerTintColor: 'white',
                 headerStyle: {
                     backgroundColor: '#f4511e',
-                    height: 95,
+                    height: Platform.OS === "ios" ? 110 : undefined,
                 },
             }}
         >

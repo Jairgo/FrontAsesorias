@@ -1,4 +1,4 @@
-import react, { useState } from "react";
+import react, { useEffect, useState } from "react";
 import {
     View,
     Text,
@@ -6,6 +6,7 @@ import {
     ScrollView,
     StyleSheet,
     TouchableOpacity,
+    RecyclerViewBackedScrollViewComponent,
 } from "react-native";
 
 import { FontAwesome5 } from '@expo/vector-icons';
@@ -16,6 +17,9 @@ import TimesView from "./ScheduleSettings/TimesView";
 import WeekDaySettings from "./ScheduleSettings/WeekDaySettings";
 import ModalTimePicker from "./ScheduleSettings/ModalTimePicker";
 
+import { endpoints } from "../constants/Backend";
+import axios from "axios";
+
 function HorarioScreen(props) {
     const [ selectedDay, setSelectedDay ] = useState(0);
     const [ isEnabled, setIsEnabled ] = useState(false);
@@ -23,6 +27,8 @@ function HorarioScreen(props) {
     const [infoOpen, setInfoOpen] = useState(false);
     const [materiaInfoSelected, setMateriaInfoSelected] = useState(-1);
     const [timerOpen, setTimerOpen] = useState(false);
+    const [materias, setMaterias] = useState([]);
+    let id_Asesor = 1;
 
     const week = [
         { day: 'Lun'},
@@ -34,12 +40,47 @@ function HorarioScreen(props) {
         { day: 'Dom'},
     ];
 
-    const materias = [
-        { startHour: "12:00 pm", endHour: "1:30 pm", place: "Cisco" },
-        { startHour: "1:30 pm", endHour: "3:00 pm", place: "A12" },
-        { startHour: "3:00 pm", endHour: "4:30 pm", place: "Zoom" },
-        { startHour: "4:30 pm", endHour: "6:00 pm", place: "Teams" },
-    ];
+    useEffect(() => {
+        axios.get(endpoints.horarioAsesorView(id_Asesor),{
+            params:{
+                day: week[selectedDay].day
+            }
+        }).then((response) => {
+            const to12Hours = (horaString) => {
+                let parts = horaString.split(':');
+                let hour = parseInt(parts[ 0 ])    
+                let pm = hour > 12;
+                return `${pm ? hour - 12 : hour}:${parts[ 1 ]} ${pm ? 'pm' : 'am'}`
+            };
+            let tempMaterias = response.data.map((horario) => {
+                return{
+                    id: horario.id,
+                    startHour: to12Hours(horario.hora_inicio),
+                    endHour: to12Hours(horario.hora_fin),
+                    place: horario.lugar
+                }
+            })
+
+            tempMaterias.sort((a, b) => {
+                let a_staHour = a.startHour.split(':');
+                let b_staHour = b.startHour.split(':');
+
+                if (parseInt(a_staHour[0]) < parseInt(b_staHour[0])) {
+                    return 1;
+                }
+                else if (parseInt(a_staHour[ 0 ]) > parseInt(b_staHour[ 0 ])){
+                    return -1;
+                }
+                else {
+                    let min_a = parseInt((a_staHour[ 1 ].split(' '))[ 0 ]);
+                    let min_b = parseInt((b_staHour[ 1 ].split(' '))[ 0 ]);
+                    return min_a < min_b ? 1 : -1;
+                }
+            })
+            setMaterias(tempMaterias);
+        })
+    },[selectedDay])
+
 
     return (
         <View style={styles.screenContainer}>
@@ -63,18 +104,22 @@ function HorarioScreen(props) {
             <ScrollView style={styles.horarioContainer}>
                 <View style={{paddingBottom: 25}}>
                     {
-                        materias.map((schedule, idx) => (
-                            <TimesView
-                                key={idx}
-                                startHour={schedule.startHour}
-                                endHour={schedule.endHour}
-                                place={schedule.place}
-                                showInfo={() => {
-                                    setInfoOpen(true);
-                                    setMateriaInfoSelected(idx);
-                                }}
-                            />
-                        ))
+                        materias.length > 0 ?
+                            materias.map((schedule, idx) => (
+                                <TimesView
+                                    key={idx}
+                                    startHour={schedule.startHour}
+                                    endHour={schedule.endHour}
+                                    place={schedule.place}
+                                    showInfo={() => {
+                                        setInfoOpen(true);
+                                        setMateriaInfoSelected(idx);
+                                    }}
+                                />
+                            )) :
+                        <View style={{height: 130, display: 'flex', justifyContent: 'flex-end'}}>
+                            <Text style={{textAlign: 'center', fontSize: 30, color: Colors.white, fontWeight: 'bold'}}>Agrega un horario</Text>
+                        </View>
                     }
                     <TouchableOpacity onPress={() => {setTimerOpen(true)}} style={{alignItems: 'center', marginTop: 10}}>
                         <FontAwesome5 name={"plus-circle"} color={Colors.orange} size={35} solid/>
@@ -94,6 +139,7 @@ function HorarioScreen(props) {
                         }}
                         materiaInfo={(materiaInfoSelected != -1 ? materias[materiaInfoSelected] : {})}
                         day={selectedDay}
+                        onRemove = {(id) => {setMaterias(materias.filter((materia) => materia.id != id))}}
                     />
                 </Modal>
                 <Modal visible={timerOpen} transparent={true} animationType="fade">
@@ -101,6 +147,8 @@ function HorarioScreen(props) {
                             close={() => {
                                 setTimerOpen(false);
                             }}
+                            id_Asesor={id_Asesor}
+                            day={week[selectedDay].day}
                         />
                 </Modal>
             </View>
