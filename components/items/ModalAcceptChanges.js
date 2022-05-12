@@ -11,7 +11,7 @@ import {
 import { FontAwesome5 } from '@expo/vector-icons';
 import Colors from "../constants/Colors";
 
-const ModalChangeUser = (props) => {
+const ModalAcceptChanges = () => {
 
     return (
         <View style={styles.screenContainer}>
@@ -38,7 +38,7 @@ const ModalChangeUser = (props) => {
     );
 };
 
-export default ModalChangeUser;
+export default ModalAcceptChanges;
 
 const styles = StyleSheet.create({
     screenContainer: {
@@ -46,7 +46,8 @@ const styles = StyleSheet.create({
         display: 'flex',
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: 'rgba(0, 0, 0, 0.9)',
+        opacity: 0.85,
+        backgroundColor: 'black',
     },
     container: {
         width: '80%',

@@ -19,7 +19,8 @@ function HomeStack(props) {
             screenOptions={{
                 headerTintColor: 'white',
                 headerStyle: {
-                    backgroundColor: '#f4511e'
+                    backgroundColor: '#f4511e',
+                    height: 95,
                 },
             }}
         >
