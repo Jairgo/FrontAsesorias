@@ -1,4 +1,4 @@
-import react, { useState } from "react";
+import react, { useEffect, useState } from "react";
 
 import {
     View,
@@ -23,6 +23,7 @@ const PickTime = (props) => {
     const [minutes, setMinutes] = useState(0);
 
     const handleChange = ({ hours, minutes }) => {
+        console.log("set");
         props.setHoursInfo({
             hour: hours,
             minutes: minutes
@@ -35,6 +36,15 @@ const PickTime = (props) => {
         setHours(0);
         setMinutes(0);
     };
+
+    useEffect(() => {
+        console.log("error");
+        props.setHoursInfo({
+            hour: hours,
+            minutes: minutes
+        });
+        console.log("error fin");
+    },[])
 
     return (
         <SafeAreaView style={styles.container}>
