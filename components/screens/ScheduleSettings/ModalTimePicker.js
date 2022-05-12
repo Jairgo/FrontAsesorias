@@ -103,7 +103,7 @@ const ModalTimePicker = (props) => {
                                                     },
                                                     (err) => {
                                                         setError(true);
-                                                        setTextError("Horario ocupado, por favor eliga otro");
+                                                        setTextError("Horario ocupado, por favor elija otro");
                                                     }
                                                 )
                                             }
