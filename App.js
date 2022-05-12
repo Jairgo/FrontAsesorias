@@ -14,13 +14,16 @@ export default function App() {
   const handlerLoguedIn = (val) => setIsLoguedIn(val);
 
   return (
-    isLoguedIn ? (
-      <HeaderApp asesor={false} changeView={handlerLoguedIn}/>
-      ) : (
-      <Login changeView={handlerLoguedIn}/>
-    )
-    // <SingUp />
-    // <ForgotPassword />
+    <>
+      {isLoguedIn ? (
+        <HeaderApp asesor={false} changeView={handlerLoguedIn}/>
+        ) : (
+        <Login changeView={handlerLoguedIn}/>
+      )
+      // <SingUp />
+      // <ForgotPassword />
+      }
+    </>
   );
 }
 
