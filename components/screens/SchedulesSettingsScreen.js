@@ -28,7 +28,6 @@ function HorarioScreen(props) {
     const [materiaInfoSelected, setMateriaInfoSelected] = useState(-1);
     const [timerOpen, setTimerOpen] = useState(false);
     const [materias, setMaterias] = useState([]);
-    let id_Asesor = 1;
 
     const week = [
         { day: 'Lun'},
@@ -41,7 +40,7 @@ function HorarioScreen(props) {
     ];
 
     useEffect(() => {
-        axios.get(endpoints.horarioAsesorView(id_Asesor),{
+        axios.get(endpoints.horarioAsesorView(props.userId),{
             params:{
                 day: week[selectedDay].day
             }
@@ -155,7 +154,7 @@ function HorarioScreen(props) {
                             close={() => {
                                 setTimerOpen(false);
                             }}
-                            id_Asesor={id_Asesor}
+                            id_Asesor={props.userId}
                             day={week[selectedDay].day}
                         />
                 </Modal>

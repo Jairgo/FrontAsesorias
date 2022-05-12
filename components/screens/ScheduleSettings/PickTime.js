@@ -23,7 +23,6 @@ const PickTime = (props) => {
     const [minutes, setMinutes] = useState(0);
 
     const handleChange = ({ hours, minutes }) => {
-        console.log("set");
         props.setHoursInfo({
             hour: hours,
             minutes: minutes
@@ -38,12 +37,10 @@ const PickTime = (props) => {
     };
 
     useEffect(() => {
-        console.log("error");
         props.setHoursInfo({
             hour: hours,
             minutes: minutes
         });
-        console.log("error fin");
     },[])
 
     return (

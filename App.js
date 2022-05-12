@@ -16,7 +16,7 @@ export default function App() {
   return (
     <>
       {isLoguedIn ? (
-        <HeaderApp asesor={false} changeView={handlerLoguedIn}/>
+        <HeaderApp asesor={true} userId={2} changeView={handlerLoguedIn}/>
         ) : (
         <Login changeView={handlerLoguedIn}/>
       )

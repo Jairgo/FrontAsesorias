@@ -88,17 +88,23 @@ export default function ScheduleScreen(props) {
                         weekFromBack.sort((a, b) => {
                             let a_staHour = a.startHour.split(':');
                             let b_staHour = b.startHour.split(':');
+                            let a_form = a_staHour[ 1 ].split(' ');
+                            let b_form = b_staHour[ 1 ].split(' ');
 
-                            if (parseInt(a_staHour[0]) < parseInt(b_staHour[0])) {
-                                return 1;
-                            }
-                            else if (parseInt(a_staHour[ 0 ]) > parseInt(b_staHour[ 0 ])){
-                                return -1;
-                            }
-                            else {
-                                let min_a = parseInt((a_staHour[ 1 ].split(' '))[ 0 ]);
-                                let min_b = parseInt((b_staHour[ 1 ].split(' '))[ 0 ]);
-                                return min_a < min_b ? 1 : -1;
+                            if (a_form[ 1 ] === b_form[ 1 ]) {
+                                if (parseInt(a_staHour[ 0 ]) < parseInt(b_staHour[ 0 ])) {
+                                    return -1;
+                                }
+                                else if (parseInt(a_staHour[ 0 ]) > parseInt(b_staHour[ 0 ])) {
+                                    return 1;
+                                }
+                                else {
+                                    let min_a = parseInt((a_staHour[ 1 ].split(' '))[ 0 ]);
+                                    let min_b = parseInt((b_staHour[ 1 ].split(' '))[ 0 ]);
+                                    return min_a < min_b ? -1 : 1;
+                                }
+                            } else {
+                                if (a_form[ 1 ] < b_form[ 1 ]) return -1;
                             }
                         })
                         setSubjects(weekFromBack);

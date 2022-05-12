@@ -46,7 +46,7 @@ function HeaderApp(props) {
                             <Ionicons name="person-outline" size={22} color={color} />
                         ),
                     }} >
-                        {(_) => <HomeStack asesor={props.asesor} screen={UserProfile} />}
+                        {(_) => <HomeStack asesor={props.asesor} userId={props.userId} screen={UserProfile} />}
                     </Drawer.Screen>
                 <Drawer.Screen
                     name="Configuración de horario"
@@ -55,7 +55,7 @@ function HeaderApp(props) {
                             <Ionicons name="settings-outline" size={22} color={color} />
                         ),
                     }} >
-                        {(_) => <HomeStack asesor={props.asesor} screen={SchedulesSettingsScreen} />}
+                        {(_) => <HomeStack asesor={props.asesor} userId={props.userId} screen={SchedulesSettingsScreen} />}
                     </Drawer.Screen>
                 <Drawer.Screen
                     name="Acerca de"
@@ -64,7 +64,7 @@ function HeaderApp(props) {
                             <Ionicons name="information-circle-outline" size={22} color={color} />
                         ),
                     }} >
-                        {(_) => <HomeStack asesor={props.asesor} screen={About} />}
+                        {(_) => <HomeStack asesor={props.asesor} userId={props.userId} screen={About} />}
                     </Drawer.Screen>
             </Drawer.Navigator>
         </NavigationContainer>
