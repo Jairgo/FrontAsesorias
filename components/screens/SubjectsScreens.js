@@ -1,4 +1,4 @@
-import react, { useState } from "react";
+import react, { useEffect, useState } from "react";
 import {
     View,
     Text,
@@ -16,36 +16,79 @@ import Colors from "../constants/Colors";
 import { FontAwesome5 } from "@expo/vector-icons";
 import ModalEdit from "./Subjects/ModalEdit";
 
-export default function SubjectsScreens() {
+import axios from "axios";
+import { endpoints } from "../constants/Backend";
+
+export default function SubjectsScreens(props) {
     const [ materiaSelected, setMateriaSelected ] = useState(0);
     const [ materiaEdit, setMateriaEdit ] = useState(false);
+    const [ Materias, setMaterias ] = useState({});
+    const [ requestDone, setRequestDone ] = useState(false);
 
-    const Materias = {
-        0: {
-            Nombre: "Cálculo integral",
-            Descripcion: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer efficitur leo in tellus scelerisque, in consequat libero placerat. Phasellus rutrum scelerisque arcu eu tincidunt. Etiam elementum libero tellus, sed vehicula lorem vehicula a. Praesent fermentum, eros eu varius aliquet, massa elit tristique est, vitae mollis nisl libero in massa",
-            LimiteTemas: 2,
-            LimiteAlumnos: 3
-        },
-        1: {
-            Nombre: "Cálculo diferencial",
-            Descripcion: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer efficitur leo in tellus scelerisque, in consequat libero placerat. Phasellus rutrum scelerisque arcu eu tincidunt. Etiam elementum libero tellus, sed vehicula lorem vehicula a. Praesent fermentum, eros eu varius aliquet, massa elit tristique est, vitae mollis nisl libero in massa",
-            LimiteTemas: 2,
-            LimiteAlumnos: 3
-        },
-        2: {
-            Nombre: "Matemáticas discretas",
-            Descripcion: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer efficitur leo in tellus scelerisque, in consequat libero placerat. Phasellus rutrum scelerisque arcu eu tincidunt. Etiam elementum libero tellus, sed vehicula lorem vehicula a. Praesent fermentum, eros eu varius aliquet, massa elit tristique est, vitae mollis nisl libero in massa",
-            LimiteTemas: 2,
-            LimiteAlumnos: 3
-        },
-        3: {
-            Nombre: "Programación orientada a objetos",
-            Descripcion: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer efficitur leo in tellus scelerisque, in consequat libero placerat. Phasellus rutrum scelerisque arcu eu tincidunt. Etiam elementum libero tellus, sed vehicula lorem vehicula a. Praesent fermentum, eros eu varius aliquet, massa elit tristique est, vitae mollis nisl libero in massa",
-            LimiteTemas: 2,
-            LimiteAlumnos: 3
-        },
-    };
+    useEffect(() => {
+        axios.get(endpoints.materias(props.userId)).then(
+            (response) => {
+                for (let key of Object.keys(Materias)) 
+                    Materias[key] = undefined;
+
+                for (let respObj of response.data) {
+                    Materias[respObj.materias.id] = {
+                        Nombre: respObj.materias.nombre,
+                        Descripcion: respObj.materias.descripcion,
+                        LimiteTemas: respObj.limite_temas,
+                        LimiteAlumnos: respObj.limite_alumnos
+                    }
+                }
+                
+                if (response.data.length > 0)
+                    setMateriaSelected(response.data[0].materias.id)
+                setRequestDone(true);
+            },
+            (err) => {
+                console.log(err)
+            }
+        )
+    }, [])
+
+    if (! requestDone) {
+        return <View style={{
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'
+        }}>
+            <Text style={{
+                fontSize: 30,
+                opacity: 0.5
+            }}>
+                Loading...
+            </Text>
+        </View>
+    }
+
+    if (Object.keys(Materias).length == 0) {
+        return <View style={{
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'
+        }}>
+            <Text style={{
+                fontSize: 30,
+                opacity: 0.5
+            }}>
+                No tienes materias
+            </Text>
+            <Text style={{
+                fontSize: 30,
+                opacity: 0.5
+            }}>
+                Solicita en configuración
+            </Text>
+        </View>
+    }
 
     return (
         <View style={styles.screenContainer}>

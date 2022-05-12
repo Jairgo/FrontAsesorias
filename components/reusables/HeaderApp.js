@@ -37,7 +37,7 @@ function HeaderApp(props) {
                         ),
                     }} 
                 >
-                    {(_) => <HomeStack asesor={props.asesor} screen={BottomApp} />}
+                    {(_) => <HomeStack asesor={props.asesor} userId={props.userId} screen={BottomApp} />}
                 </Drawer.Screen>
                 <Drawer.Screen
                     name="Perfil"

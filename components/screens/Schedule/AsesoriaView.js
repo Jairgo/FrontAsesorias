@@ -10,9 +10,9 @@ import { FontAwesome5 } from '@expo/vector-icons';
 
 import Colors from "../../constants/Colors";
 
-const SubjectView = (props) => {
+const AsesoriaView = (props) => {
     return (
-        <View style={{...styles.viewContainer, backgroundColor: props.reserved ? Colors.orange : Colors.lightOrange}}>
+        <View style={{ ...styles.viewContainer, backgroundColor: Colors.orange }}>
             <View style={styles.iconContainer}>
                 <Pressable
                     onPress={() => props.showInfo()}
@@ -23,21 +23,14 @@ const SubjectView = (props) => {
                     } ]}
                 >
                     <Text style={{ width: 60, textAlign: 'center' }}>
-                        <FontAwesome5 name={props.reserved ? "user-lock" : "user"} color={"white"} size={50} solid />
+                        <FontAwesome5 name={"user"} color={"white"} size={50} solid />
                     </Text>
                 </Pressable>
             </View>
             <View style={styles.contentContainer}>
-                <Text style={{...styles.subjectHour, fontSize: !props.reserved ? 22 : 14}}>
+                <Text style={{ ...styles.subjectHour, fontSize: 22 }}>
                     {props.startHour} - {props.endHour}
                 </Text>
-                {
-                    props.reserved
-                     ? <Text style={styles.subjectName}>
-                            {props.subjectName}
-                        </Text>
-                     : <></>
-                }
                 <Text style={{
                     color: 'white'
                 }}>
@@ -48,7 +41,7 @@ const SubjectView = (props) => {
     );
 };
 
-export default SubjectView;
+export default AsesoriaView;
 
 const styles = StyleSheet.create({
     viewContainer: {
