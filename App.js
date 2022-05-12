@@ -1,12 +1,9 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import About from './components/About';
-import AsesorRequest from './components/AsesorRequest';
-import UserProfile from './components/UserProfile';
+import React from 'react';
+import HeaderApp from './components/reusables/HeaderApp';
+
+
 export default function App() {
   return (
-    // <About/>
-    <AsesorRequest/>
-    // <UserProfile/>
+    <HeaderApp asesor={true}/>
   );
 }
