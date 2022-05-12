@@ -49,7 +49,7 @@ export default function ScheduleScreen(props) {
                         };
     
                         const getLimits = (materiaId) => {
-                            return (response.data.materiasImpartidas.filter((materia) => materia.materias == materiaId))[0];
+                            return (response.data.materiasImpartidas.filter((materia) => materia.materias.id == materiaId))[0];
                         };
 
                         const getAlumnosTemas = (asesoriaId) => {
@@ -64,7 +64,7 @@ export default function ScheduleScreen(props) {
                             if (as_ho != undefined) {
                                 as_ho_data['date'] = as_ho.fecha;
                                 as_ho_data['subject'] = as_ho.materia.nombre;
-    
+                                
                                 let limits = getLimits(as_ho.materia.id);
     
                                 as_ho_data['maxStudents'] = limits.limite_alumnos;

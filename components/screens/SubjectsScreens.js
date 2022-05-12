@@ -81,12 +81,6 @@ export default function SubjectsScreens(props) {
             }}>
                 No tienes materias
             </Text>
-            <Text style={{
-                fontSize: 30,
-                opacity: 0.5
-            }}>
-                Solicita en configuración
-            </Text>
         </View>
     }
 

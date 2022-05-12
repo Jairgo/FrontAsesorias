@@ -15,7 +15,7 @@ export default function App() {
 
   return (
     isLoguedIn ? (
-      <HeaderApp asesor={true} userId={2} changeView={handlerLoguedIn}/>
+      <HeaderApp asesor={false} userId={1} changeView={handlerLoguedIn}/>
       ) : (
       <Login changeView={handlerLoguedIn}/>
     )
@@ -23,3 +23,6 @@ export default function App() {
     // <ForgotPassword />
   );
 }
+
+
+

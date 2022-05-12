@@ -4,7 +4,8 @@ const main_endpoint = `http://${ip}:${port}/`;
 
 const endpoints = {
     horario: (id) => `${main_endpoint}horario/${id}/`,
-    materias: (id) => `${main_endpoint}materiasimpartidas/${id}/`
+    materias: (id) => `${main_endpoint}materiasimpartidas/${id}/`,
+    horarioAsesorView: (id_asesor) => `${main_endpoint}horarioAsesor/${ id_asesor != undefined ? id_asesor + '/' : ''}`
 };
 
 export {

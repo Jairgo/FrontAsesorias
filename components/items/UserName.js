@@ -16,7 +16,7 @@ function UserName(props) {
 
 const styles = StyleSheet.create({
     contentStyle:{
-        alignItems: 'center'
+        alignItems: 'center',
     },
     user:{
         textAlign: 'center',
