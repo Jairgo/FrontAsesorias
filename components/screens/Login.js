@@ -16,10 +16,10 @@ export default function Login(props) {
   const [showLoader, setLoader] = useState(false);
 
   const login = () =>{
-    setLoader(true);
     if(mail === '') Alert.alert("","Indica una cuenta de correo electrónico");
     else if(password === '') Alert.alert("","Indica tu contraseña");
     else {
+      setLoader(true);
       let endpoint = 'http://becasdeploy.pythonanywhere.com/login/';
       let credentials = {
         correo: mail,
@@ -27,10 +27,9 @@ export default function Login(props) {
       };
       console.log(credentials);
       axios.post(endpoint, credentials).then(response => {
-        props.changeView(true);
         setLoader(false);
+        props.changeView(true);
       }).catch(e => {
-        console.log(e);
         Alert.alert("Error","Credenciales incorrectas");
         setLoader(false);
       });
@@ -117,7 +116,7 @@ export default function Login(props) {
         <StatusBar style="auto" />  
       </View>
     </View>
-    <ActivityIndicator size="large"  animating={showLoader} />
+    <ActivityIndicator size="large" color="#ff5900" animating={showLoader} />
     </ScrollView>    
   );
 }
