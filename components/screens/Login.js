@@ -40,7 +40,6 @@ export default function Login(props) {
         correo: mail,
         contrasena: password
       };
-      console.log(credentials);
       axios.post(endpoint, credentials).then(response => {
         setLoader(false);
         props.changeView(true);

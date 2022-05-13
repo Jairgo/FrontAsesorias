@@ -22,9 +22,9 @@ function SolicitudAsesoriaAgendada({ route, navigation }) {
                     lugar: lugar
                 });
                 if (response.status === 201) {
-                    console.log(`Haz agregado una nueva asesoria: ${JSON.stringify(response.data)}`);
+                    // console.log(`Haz agregado una nueva asesoria: ${JSON.stringify(response.data)}`);
                 } else {
-                    console.log(`Error al agregar la asesoria: ${JSON.stringify(response.data)}`);
+                    // console.log(`Error al agregar la asesoria: ${JSON.stringify(response.data)}`);
                 }
             } catch (error) {
                 console.log(error);

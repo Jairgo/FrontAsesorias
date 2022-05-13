@@ -108,10 +108,10 @@ export default function ScheduleScreen(props) {
                             }
                         })
                         setSubjects(weekFromBack);
-                        console.log(weekFromBack)
+                        // console.log(weekFromBack)
                     }
                     else {
-                        console.log(response.data);
+                        // console.log(response.data);
                     }
 
                 },

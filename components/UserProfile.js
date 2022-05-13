@@ -5,21 +5,6 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const ProfileScreen = () => {
 
-  const myCustomShare = async() => {
-    const shareOptions = {
-      message: 'Order your next meal from FoodFinder App. I\'ve already ordered more than 10 meals on it.',
-      url: files.appLogo,
-      // urls: [files.image1, files.image2]
-    }
-
-    try {
-    //   const ShareResponse = await Share.open(shareOptions);
-      console.log(JSON.stringify(ShareResponse));
-    } catch(error) {
-      console.log('Error => ', error);
-    }
-  };
-
   return (
     <SafeAreaView style={styles.container}>
 

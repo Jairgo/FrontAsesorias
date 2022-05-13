@@ -81,25 +81,27 @@ export default function NotificationsScreen() {
     }
   ];
 
-  console.log(notifications)
+  // console.log(notifications)
 
   return (
     <View style={styles.screen}>
       <Text style={styles.title}>
         Notificaciones
       </Text>
-      <ScrollView>
-        {
-          notifications.map((notifications) => (
-            <NotificationsView
-              key={notifications.id}
-              nombre={notifications.nombre}
-              descripcion={notifications.descripcion}
-              fecha={notifications.fecha}
-            />
-          ))
-        }
-      </ScrollView>
+      <View style={{paddingBottom: 100}}>
+        <ScrollView>
+          {
+            notifications.map((notifications) => (
+              <NotificationsView
+                key={notifications.id}
+                nombre={notifications.nombre}
+                descripcion={notifications.descripcion}
+                fecha={notifications.fecha}
+              />
+            ))
+          }
+        </ScrollView>
+      </View>
     </View>
   );
 }

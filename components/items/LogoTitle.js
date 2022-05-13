@@ -7,8 +7,6 @@ import { main_endpoint } from '../constants/Backend';
 function LogoTitle(props) {
     const {user, setUser} = useContext(UserContext);
 
-    console.log(user);
-
     return (
         <Image
             style={styles.tinyLogo}
