@@ -21,6 +21,7 @@ const AsesorView = (props) => {
                 carrera: props.asesorCarrera,
                 semestre: props.asesorSemestre,
                 asesorId: props.asesorId,
+                asesorImg: props.asesorImg,
             })}
             style={({ pressed }) => [{
                 borderRadius: 10,
@@ -36,7 +37,7 @@ const AsesorView = (props) => {
                         <View style={{ borderRadius: 50, overflow: 'hidden'}}>
                             <Image
                                 style={styles.tinyLogo}
-                                source={{ uri: user ? user.link : 'https://www.jing.fm/clipimg/detail/375-3757880_my-account-profile-icon-transparent-white.png' }}
+                                source={{ uri: user ? props.asesorImg: 'https://www.jing.fm/clipimg/detail/375-3757880_my-account-profile-icon-transparent-white.png' }}
                             />
                         </View>
 
