@@ -14,7 +14,7 @@ export default function App() {
   const [user, setUser] = useState(null);
   const value = useMemo(() => ({user, setUser}), [user, setUser]);
 
-  const [isLoguedIn, setIsLoguedIn] = useState(false);
+  const [isLoguedIn, setIsLoguedIn] = useState(true);
   const handlerLoguedIn = (val) => setIsLoguedIn(val);
 
   useEffect(() => {
@@ -29,7 +29,7 @@ export default function App() {
     <UserContext.Provider value={value}>
       {
         isLoguedIn ? (
-          <HeaderApp asesor={true} userId={2} changeView={handlerLoguedIn} />
+          <HeaderApp asesor={false} userId={2} changeView={handlerLoguedIn} />
         ) : (
           <Login changeView={handlerLoguedIn} />
         )
