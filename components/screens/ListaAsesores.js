@@ -68,8 +68,9 @@ const SolicitudAsesoria = ({ navigation }) => {
                             asesorName={asesor.nombre}
                             asesorApellidoPat={asesor.apellido_paterno}
                             asesorApellidoMat={asesor.apellido_materno}
-                            asesorCarrera={findCarrera(asesor.carrera)}
+                            asesorCarrera={asesor.carrera.nombre}
                             asesorSemestre={asesor.semestre}
+                            asesorImg={asesor.profile_picture_url}
                             navigation={navigation}
                         />
                     ))

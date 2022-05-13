@@ -7,7 +7,7 @@ import { VStack, Box, NativeBaseProvider, Select, CheckIcon, FormControl } from 
 import axios from 'axios';
 
 function PerfilAsesor({ route, navigation }) {
-    const { asesor, carrera, semestre, asesorId } = route.params;
+    const { asesor, carrera, semestre, asesorId, asesorImg } = route.params;
     const [date, setDate] = useState(new Date())
     const [horarios, setHorarios] = useState([]);
     const [horarioId, setHorarioId] = React.useState("");
@@ -75,7 +75,7 @@ function PerfilAsesor({ route, navigation }) {
         <NativeBaseProvider>
             <ScrollView style={{ paddingTop: 20 }}>
                 <View style={styles.screen}>
-                    <Image style={styles.image} source={require('../../assets/avatar-2.png')} />
+                    <Image style={styles.image} source={{ uri: asesorImg }}/>
                     <Text style={styles.tituloText}>  {asesor}</Text>
                 </View>
                 <View style={styles.screen}>
