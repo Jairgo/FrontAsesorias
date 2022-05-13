@@ -68,7 +68,7 @@ export default function ForgotPassword(props) {
             placeholder="usuario@anahuac.com"
             style={styles.textInput}
           />
-          <Animatable.View animation="fadeInUp">
+          <Animatable.View style={{marginTop: 20}} animation="fadeInUp">
             <ButtonGradient
               navigation={props.navigation} />
           </Animatable.View>

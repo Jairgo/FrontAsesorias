@@ -4,6 +4,7 @@ import login from '../screens/Login';
 import reset from '../screens/ForgotPassword';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import Login from '../screens/Login';
 
 const Stack = createStackNavigator();
 
@@ -16,8 +17,9 @@ function LoginStack(props) {
                 }}>
                 <Stack.Screen
                     name="Login"
-                    component={login}
-                />
+                >
+                    {(otherProps) => <Login  changeView={props.changeView} {...otherProps}/>}
+                </Stack.Screen>
                 <Stack.Screen name="registro" component={registro} />
                 <Stack.Screen name="reset" component={reset} />
 

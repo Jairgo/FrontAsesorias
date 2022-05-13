@@ -4,7 +4,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 export default function ButtonGradient(props) {
     return (
-        <View sx={styles.buttons}>
+        <View style={styles.buttons}>
             <TouchableOpacity style={styles.container} onPress={() => props.login()}>
                 <LinearGradient
                     colors={['#f49e73', '#ff5900']}
@@ -23,14 +23,14 @@ export default function ButtonGradient(props) {
                         <Text style={styles.text}>Cancelar</Text>
                     </LinearGradient>
                 </TouchableOpacity>
-            ) : (<View></View>)}
+            ) : (<></>)}
         </View>
     );
 }
 const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
-        width: 200,
+        width: 150,
         marginTop: 5,
     },
     text: {
@@ -39,15 +39,16 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     button: {
-        width: '80%',
+        width: 125,
         height: 50,
         borderRadius: 25,
-        padding: 10,
+        // padding: 10,
         alignItems: 'center',
         justifyContent: 'center',
     },
     buttons: {
-        flexDirection: 'row'
+        // backgroundColor: 'red',
+        flexDirection: 'row',
     }
 
 });

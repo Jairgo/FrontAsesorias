@@ -17,7 +17,7 @@ const ModalChangeUser = (props) => {
         <View style={styles.screenContainer}>
             <View style={styles.container}>
                 <Text style={styles.titleStyle}>
-                    ¿Desea Cambiar a {props.state ? "Asesor" : "Estudiante"}?
+                    {props.text}
                 </Text>
                 <Pressable 
                     style={styles.closeIcon}
@@ -26,7 +26,7 @@ const ModalChangeUser = (props) => {
                     <FontAwesome5 name={"times"} color={"black"} size={16} solid />
                 </Pressable>
                 <TouchableOpacity
-                    onPress={() => {props.changeState(); props.close()}}
+                    onPress={props.onPress ? props.onPress: () => {props.changeState(); props.close()}}
                     style={styles.ButtonStyle}
                 >
                     <Text style={styles.textStyle}>

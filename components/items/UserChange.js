@@ -12,7 +12,7 @@ function UserChange(props) {
             <FontAwesome5 onPress={() => setShowModal(true)} name="user-friends" style={styles.iconStyle} size={28}/>
             <Modal visible={showModal} transparent={true} animationType="fade">
                 <ModalChangeUser 
-                    state={props.state}
+                    text={`¿Desea Cambiar a ${props.state ? "asesor" : "estudiante"}?`}
                     changeState={() => props.changeState()}
                     close={() => setShowModal(false)}
                 />

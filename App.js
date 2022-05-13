@@ -8,8 +8,6 @@ import HeaderApp from './components/reusables/HeaderApp';
 import LoginStack from './components/stacks/LoginStack'
 import { UserContext } from './components/UserContext';
 import { fakeUser } from "./components/Server";
-import ForgotPassword from "./components/screens/ForgotPassword";
-import LoginStack from './components/stacks/LoginStack';
 
 
 export default function App() {
