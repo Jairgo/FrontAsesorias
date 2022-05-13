@@ -1,7 +1,7 @@
 import react, { useState, useEffect } from "react";
 import { StyleSheet, View, Text, ScrollView } from 'react-native';
-import { endpoints } from "../constants/Backend";
 import NotificationsView from "./NotificationsView";
+import { endpoints } from "../constants/Backend";
 import axios from 'axios';
 
 export default function NotificationsScreen() {
@@ -9,7 +9,7 @@ export default function NotificationsScreen() {
   // const [notifications, setNotifications] = useState();
   // const getNotifications = () => {
 
-  //   let endpoint = 'http://127.0.0.1/:8000/notificaciones/'
+  //   let endpoint = 'http://10.0.2.2:8000/notificaciones/'
 
   //   axios.get(endpoint).then((response) => {
   //     console.log(JSON.stringify(response.data));
@@ -110,5 +110,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     marginTop: 20,
+  },
+  screen: {
+    paddingBottom: 40
   }
 });
