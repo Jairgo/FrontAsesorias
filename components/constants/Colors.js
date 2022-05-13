@@ -9,5 +9,6 @@ export default {
     white: '#ffffff',
     extraLightOrange: '#fbdada',
     lightOrange: '#ffbf9b',
-    orange: '#ff5900'
+    orange: '#ff5900',
+    redColor: '#ff0000',
 }
