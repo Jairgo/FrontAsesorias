@@ -16,6 +16,7 @@ const ModalEdit = (props) => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.85)',
     }}>
         <View style={{
             display: 'flex',

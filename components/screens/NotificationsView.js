@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
         marginRight: 15,
         padding: 5,
         borderRadius: 15,
-        backgroundColor: Colors.darkGray,
+        backgroundColor: Colors.naranjaColor,
         display: 'flex',
         flexDirection: 'row',
         marginVertical: 10,

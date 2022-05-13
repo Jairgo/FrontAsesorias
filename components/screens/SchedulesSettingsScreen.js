@@ -6,7 +6,6 @@ import {
     ScrollView,
     StyleSheet,
     TouchableOpacity,
-    RecyclerViewBackedScrollViewComponent,
 } from "react-native";
 
 import { FontAwesome5 } from '@expo/vector-icons';
@@ -20,6 +19,7 @@ import ModalTimePicker from "./ScheduleSettings/ModalTimePicker";
 import { endpoints } from "../constants/Backend";
 import axios from "axios";
 
+
 function HorarioScreen(props) {
     const [ selectedDay, setSelectedDay ] = useState(0);
     const [ isEnabled, setIsEnabled ] = useState(false);
@@ -28,7 +28,6 @@ function HorarioScreen(props) {
     const [materiaInfoSelected, setMateriaInfoSelected] = useState(-1);
     const [timerOpen, setTimerOpen] = useState(false);
     const [materias, setMaterias] = useState([]);
-    let id_Asesor = 1;
 
     const week = [
         { day: 'Lun'},
@@ -41,7 +40,7 @@ function HorarioScreen(props) {
     ];
 
     useEffect(() => {
-        axios.get(endpoints.horarioAsesorView(id_Asesor),{
+        axios.get(endpoints.horarioAsesorView(props.userId),{
             params:{
                 day: week[selectedDay].day
             }
@@ -64,22 +63,28 @@ function HorarioScreen(props) {
             tempMaterias.sort((a, b) => {
                 let a_staHour = a.startHour.split(':');
                 let b_staHour = b.startHour.split(':');
+                let a_form = a_staHour[1].split(' ');
+                let b_form = b_staHour[1].split(' ');
 
-                if (parseInt(a_staHour[0]) < parseInt(b_staHour[0])) {
-                    return 1;
-                }
-                else if (parseInt(a_staHour[ 0 ]) > parseInt(b_staHour[ 0 ])){
-                    return -1;
-                }
-                else {
-                    let min_a = parseInt((a_staHour[ 1 ].split(' '))[ 0 ]);
-                    let min_b = parseInt((b_staHour[ 1 ].split(' '))[ 0 ]);
-                    return min_a < min_b ? 1 : -1;
+                if(a_form[1] === b_form[1]){
+                    if (parseInt(a_staHour[0]) < parseInt(b_staHour[0])) {
+                        return -1;
+                    }
+                    else if (parseInt(a_staHour[ 0 ]) > parseInt(b_staHour[ 0 ])){
+                        return 1;
+                    }
+                    else {
+                        let min_a = parseInt((a_staHour[ 1 ].split(' '))[ 0 ]);
+                        let min_b = parseInt((b_staHour[ 1 ].split(' '))[ 0 ]);
+                        return min_a < min_b ? -1 : 1;
+                    }
+                }else{
+                    if(a_form[1] < b_form[1]) return -1;
                 }
             })
             setMaterias(tempMaterias);
         })
-    },[selectedDay])
+    },[selectedDay, timerOpen])
 
 
     return (
@@ -121,7 +126,9 @@ function HorarioScreen(props) {
                             <Text style={{textAlign: 'center', fontSize: 30, color: Colors.white, fontWeight: 'bold'}}>Agrega un horario</Text>
                         </View>
                     }
-                    <TouchableOpacity onPress={() => {setTimerOpen(true)}} style={{alignItems: 'center', marginTop: 10}}>
+                    <TouchableOpacity onPress={() => {
+                        setTimerOpen(true);
+                    }} style={{alignItems: 'center', marginTop: 10}}>
                         <FontAwesome5 name={"plus-circle"} color={Colors.orange} size={35} solid/>
                     </TouchableOpacity>
                 </View>
@@ -147,7 +154,7 @@ function HorarioScreen(props) {
                             close={() => {
                                 setTimerOpen(false);
                             }}
-                            id_Asesor={id_Asesor}
+                            id_Asesor={props.userId}
                             day={week[selectedDay].day}
                         />
                 </Modal>

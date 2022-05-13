@@ -31,28 +31,34 @@ export default function BottomApp(props) {
                 }}
                 
             >
-                {(_) => <ScheduleScreen asesor={props.asesor} />}
+                {(_) => <ScheduleScreen asesor={props.asesor} userId={props.userId} />}
             </Tab.Screen>
-            {props.asesor ? 
+            {props.asesor
+             ? (
                 <Tab.Screen
-                name="Materias"
-                component={SubjectsScreens}
-                options={{
-                    tabBarLabel: 'Materias',
-                    tabBarIcon: ({ color }) => (
-                        <Feather name="book-open" color={color} size={24} />
-                    ),
-                }} /> :
+                    name="Materias"
+                    options={{
+                        tabBarLabel: 'Materias',
+                        tabBarIcon: ({ color }) => (
+                            <Feather name="book-open" color={color} size={24} />
+                        ),
+                    }}
+                >
+
+                    {(_) => <SubjectsScreens userId={props.userId} />}
+                </Tab.Screen>
+             ) : (
                 <Tab.Screen
-                name="Asesores"
-                component={AsesorStack}
-                options={{
-                    tabBarLabel: 'Asesores',
-                    tabBarIcon: ({ color }) => (
-                        <Feather name="book-open" color={color} size={24} />
-                    ),
-                }} />
-            }
+                    name="Asesores"
+                    component={AsesorStack}
+                    options={{
+                        tabBarLabel: 'Asesores',
+                        tabBarIcon: ({ color }) => (
+                            <Feather name="book-open" color={color} size={24} />
+                        ),
+                    }} 
+                />
+            )}
             <Tab.Screen
                 name="Notificaciones"
                 component={NotificationsScreen}

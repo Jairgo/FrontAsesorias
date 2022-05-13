@@ -1,4 +1,4 @@
-import react, { useState } from "react";
+import react, { useEffect, useState } from "react";
 
 import {
     View,
@@ -35,6 +35,13 @@ const PickTime = (props) => {
         setHours(0);
         setMinutes(0);
     };
+
+    useEffect(() => {
+        props.setHoursInfo({
+            hour: hours,
+            minutes: minutes
+        });
+    },[])
 
     return (
         <SafeAreaView style={styles.container}>

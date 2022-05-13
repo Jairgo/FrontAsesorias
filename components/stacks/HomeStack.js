@@ -37,7 +37,7 @@ function HomeStack(props) {
                     headerRight: () => <UserChange state={isStudent} changeState={handlerStudent}/>,
                 })}
             >
-                {(_) => <props.screen asesor={props.asesor} />}
+                {(_) => <props.screen asesor={props.asesor} userId={props.userId} />}
             </Stack.Screen>
         </Stack.Navigator>
     );

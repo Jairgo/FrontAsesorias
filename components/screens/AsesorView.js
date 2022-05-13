@@ -1,16 +1,19 @@
-import react, { useState } from "react";
+import react, { useState, useContext } from "react";
 import {
     View,
     Text,
     Pressable,
     StyleSheet,
+    Image
 } from "react-native";
 
 import { FontAwesome5 } from '@expo/vector-icons';
+import { UserContext } from "../UserContext";
 
 import Colors from '../constants/Colors';
 
 const AsesorView = (props) => {
+    const { user, setUser } = useContext(UserContext);
     return (
         <Pressable
             onPress={() => props.navigation.navigate('PerfilAsesor', {
@@ -30,7 +33,14 @@ const AsesorView = (props) => {
                 <View style={styles.iconContainer}>
 
                     <Text style={{ width: 60, textAlign: 'center' }}>
-                        <FontAwesome5 name={"user"} color={Colors.blancoColor} size={50} solid />
+                        <View style={{ borderRadius: 50, overflow: 'hidden'}}>
+                            <Image
+                                style={styles.tinyLogo}
+                                source={{ uri: user ? user.link : 'https://www.jing.fm/clipimg/detail/375-3757880_my-account-profile-icon-transparent-white.png' }}
+                            />
+                        </View>
+
+                        {/* <FontAwesome5 name={"user"} color={Colors.blancoColor} size={50} solid /> */}
                     </Text>
 
                 </View>
@@ -57,7 +67,7 @@ const styles = StyleSheet.create({
         padding: 15,
         borderRadius: 15,
         // width: '100%',
-        backgroundColor: Colors.darkGray,
+        backgroundColor: Colors.naranjaColor,
         display: 'flex',
         flexDirection: 'row',
         marginVertical: 10,
@@ -78,5 +88,10 @@ const styles = StyleSheet.create({
         fontSize: 22,
         fontWeight: 'bold',
         color: Colors.blancoColor,
+    },
+    tinyLogo: {
+        width: 50,
+        height: 50,
+        borderRadius: 50,
     }
 });

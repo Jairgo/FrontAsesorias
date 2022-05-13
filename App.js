@@ -29,7 +29,7 @@ export default function App() {
     <UserContext.Provider value={value}>
       {
         isLoguedIn ? (
-          <HeaderApp asesor={false} changeView={handlerLoguedIn} />
+          <HeaderApp asesor={false} userId={2} changeView={handlerLoguedIn} />
         ) : (
           <Login changeView={handlerLoguedIn} />
         )
@@ -39,6 +39,3 @@ export default function App() {
     </UserContext.Provider>
   );
 }
-
-
-

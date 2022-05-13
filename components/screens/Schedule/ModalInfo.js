@@ -11,23 +11,9 @@ import {
 import { FontAwesome5 } from '@expo/vector-icons';
 
 import Colors from "../../constants/Colors";
+import { fonts } from "@rneui/base";
 
 const InfoModal = (props) => {
-    const alumnos = [
-        { nombre: "Erick Saúl", semestre: 6 },
-        { nombre: "Erick Saúl", semestre: 6 },
-        { nombre: "Erick Saúl", semestre: 6 },
-        { nombre: "Erick Saúl", semestre: 6 },
-    ];
-
-    const temas = [
-        "Tema 1",
-        "Tema 2",
-        "Tema 3",
-        "Tema 4",
-        "Tema 5",
-    ];
-
     return (
         <View style={styles.screenContainer}>
             <View style={styles.container}>
@@ -39,26 +25,38 @@ const InfoModal = (props) => {
                 </Pressable>
                 <View style={styles.contentContainer}>
                     <Text style={styles.subjectName}>
-                        {props.materiaInfo.nombre}
+                        {props.materiaInfo.reserved ? props.materiaInfo.subject : "No reservada"}
                     </Text>
-                    <Text>
-                        Horario: {props.materiaInfo.horaInicio} - {props.materiaInfo.horaFin}
-                    </Text>
+                    <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                        <Text style={{ fontSize: 15, color: Colors.black, marginRight: 5, fontWeight: 'bold' }}>
+                            Horario:
+                        </Text>
+                        <Text style={{ fontSize: 14, color: Colors.black }}>
+                            {props.materiaInfo.startHour} - {props.materiaInfo.endHour}
+                        </Text>
+                    </View>
                     {
-                        props.materiaInfo.reservada ? (
+                        props.materiaInfo.reserved ? (
                             <View style={styles.infoElementsContainer}>
                                 <Text style={styles.text}>
-                                    Alumnos inscritos: {alumnos.length}
+                                    Alumnos inscritos: 
                                 </Text>
-                                <View style={{ ...styles.infoElementsContainer, height: 120 }}>
+                                <View style={{ 
+                                    ...styles.infoElementsContainer, 
+                                    height: 120,
+                                    backgroundColor: Colors.extraLightOrange,
+                                    padding: 10,
+                                    borderBottomRightRadius: 10,
+                                    borderBottomLeftRadius: 10,
+                                }}>
                                     <ScrollView>
-                                        {alumnos.map((alumno, idx) => (
+                                        {props.materiaInfo.students.map((alumno, idx) => (
                                             <View key={idx}>
                                                 <View style={styles.studentNameContainer}>
                                                     <Text style={styles.studentName}>
                                                         {alumno.nombre}
                                                     </Text>
-                                                    <Text style={{ flex: 1 }}>
+                                                    <Text style={{ flex: 1.2 }}>
                                                         {alumno.semestre}º Sem.
                                                     </Text>
                                                 </View>
@@ -67,15 +65,20 @@ const InfoModal = (props) => {
                                     </ScrollView>
                                 </View>
                                 <Text style={styles.text}>
-                                    Número de temas: {temas.length}
+                                    Temas:
                                 </Text>
-                                <View style={{...styles.infoElementsContainer, height: 120}}>
+                                <View style={{
+                                    ...styles.infoElementsContainer, 
+                                    height: 120,
+                                    backgroundColor: Colors.extraLightOrange,
+                                    padding: 10,
+                                    borderBottomRightRadius: 10,
+                                    borderBottomLeftRadius: 10,
+                                }}>
                                     <ScrollView>
-                                        {temas.map((tema, idx) => (
-                                            <View
-                                                key={idx}
-                                            >
-                                                <Text> {tema} </Text>
+                                        {props.materiaInfo.topics.map((tema, idx) => (
+                                            <View key={idx}>
+                                                <Text>- {tema} </Text>
                                             </View>
                                         ))}
                                     </ScrollView>
@@ -89,14 +92,26 @@ const InfoModal = (props) => {
                             </View>
                         )
                     }
-                    <View style={styles.bottomContainer}>
-                        <Text style={styles.bottomContainerText}>
-                            Limite temas: {props.materiaInfo.limiteTemas}
-                        </Text>
-                        <Text style={styles.bottomContainerText}>
-                            Limite alumnos: {props.materiaInfo.limiteAlumnos}
-                        </Text>
-                    </View>
+                    {
+                        props.materiaInfo.reserved
+                          ? <View style={styles.bottomContainer}>
+                                <Text style={styles.bottomContainerText}>
+                                    Limite temas: {props.materiaInfo.maxTopics}
+                                </Text>
+                                <Text style={styles.bottomContainerText}>
+                                    Limite alumnos: {props.materiaInfo.maxStudents}
+                                </Text>
+                            </View>
+                          : <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                                <Text style={{ fontSize: 15, color: Colors.black, marginRight: 5, fontWeight: 'bold' }}>
+                                    Lugar: 
+                                </Text>
+                                <Text style={{ fontSize: 14, color: Colors.black }}>
+                                    {props.materiaInfo.lugar}
+                                </Text>
+                            </View>
+                    }
+
                 </View>
             </View>
         </View>
@@ -111,7 +126,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         justifyContent: "center",
         alignItems: "center",
-        marginTop: 22,
+        backgroundColor: 'rgba(0, 0, 0, 0.85)',
     },
     container: {
         width: '80%',
@@ -154,8 +169,8 @@ const styles = StyleSheet.create({
         width: '100%',
         display: 'flex',
         flexDirection: 'row',
-        marginBottom: 0,
         bottom: 0,
+        marginTop: 20,
     },
     bottomContainerText: {
         width: '50%',
@@ -169,12 +184,19 @@ const styles = StyleSheet.create({
         marginVertical: 20
     },
     text: {
-        fontSize: 16,
-        marginVertical: 8
+        fontSize: 17,
+        marginTop: 8,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        backgroundColor: Colors.orange,
+        color: Colors.white,
+        borderTopRightRadius: 10,
+        borderTopLeftRadius: 10,
+        paddingVertical: 5,
     },
     infoElementsContainer: {
         display: 'flex',
-        width: '100%'
+        width: '100%',
     },
     studentNameContainer: {
         width: '100%',

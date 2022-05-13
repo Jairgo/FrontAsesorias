@@ -1,4 +1,4 @@
-import react, { useState } from "react";
+import react, { useEffect, useState } from "react";
 
 import {
     View,
@@ -6,7 +6,7 @@ import {
     Pressable,
     StyleSheet,
     TouchableOpacity,
-    TextInput
+    TextInput,
 } from 'react-native';
 
 import { FontAwesome5 } from '@expo/vector-icons';
@@ -16,19 +16,20 @@ import Colors from "../../constants/Colors";
 import PickTime from "./PickTime";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-
+import axios from "axios";
+import { endpoints } from "../../constants/Backend";
 
 const ModalTimePicker = (props) => {
-    const [text, onChangeText] = useState("");
+
+    const [place, setPlace] = useState("");
+    const [error, setError] = useState(false);
+    const [textError, setTextError] = useState("Error");
     const [hoursInfo, setHoursInfo] = useState({
         startHour: 0,
         startMinutes: 0,
         endHour: 0,
         endMinutes: 0
     })
-
-    //El pickTime recibe las variables startHour y startMinutes, etc y 
-    //El acceda facil solo a la variable
 
     return (
         <View style={styles.screenContainer}>
@@ -39,52 +40,103 @@ const ModalTimePicker = (props) => {
                 paddingBottom: 20
             }}
             >
-                <PickTime title="Hora de inicio" setHoursInfo={(newData) => setHoursInfo((actValue) => {
-                    return { ...actValue, startHour: newData.hour, startMinutes: newData.minutes }
-                })} />
-                {/* 
-                <PickTime title="Hora de inicio" hoursInfo={hoursInfo}/>
-                props.hoursInfo['startHour'] = VALOR;
-                // <PickTime title="Hora de inicio" setHoursInfo={(data) => setHoursInfo((actValue) => {return {...actValue, ...data}})}/>
-                // props.setHoursInfo({startHour: VALOR})
-                <PickTime title="Hora de inicio" setHoursInfo={(key, value) => hoursInfo[key] = value; }/> 
-                props.setHoursInfo('startHour', VALOR);
-                */}
+                <Pressable 
+                    style={styles.closeIcon}
+                    onPress={() => props.close()}
+                >
+                    <FontAwesome5 name={"times"} color={"black"} size={16} solid />
+                </Pressable>
+                {
+                    !error ? (
+                        <View style={{ alignItems: 'center' }}>
+                            <PickTime title="Hora de inicio" setHoursInfo={(newData) => setHoursInfo((actValue) => {
+                                return { ...actValue, startHour: newData.hour, startMinutes: newData.minutes }
+                            })} />
 
-                <PickTime title="Hora de fin" setHoursInfo={(newData) => setHoursInfo((actValue) => {
-                    return { ...actValue, endHour: newData.hour, endMinutes: newData.minutes }
-                })} />
+                            <PickTime title="Hora de fin" setHoursInfo={(newData) => setHoursInfo((actValue) => {
+                                return { ...actValue, endHour: newData.hour, endMinutes: newData.minutes }
+                            })} />
 
-                <Text style={{ fontSize: 19, color: Colors.black }}>
-                    Lugar:
-                </Text>
-                <TextInput
-                    style={styles.input}
-                    onChangeText={onChangeText}
-                    value={text}
-                    placeholder="Lugar"
-                />
+                            <Text style={{ fontSize: 19, color: Colors.black }}>
+                                Lugar:
+                            </Text>
+                            <TextInput
+                                style={styles.input}
+                                onChangeText={setPlace}
+                                value={place}
+                                placeholder="Lugar"
+                            />
 
-                <View style={styles.buttonContainer}>
-                    <TouchableOpacity
-                        onPress={() => { props.close() }}
-                        style={styles.ButtonStyle}
-                    >
-                        <FontAwesome5 name={"times"} color={"white"} size={16} solid />
-                        <Text style={styles.textStyle}>
-                            Cancelar
-                        </Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        onPress={() => { console.log(text); console.log(hoursInfo) }}
-                        style={{ ...styles.ButtonStyle, backgroundColor: Colors.white, marginLeft: 10, }}
-                    >
-                        <FontAwesome5 name={"check"} color={Colors.orange} size={16} solid />
-                        <Text style={{ ...styles.textStyle, color: Colors.orange }}>
-                            Aceptar
-                        </Text>
-                    </TouchableOpacity>
-                </View>
+                            <View style={styles.buttonContainer}>
+                                <TouchableOpacity
+                                    onPress={() => { props.close() }}
+                                    style={styles.ButtonStyle}
+                                >
+                                    <FontAwesome5 name={"times"} color={"white"} size={16} solid />
+                                    <Text style={styles.textStyle}>
+                                        Cancelar
+                                    </Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity
+                                    onPress={() => {
+                                        // console.log(hoursInfo);
+                                        if (hoursInfo.endHour < hoursInfo.startHour || ((hoursInfo.startHour === hoursInfo.endHour) && (hoursInfo.endMinutes <= hoursInfo.startMinutes))) {
+                                            setError(true);
+                                            setTextError("Horario incorrecto");
+                                        } else {
+                                            if (place.length === 0) {
+                                                setError(true);
+                                                setTextError("Debe definir un lugar");
+                                            }else{
+                                                axios.post(endpoints.horarioAsesorView(), {
+                                                    startHour: hoursInfo.startHour,
+                                                    endHour: hoursInfo.endHour,
+                                                    place: place,
+                                                    startMinutes: hoursInfo.startMinutes,
+                                                    endMinutes: hoursInfo.endMinutes,
+                                                    day: props.day,
+                                                    asesor: props.id_Asesor
+                                                }).then(
+                                                    (response) => {
+                                                        props.close()
+                                                        // console.log(response.data);
+                                                    },
+                                                    (err) => {
+                                                        setError(true);
+                                                        setTextError("Horario ocupado, por favor elija otro");
+                                                    }
+                                                )
+                                            }
+                                        }
+                                    }}
+                                    style={{ ...styles.ButtonStyle, backgroundColor: Colors.white, marginLeft: 10, }}
+                                >
+                                    <FontAwesome5 name={"check"} color={Colors.orange} size={16} solid />
+                                    <Text style={{ ...styles.textStyle, color: Colors.orange }}>
+                                        Aceptar
+                                    </Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    ) : (
+                        <View style={{ alignItems: 'center', padding: 15, paddingHorizontal: 30, maxWidth: 350, }}>
+                            <Text style={{ padding: 20, fontSize: 22, textAlign: 'center' }}>
+                                {textError}
+                            </Text>
+                            <TouchableOpacity
+                                onPress={() => {
+                                    setError(false);
+                                }}
+                                style={{ ...styles.ButtonStyle, backgroundColor: Colors.white, marginLeft: 10, }}
+                            >
+                                <FontAwesome5 name={"check"} color={Colors.orange} size={16} solid />
+                                <Text style={{ ...styles.textStyle, color: Colors.orange }}>
+                                    Aceptar
+                                </Text>
+                            </TouchableOpacity>
+                        </View>
+                    )
+                }
             </SafeAreaView>
         </View>
     );
@@ -152,3 +204,13 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
 });
+
+
+{/* 
+<PickTime title="Hora de inicio" hoursInfo={hoursInfo}/>
+props.hoursInfo['startHour'] = VALOR;
+// <PickTime title="Hora de inicio" setHoursInfo={(data) => setHoursInfo((actValue) => {return {...actValue, ...data}})}/>
+// props.setHoursInfo({startHour: VALOR})
+<PickTime title="Hora de inicio" setHoursInfo={(key, value) => hoursInfo[key] = value; }/> 
+props.setHoursInfo('startHour', VALOR);
+*/}
