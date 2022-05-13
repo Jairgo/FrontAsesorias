@@ -12,7 +12,7 @@ function UserName(props) {
                 {props.title}
             </Text>
             <Text style={styles.userText}>
-                {user ? user.name : "Cargando..." }
+                {user ? user.nombre : "Cargando..." }
             </Text>
         </View>
     );

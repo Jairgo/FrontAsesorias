@@ -21,6 +21,7 @@ import {
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import NotificationsScreen from '../screens/NotificationsScreen';
 import { UserContext } from "../UserContext";
+import { main_endpoint } from '../constants/Backend';
 
 // import NotificationsScreen from '../stacks/NotificationsStack';
 // import ProfileScreen from '../stacks/ProfileStack';
@@ -54,7 +55,7 @@ const CustomSidebarMenu = (props) => {
           >
           <View style={{flexDirection: 'row'}}>
             <Image
-              source={{uri: user ? user.link : 'https://www.jing.fm/clipimg/detail/375-3757880_my-account-profile-icon-transparent-white.png'}}
+              source={{uri: user ? main_endpoint + user.profile_picture_url : 'https://www.jing.fm/clipimg/detail/375-3757880_my-account-profile-icon-transparent-white.png'}}
               style={{height: 80, width: 80, borderRadius: 40, marginBottom: 10, opacity: 1}}
             />
             <View style={{flexDirection: 'column', marginLeft: 10}}>
@@ -64,14 +65,22 @@ const CustomSidebarMenu = (props) => {
                   fontSize: 18,
                   marginBottom: 5,
                 }}>
-                Jessica Ramírez
+                {user ? user.nombre : ""}
+              </Text>
+              <Text
+                style={{
+                  color: '#fff',
+                  marginRight: 5,
+                  marginBottom: 5,
+                }}>
+                {user ? user.carrera.nombre : ""}
               </Text>
               <Text
                 style={{
                   color: '#fff',
                   marginRight: 5,
                 }}>
-                Ing. Industrial
+                {user ? user.semestre : ""}º semestre
               </Text>
                 {/* <FontAwesome5 name="coins" size={14} color="#fff" /> */}
             </View>

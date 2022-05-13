@@ -17,19 +17,19 @@ export default function App() {
   const [isLoguedIn, setIsLoguedIn] = useState(false);
   const handlerLoguedIn = (val) => setIsLoguedIn(val);
 
-  useEffect(() => {
-    async function fetchData() {
-      const actualUser = await fakeUser();
-      setUser(actualUser)
-    }
-    fetchData();
-  }, [])
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const actualUser = await fakeUser();
+  //     setUser(actualUser)
+  //   }
+  //   fetchData();
+  // }, [])
 
   return (
     <UserContext.Provider value={value}>
       {
         isLoguedIn ? (
-          <HeaderApp asesor={true} userId={1} changeView={handlerLoguedIn} />
+          <HeaderApp asesor={user ? user.asesor : false} userId={user ? user.id : 0} changeView={handlerLoguedIn} />
         ) : (
           <LoginStack changeView={handlerLoguedIn} />
         )

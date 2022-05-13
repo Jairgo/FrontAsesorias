@@ -1,24 +1,12 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {View, SafeAreaView, StyleSheet, Text, TouchableOpacity, Image} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { main_endpoint } from '../constants/Backend';
+import { UserContext } from '../UserContext';
 
 
 function ProfileScreen() {
-
-  const myCustomShare = async() => {
-    const shareOptions = {
-      message: 'Order your next meal from FoodFinder App. I\'ve already ordered more than 10 meals on it.',
-      url: files.appLogo,
-      // urls: [files.image1, files.image2]
-    }
-
-    try {
-    //   const ShareResponse = await Share.open(shareOptions);
-      console.log(JSON.stringify(ShareResponse));
-    } catch(error) {
-      console.log('Error => ', error);
-    }
-  };
+  const {user, setUser} = useContext(UserContext);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -29,8 +17,10 @@ function ProfileScreen() {
             <Text style={[styles.title, {
               marginTop:15,
               marginBottom: 5,
-            }]}>John Doe</Text>
-            <Text style={styles.caption}>@j_doe</Text>
+            }]}>{user ? `${user.nombre} ${user.apellido_paterno} ${user.apellido_materno}` : ""}</Text>
+            <Text style={styles.caption}>
+              {user ? user.correo : ""}
+            </Text>
           </View>
           <View style={{}}>
             <Icon reverse name="pencil" color="black" size={20}/>
@@ -49,19 +39,19 @@ function ProfileScreen() {
         </View>
         <View style={styles.row}>
           <Icon name="email" color="#777777" size={20}/>
-          <Text style={styles.listText}>john_doe@anahuac.mx</Text>
+          <Text style={styles.listText}>{user ? user.correo : ""}</Text>
         </View>
         <View style={styles.row}>
           <Icon name="face" color="#777777" size={20}/>
-          <Text style={styles.listText}>6° semestre</Text>
+          <Text style={styles.listText}>{user ? `${user.semestre}º semestre` : ""}</Text>
         </View>
         <View style={styles.row}>
           <Icon name="card-account-details" color="#777777" size={20}/>
-          <Text style={styles.listText}>Estudiante</Text>
+          <Text style={styles.listText}>{user.asesor ? "Asesor" : "Estudiante"}</Text>
         </View>
         <View style={styles.row}>
           <Icon name="card-account-details-outline" color="#777777" size={20}/>
-          <Text style={styles.listText}>Ingeniería Biomédica</Text>
+          <Text style={styles.listText}>{user ? user.carrera.nombre : ""}</Text>
         </View>
 
       </View>

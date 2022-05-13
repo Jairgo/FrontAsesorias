@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   StyleSheet, Text, View, TextInput, Dimensions, TouchableOpacity,
   ScrollView, ActivityIndicator, Alert, Modal 
@@ -9,6 +9,7 @@ import ButtonGradient from './ButtonGradient';
 import * as Animatable from 'react-native-animatable';
 import axios from 'axios';
 import ModalChangeUser from '../items/ModalChangeUser';
+import { UserContext } from '../UserContext';
 const { width, height } = Dimensions.get('window')
 
 export default function Login(props) {
@@ -19,6 +20,7 @@ export default function Login(props) {
     text: "",
     isOpen: false
   });
+  const {user, setUser} = useContext(UserContext);
 
   const login = () => {
     if (mail === '')
@@ -42,6 +44,7 @@ export default function Login(props) {
       axios.post(endpoint, credentials).then(response => {
         setLoader(false);
         props.changeView(true);
+        setUser(response.data);
       }, (error) => {
         setModalData({
           text: 'Credenciales incorrectas',
