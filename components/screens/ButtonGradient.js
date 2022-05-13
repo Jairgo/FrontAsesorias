@@ -1,19 +1,30 @@
 import React from "react";
-import { StyleSheet, Text, View, TextInput, Dimensions, TouchableOpacity} from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
-import HeaderApp from "../reusables/HeaderApp";
-
-export default function  ButtonGradient (props) {
+export default function ButtonGradient(props) {
     return (
-        <TouchableOpacity style={styles.container} onPress={() => props.login()}>
-            <LinearGradient
-                colors={['#f49e73', '#ff5900']}
-                style={styles.button}
-            >
-                <Text style={styles.text}>Enviar</Text>
-            </LinearGradient>
-        </TouchableOpacity>
+        <View sx={styles.buttons}>
+            <TouchableOpacity style={styles.container} onPress={() => props.login()}>
+                <LinearGradient
+                    colors={['#f49e73', '#ff5900']}
+                    style={styles.button}
+                >
+                    <Text style={styles.text}>Enviar</Text>
+                </LinearGradient>
+            </TouchableOpacity>
+
+            {props.navigation ? (
+                <TouchableOpacity style={styles.container} onPress={() => props.navigation.goBack()}>
+                    <LinearGradient
+                        colors={['#f49e73', '#ff5900']}
+                        style={styles.button}
+                    >
+                        <Text style={styles.text}>Cancelar</Text>
+                    </LinearGradient>
+                </TouchableOpacity>
+            ) : (<View></View>)}
+        </View>
     );
 }
 const styles = StyleSheet.create({
@@ -22,11 +33,10 @@ const styles = StyleSheet.create({
         width: 200,
         marginTop: 5,
     },
-
     text: {
-      fontSize: 14,
-      color: '#fff',
-      fontWeight: 'bold',
+        fontSize: 14,
+        color: '#fff',
+        fontWeight: 'bold',
     },
     button: {
         width: '80%',
@@ -36,5 +46,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    
-  });
+    buttons: {
+        flexDirection: 'row'
+    }
+
+});

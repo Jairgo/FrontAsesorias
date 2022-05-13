@@ -11,7 +11,7 @@ import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import * as Animatable from "react-native-animatable";
 
-function SingUp() {
+function SingUp(props) {
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -21,7 +21,8 @@ function SingUp() {
       </View>
       <Inputs />
       <Animatable.View animation="fadeInUp">
-        <Send />
+        <Send
+          navigation={props.navigation} />
       </Animatable.View>
     </ScrollView>
   );
@@ -161,7 +162,7 @@ function Inputs() {
     </NativeBaseProvider>
   );
 }
-function Send() {
+function Send(props) {
   return (
     <NativeBaseProvider>
       <Stack
@@ -177,7 +178,9 @@ function Send() {
           md: "0",
         }}
       >
-        <Button size="sm" mt='5'>Cancelar</Button>
+        <Button size="sm" mt='5'
+          onPress={() => props.navigation.goBack()}
+        >Cancelar</Button>
         <Button size="sm" mt='5' color="secondary">
           Enviar
         </Button>
