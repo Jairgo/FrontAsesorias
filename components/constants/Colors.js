@@ -1,7 +1,8 @@
 export default {
     naranjaColor: '#ff5900',
-    negroColor: '#231f20',
+    naranjaSecundarioColor: '#ffba8b',
     arenaColor: '#997747',
+    negroColor: '#231f20',
     blancoColor: '#ffffff',
     transparent: 'transparent',
     black: '#231f20',
