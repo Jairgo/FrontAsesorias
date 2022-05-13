@@ -82,43 +82,35 @@ export default function Login(props) {
     )
   }
   return (
-  <ScrollView>    
-    <View style={styles.mainContainer}>
-      <View style={styles.containerSVG}>
-        <SvgTop/>
+    <ScrollView>
+      <View style={styles.mainContainer}>
+        <View style={styles.containerSVG}>
+          <SvgTop />
+        </View>
+        <View style={styles.container}>
+          <Animatable.View animation="fadeInRight">
+            <Text style={styles.titulo}>Bienvenido</Text>
+          </Animatable.View>
+          <Text style={styles.subTitle}>Inicia sesión para continuar</Text>
+          <TextInput
+            placeholder="usuario@anahuac.mx"
+            style={styles.textInput}
+            onChangeText={input => setMail(input)}
+          />
+          <TextInput
+            placeholder="password"
+            style={styles.textInput}
+            secureTextEntry={true}
+            onChangeText={input => setPassword(input)}
+          />
+          <TouchableOpacity
+            onPress={() => navigation.navigate("reset")}
+            navigation={navigation}>
+            <Text style={styles.forgotPassword}>¿Olvidaste tu contraseña?</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-      <View style={styles.container}>
-      <Animatable.View animation="fadeInRight">
-        <Text style={styles.titulo}>Bienvenido</Text>
-        </Animatable.View>
-        <Text style={styles.subTitle}>Inicia sesión para continuar</Text>
-        <TextInput 
-          placeholder="usuario@anahuac.mx"
-          style={styles.textInput}
-          onChangeText={input => setMail(input)}
-        />
-        <TextInput 
-          placeholder="password"
-          style={styles.textInput}
-          secureTextEntry={true}
-          onChangeText={input => setPassword(input)}
-        />
-
-        <TouchableOpacity onPress={() => {}}>
-          <Text style={styles.forgotPassword}>Olvidaste tu contraseña?</Text>
-        </TouchableOpacity>
-        
-      <Animatable.View animation="fadeInUp">
-        <ButtonGradient login={() => login()}/>
-        </Animatable.View>
-        <TouchableOpacity>
-        <Text style={styles.forgotPassword}>Aún no tienes cuenta?</Text>
-        </TouchableOpacity>
-        <StatusBar style="auto" />  
-      </View>
-    </View>
-    <ActivityIndicator size="large" color="#ff5900" animating={showLoader} />
-    </ScrollView>    
+    </ScrollView>
   );
 }
 
