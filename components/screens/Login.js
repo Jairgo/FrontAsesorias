@@ -1,13 +1,41 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View, TextInput, Dimensions, TouchableOpacity, ScrollView} from 'react-native';
+import React, {useState} from 'react';
+import { StyleSheet, Text, View, TextInput, Dimensions, TouchableOpacity, 
+          ScrollView, ActivityIndicator, Alert} from 'react-native';
 import Svg, { Path, Defs, LinearGradient, Stop } from "react-native-svg"
 import ButtonGradient from './ButtonGradient';
 import * as Animatable from 'react-native-animatable';
 import { Button } from 'react-native-paper';
+import axios from 'axios';
 const { width, height } = Dimensions.get('window')
 
 export default function Login(props) {
+
+  const [mail, setMail] = useState('');
+  const [password, setPassword] = useState('');
+  const [showLoader, setLoader] = useState(false);
+
+  const login = () =>{
+    if(mail === '') Alert.alert("","Indica una cuenta de correo electrónico");
+    else if(password === '') Alert.alert("","Indica tu contraseña");
+    else {
+      setLoader(true);
+      let endpoint = 'http://becasdeploy.pythonanywhere.com/login/';
+      let credentials = {
+        correo: mail,
+        contrasena: password
+      };
+      console.log(credentials);
+      axios.post(endpoint, credentials).then(response => {
+        setLoader(false);
+        props.changeView(true);
+      }).catch(e => {
+        Alert.alert("Error","Credenciales incorrectas");
+        setLoader(false);
+      });
+    } 
+  }
+
 
   function SvgTop() {
     return (
@@ -54,33 +82,41 @@ export default function Login(props) {
     )
   }
   return (
-   <ScrollView>
+  <ScrollView>    
     <View style={styles.mainContainer}>
       <View style={styles.containerSVG}>
         <SvgTop/>
       </View>
       <View style={styles.container}>
-       <Animatable.View animation="fadeInRight">
+      <Animatable.View animation="fadeInRight">
         <Text style={styles.titulo}>Bienvenido</Text>
         </Animatable.View>
         <Text style={styles.subTitle}>Inicia sesión para continuar</Text>
         <TextInput 
-          placeholder="usuario@anahuac.com"
+          placeholder="usuario@anahuac.mx"
           style={styles.textInput}
+          onChangeText={input => setMail(input)}
         />
         <TextInput 
           placeholder="password"
           style={styles.textInput}
           secureTextEntry={true}
+          onChangeText={input => setPassword(input)}
         />
+        <TouchableOpacity>
         <Text style={styles.forgotPassword}>Olvidaste tu contraseña?</Text>
+        </TouchableOpacity>
+        
       <Animatable.View animation="fadeInUp">
-        <ButtonGradient changeView={() => props.changeView(true)}/>
+        <ButtonGradient login={() => login()}/>
         </Animatable.View>
+        <TouchableOpacity>
         <Text style={styles.forgotPassword}>Aún no tienes cuenta?</Text>
+        </TouchableOpacity>
         <StatusBar style="auto" />  
       </View>
     </View>
+    <ActivityIndicator size="large" color="#ff5900" animating={showLoader} />
     </ScrollView>    
   );
 }
@@ -100,7 +136,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   titulo: {
-    fontSize: 80,
+    fontSize: 70,
     color: '#34434D',
     fontWeight: 'bold',
   },
@@ -120,7 +156,8 @@ const styles = StyleSheet.create({
   forgotPassword: {
     fontSize: 14,
     color: 'gray',
-    marginTop: 20
+    marginTop: 15,
+    marginBottom: 15
   },
 
   

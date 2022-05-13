@@ -6,7 +6,7 @@ import HeaderApp from "../reusables/HeaderApp";
 
 export default function  ButtonGradient (props) {
     return (
-        <TouchableOpacity style={styles.container} onPress={() => props.changeView()}>
+        <TouchableOpacity style={styles.container} onPress={() => props.login()}>
             <LinearGradient
                 colors={['#f49e73', '#ff5900']}
                 style={styles.button}
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
         width: 200,
-        marginTop: 60,
+        marginTop: 5,
     },
 
     text: {

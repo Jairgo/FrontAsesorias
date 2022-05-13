@@ -3,7 +3,7 @@ import {View, SafeAreaView, StyleSheet, Text, TouchableOpacity, Image} from 'rea
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 
-function ProfileScreen() {
+const ProfileScreen = () => {
 
   const myCustomShare = async() => {
     const shareOptions = {
@@ -32,9 +32,6 @@ function ProfileScreen() {
             }]}>John Doe</Text>
             <Text style={styles.caption}>@j_doe</Text>
           </View>
-          <View style={{}}>
-            <Icon reverse name="pencil" color="black" size={20}/>
-          </View>
         </View>
       </View>
 
@@ -45,7 +42,7 @@ function ProfileScreen() {
         </View>
         <View style={styles.row}>
           <Icon name="phone" color="#777777" size={20}/>
-          <Text style={styles.listText}>+52 951 123 4567</Text>
+          <Text style={styles.listText}>+91-900000009</Text>
         </View>
         <View style={styles.row}>
           <Icon name="email" color="#777777" size={20}/>
@@ -63,15 +60,7 @@ function ProfileScreen() {
           <Icon name="card-account-details-outline" color="#777777" size={20}/>
           <Text style={styles.listText}>Ingeniería Biomédica</Text>
         </View>
-
       </View>
-      <View style={styles.centerView}>
-        <TouchableOpacity style={styles.btnAsesor} onPress={() => {}}>
-            <Icon reverse name="account-convert" color="white" size={20}/>
-            <Text style={{color: 'white'}}>Convertirme en asesor</Text>
-        </TouchableOpacity>
-      </View>
-
 
     </SafeAreaView>
   );
@@ -104,17 +93,5 @@ const styles = StyleSheet.create({
     color:"#777777",
     marginLeft: 20,
     fontSize: 18,
-  },
-  btnAsesor:{
-    flexDirection: "column",
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#FD5A04',
-    width: '50%',
-    padding: 4,
-    borderRadius: 8,
-  },
-  centerView:{
-    alignItems: 'center',
   }
 });
