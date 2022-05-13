@@ -19,7 +19,7 @@ import { TimePicker } from 'react-native-simple-time-picker';
 
 const PickTime = (props) => {
 
-    const [hours, setHours] = useState(0);
+    const [hours, setHours] = useState(props.startHour);
     const [minutes, setMinutes] = useState(0);
 
     const handleChange = ({ hours, minutes }) => {
@@ -47,7 +47,7 @@ const PickTime = (props) => {
         <SafeAreaView style={styles.container}>
             <View style={{ marginTop: 5, ustifyContent: 'center', alignItems: 'center' }}>
                 <Text style={{ fontSize: 19, color: Colors.black }}>
-                    {props.title}: {hours}:{minutes}
+                    {props.title}: {hours >= 10 ? hours : `0${hours}`}: {minutes >= 10 ? minutes : `0${minutes}`}
                 </Text>
                 <TimePicker
                     value={{ hours, minutes }}

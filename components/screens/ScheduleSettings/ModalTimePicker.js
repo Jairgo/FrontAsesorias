@@ -49,11 +49,11 @@ const ModalTimePicker = (props) => {
                 {
                     !error ? (
                         <View style={{ alignItems: 'center' }}>
-                            <PickTime title="Hora de inicio" setHoursInfo={(newData) => setHoursInfo((actValue) => {
+                            <PickTime title="Hora de inicio" startHour={7} setHoursInfo={(newData) => setHoursInfo((actValue) => {
                                 return { ...actValue, startHour: newData.hour, startMinutes: newData.minutes }
                             })} />
 
-                            <PickTime title="Hora de fin" setHoursInfo={(newData) => setHoursInfo((actValue) => {
+                            <PickTime title="Hora de fin" startHour={8} setHoursInfo={(newData) => setHoursInfo((actValue) => {
                                 return { ...actValue, endHour: newData.hour, endMinutes: newData.minutes }
                             })} />
 

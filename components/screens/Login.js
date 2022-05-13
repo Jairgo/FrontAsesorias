@@ -103,8 +103,9 @@ export default function Login(props) {
           secureTextEntry={true}
           onChangeText={input => setPassword(input)}
         />
-        <TouchableOpacity>
-        <Text style={styles.forgotPassword}>Olvidaste tu contraseña?</Text>
+
+        <TouchableOpacity onPress={() => {}}>
+          <Text style={styles.forgotPassword}>Olvidaste tu contraseña?</Text>
         </TouchableOpacity>
         
       <Animatable.View animation="fadeInUp">

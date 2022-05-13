@@ -8,6 +8,8 @@ import HeaderApp from './components/reusables/HeaderApp';
 import Login from './components/screens/Login';
 import { UserContext } from './components/UserContext';
 import { fakeUser } from "./components/Server";
+import ForgotPassword from "./components/screens/ForgotPassword";
+import LoginStack from './components/stacks/LoginStack';
 
 
 export default function App() {
@@ -29,7 +31,7 @@ export default function App() {
     <UserContext.Provider value={value}>
       {
         isLoguedIn ? (
-          <HeaderApp asesor={false} userId={2} changeView={handlerLoguedIn} />
+          <HeaderApp asesor={true} userId={1} changeView={handlerLoguedIn} />
         ) : (
           <Login changeView={handlerLoguedIn} />
         )

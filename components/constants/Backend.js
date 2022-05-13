@@ -1,6 +1,6 @@
 const ip = '10.0.2.2';
 const port = 8000;
-const main_endpoint = `http://${ip}:${port}/`;
+const main_endpoint = `https://becasdeploy.pythonanywhere.com/`;
 
 const endpoints = {
     horario: (id) => `${main_endpoint}horario/${id}/`,
