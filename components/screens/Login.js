@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   titulo: {
-    fontSize: 80,
+    fontSize: 70,
     color: '#34434D',
     fontWeight: 'bold',
   },
