@@ -81,7 +81,8 @@ const SolicitudAsesoria = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     screen: {
-        paddingTop: 30
+        paddingTop: 30,
+        paddingBottom: 50
     },
     tituloText: {
         fontSize: 35,
