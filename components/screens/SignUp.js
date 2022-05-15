@@ -10,6 +10,9 @@ import {
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import * as Animatable from "react-native-animatable";
+import { endpoints } from "../constants/Backend";
+import axios from "axios";
+
 
 function SingUp(props) {
   return (
@@ -178,10 +181,10 @@ function Send(props) {
           md: "0",
         }}
       >
-        <Button size="sm" mt='5'
+        <Button style={styles.colorButtonCancel} size="sm" mt='5'
           onPress={() => props.navigation.goBack()}
         >Cancelar</Button>
-        <Button size="sm" mt='5' color="secondary">
+        <Button style={styles.colorButtonSend} size="sm" mt='5' color="secondary">
           Enviar
         </Button>
       </Stack>
@@ -223,5 +226,16 @@ const styles = StyleSheet.create({
     color: "gray",
     marginTop: 20,
   },
+  colorButtonCancel: {
+    backgroundColor: '#D1CECE',
+    marginRight: 20,
+    borderRadius: 5,
+   
+  },
+  colorButtonSend: {
+    backgroundColor: '#ff5900',
+    borderRadius: 5,
+   
+  }
 });
 export default SingUp;
