@@ -99,8 +99,8 @@ export default function Login(props) {
     )
   }
   return (
-    <ScrollView>
-      <View style={styles.mainContainer}>
+    <ScrollView style={styles.mainContainer}>
+     
         <View style={styles.containerSVG}>
           <SvgTop />
         </View>
@@ -136,7 +136,6 @@ export default function Login(props) {
           </TouchableOpacity>
           <StatusBar style="auto" />
         </View>
-      </View>
       <ActivityIndicator size="large" color="#ff5900" animating={showLoader} />
       <Modal visible={modalData.isOpen} transparent={true} animationType="fade">
           <ModalChangeUser 

@@ -54,8 +54,8 @@ export default function ForgotPassword(props) {
   }
 
   return (
-    <ScrollView>
-      <View style={styles.mainContainer}>
+    <ScrollView style={styles.mainContainer}>
+      
         <View style={styles.containerSVG}>
           <SvgTop />
         </View>
@@ -75,7 +75,7 @@ export default function ForgotPassword(props) {
           <StatusBar style="auto" />
 
         </View>
-      </View>
+     
     </ScrollView>
   );
 }
