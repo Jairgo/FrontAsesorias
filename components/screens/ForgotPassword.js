@@ -65,7 +65,7 @@ export default function ForgotPassword(props) {
           </Animatable.View>
           <Text style={styles.subTitle}>Ingresa tu correo para recibir un código de recuperación</Text>
           <TextInput
-            placeholder="usuario@anahuac.com"
+            placeholder="usuario@anahuac.mx"
             style={styles.textInput}
           />
           <Animatable.View style={{marginTop: 20}} animation="fadeInUp">
