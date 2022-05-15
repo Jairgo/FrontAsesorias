@@ -11,10 +11,13 @@ import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import * as Animatable from "react-native-animatable";
 import { endpoints } from "../constants/Backend";
+import { Ionicons } from "@expo/vector-icons";
 import axios from "axios";
+import GalleryComponenet from '../screens/Gallery_component.js'
 
 
-function SingUp(props) {
+
+function SingUp1(props) {
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -160,6 +163,7 @@ function Inputs() {
             }
             placeholder="Semestre"
           />
+        <GalleryComponenet/>
         </Stack>
       </Center>
     </NativeBaseProvider>
@@ -181,6 +185,7 @@ function Send(props) {
           md: "0",
         }}
       >
+        
         <Button style={styles.colorButtonCancel} size="sm" mt='5'
           onPress={() => props.navigation.goBack()}
         >Cancelar</Button>
@@ -238,4 +243,4 @@ const styles = StyleSheet.create({
    
   }
 });
-export default SingUp;
+export default SingUp1;

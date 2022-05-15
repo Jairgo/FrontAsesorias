@@ -6,7 +6,8 @@ const endpoints = {
     notifications: (id_alumno) => `${main_endpoint}/notificaciones/${id_alumno}/`,
     horario: (id) => `${main_endpoint}/horario/${id}/`,
     materias: (id) => `${main_endpoint}/materiasimpartidas/${id}/`,
-    horarioAsesorView: (id_asesor) => `${main_endpoint}/horarioAsesor/${id_asesor != undefined ? id_asesor + '/' : ''}`
+    horarioAsesorView: (id_asesor) => `${main_endpoint}/horarioAsesor/${id_asesor != undefined ? id_asesor + '/' : ''}`,
+    estudiantes: (id) => `${main_endpoint}/estudiantes/`,
 };
 
 export {
