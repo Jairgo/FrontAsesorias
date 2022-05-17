@@ -1,5 +1,3 @@
-import react, { useState } from "react";
-
 import {
     View,
     Text,
@@ -8,6 +6,15 @@ import {
 } from "react-native";
 
 import Colors from "../../constants/Colors";
+
+/**
+ * Función que muestra los días de la semana para escoger y cambiar entre ellos.
+ * @param {selected, onPress, day} props 
+ * props.selected: Booleano para saber si seleccionó un dia de nuestra lista.
+ * props.onPress: Función para saber si se precionó un dia de la semana.
+ * props.day: Variable que muestra el dia de la semana.
+ * @returns Regresa un lista de los dias de la semana resaltando el día seleccionado.
+ */
 
 const WeekDaySettings = (props) => {
 

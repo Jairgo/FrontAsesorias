@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import BottomApp from '../reusables/BottomApp';
+import React from 'react';
 import LogoTitle from '../items/LogoTitle';
 import UserName from '../items/UserName';
 import UserChange from '../items/UserChange';
@@ -9,6 +8,18 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { Platform } from 'react-native';
 
 const Stack = createStackNavigator();
+
+/**
+ * Función que muestra la vista selecionada desde la barra laterral izquierda
+ * @param {asesor, toggleAsesor, screen, userId} props 
+ * props.asesor: Booleano para saber si está como asesor o estudiante.
+ * props.toggleAsesor: Función para cambiar entre estudiante y asesor.
+ * props.screen: Variable que contiene la pantalla que se debe mostrar de a cuerdo a la que se seleccionó desde el HeaderApp.
+ * props.userId: Variable con el id del usuario.
+ * @returns Regresa la vista que debe mostrarse de acuerdo a lo que se selecciono desde la barra lateral izquierda
+ */
+
+
 
 function HomeStack(props) {
 

@@ -1,7 +1,12 @@
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { UserContext } from "../UserContext";
 
+/**
+ * Función que muestra el nombre del usuario que inició sesión
+ * @param {title} props 
+ * @returns Regresa el nombre del usuario y un holder de cargando mientras extrae el nombre de la base
+ */
 
 function UserName(props) {
     const {user, setUser} = useContext(UserContext);

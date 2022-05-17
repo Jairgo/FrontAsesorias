@@ -1,5 +1,3 @@
-import react from "react";
-
 import {
     View,
     Text,
@@ -13,6 +11,17 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import Colors from "../../constants/Colors";
 import axios from "axios";
 import { endpoints } from "../../constants/Backend";
+
+/**
+ * Función del modal para eliminar una asesoria.
+ * @param {close, materiaInfo.startHour, materiaInfo.endHour, day, materiaInfo.place} props 
+ * props.close: Función para cerrar el modal.
+ * props.materiaInfo.startHour: Variable que muestra la hora de inicio de la asesoría seleccionada.
+ * props.materiaInfo.endHour: Variable que muestra la hora de fin de la asesoría seleccionada.
+ * props.day: Variable que muestra el dia de la asesoría seleccionada.
+ * props.materiaInfo.place: Variable que muestra el lugar en donde se propone se dará la asesoría.
+ * @returns Regresa un modal con las especificaciones de la materia seleccionada.
+ */
 
 const ModalInfo = (props) => {
 

@@ -3,19 +3,22 @@ import react, { useEffect, useState } from "react";
 import {
     View,
     Text,
-    Pressable,
     StyleSheet,
-    TouchableOpacity,
     SafeAreaView,
 } from 'react-native';
-
-import { FontAwesome5 } from '@expo/vector-icons';
 
 import Colors from "../../constants/Colors";
 
 import { TimePicker } from 'react-native-simple-time-picker';
 
-
+/**
+ * Función para escoger una hora
+ * @param {startHour, setHoursInfo, title} props 
+ * props.startHour: Variable para setear la hora de inicio.
+ * props.setHoursInfo: Objeto para seter la hora y los minutos de la asesoría.
+ * props.title: Variable con el header que muestra la hora seleccionada.
+ * @returns Regresa un seleccionador de una hora
+ */
 
 const PickTime = (props) => {
 

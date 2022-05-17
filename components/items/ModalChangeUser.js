@@ -2,9 +2,7 @@ import {
     View,
     Text,
     Pressable,
-    ScrollView,
     StyleSheet,
-    Button,
     TouchableOpacity
 } from "react-native";
 
@@ -12,9 +10,14 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import Colors from "../constants/Colors";
 
 /**
- * Función encargada del modal para 
- * @param {*} props 
- * @returns 
+ * Función encargada del modal para cambiar de estudiante a asesor y viceversa
+ * @param {text, close, onPress, changeState} props 
+ * props.text: Es la variable que contiene el texto que debe mostrar el modal.
+ * props.close: Es la función para cerrar el modal.
+ * props.onPress: Contiene la función que se le envíe por ejemplo tan solo cerrar el modal
+ * props.changeState: Función para cambiar de asesor a estudiante o viceversa
+ * @returns Regresa el modal para cambiar a asesor si tiene permiso 
+ * o muestra un texto que dice que no tiene permisos
  */
 
 const ModalChangeUser = (props) => {
