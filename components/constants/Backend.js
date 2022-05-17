@@ -8,6 +8,7 @@ const endpoints = {
     materias: (id) => `${main_endpoint}/materiasimpartidas/${id}/`,
     horarioAsesorView: (id_asesor) => `${main_endpoint}/horarioAsesor/${id_asesor != undefined ? id_asesor + '/' : ''}`,
     estudiantes: (id) => `${main_endpoint}/estudiantes/`,
+    updateEstudiantes: (id) => `${main_endpoint}/estudiantes/${id}/`,
 };
 
 export {

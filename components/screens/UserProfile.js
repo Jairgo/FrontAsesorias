@@ -69,7 +69,7 @@ function ProfileScreen() {
 
       <Modal visible={showModal} transparent={true} animationType="fade">
         <ModalUpdateUser
-          nombre={`${user.nombre} ${user.apellido_paterno} ${user.apellido_materno}`}
+          user={user}
           close={() => setShowModal(false)}
         />
       </Modal>
