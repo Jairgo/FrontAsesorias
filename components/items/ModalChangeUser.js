@@ -11,6 +11,12 @@ import {
 import { FontAwesome5 } from '@expo/vector-icons';
 import Colors from "../constants/Colors";
 
+/**
+ * Función encargada del modal para 
+ * @param {*} props 
+ * @returns 
+ */
+
 const ModalChangeUser = (props) => {
 
     return (

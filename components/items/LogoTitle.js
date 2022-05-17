@@ -4,7 +4,12 @@ import { Image, StyleSheet } from 'react-native';
 import { UserContext } from "../UserContext";
 import { main_endpoint } from '../constants/Backend';
 
-function LogoTitle(props) {
+/**
+ * Función encargada de mostrar la imagen o Logo 
+ * del usuario que inció sesión
+ */
+
+function LogoTitle() {
     const {user, setUser} = useContext(UserContext);
 
     return (

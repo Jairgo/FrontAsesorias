@@ -11,6 +11,11 @@ import {
 import { FontAwesome5 } from '@expo/vector-icons';
 import Colors from "../constants/Colors";
 
+/**
+ * Función encargada del modal para cambiar de estudiante a asesor
+ * @returns Habre un modal que confirma el cambio de estudiante a ususario o viceversa
+ */
+
 const ModalAcceptChanges = () => {
 
     return (
