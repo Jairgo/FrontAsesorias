@@ -37,7 +37,7 @@ function HeaderApp(props) {
                         ),
                     }} 
                 >
-                    {(_) => <HomeStack asesor={props.asesor} userId={props.userId} screen={BottomApp} />}
+                    {(_) => <HomeStack asesor={props.asesor} userId={props.userId} screen={BottomApp} toggleAsesor={props.toggleAsesor}/>}
                 </Drawer.Screen>
                 <Drawer.Screen
                     name="Perfil"
@@ -47,7 +47,7 @@ function HeaderApp(props) {
                         ),
                     }} 
                 >
-                    {(_) => <HomeStack asesor={props.asesor} userId={props.userId} screen={UserProfile} />}
+                    {(_) => <HomeStack asesor={props.asesor} userId={props.userId} screen={UserProfile} toggleAsesor={props.toggleAsesor}/>}
                 </Drawer.Screen>
                 {
                     props.asesor ? (
@@ -58,7 +58,7 @@ function HeaderApp(props) {
                                     <Ionicons name="settings-outline" size={22} color={color} />
                                 ),
                             }} >
-                            {(_) => <HomeStack asesor={props.asesor} userId={props.userId} screen={SchedulesSettingsScreen} />}
+                            {(_) => <HomeStack asesor={props.asesor} userId={props.userId} screen={SchedulesSettingsScreen} toggleAsesor={props.toggleAsesor}/>}
                         </Drawer.Screen>
                     ) : <></>
                 }
@@ -69,7 +69,7 @@ function HeaderApp(props) {
                             <Ionicons name="information-circle-outline" size={22} color={color} />
                         ),
                     }} >
-                        {(_) => <HomeStack asesor={props.asesor} userId={props.userId} screen={About} />}
+                        {(_) => <HomeStack asesor={props.asesor} userId={props.userId} screen={About} toggleAsesor={props.toggleAsesor}/>}
                     </Drawer.Screen>
             </Drawer.Navigator>
         </NavigationContainer>

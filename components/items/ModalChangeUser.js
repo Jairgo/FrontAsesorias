@@ -26,7 +26,7 @@ const ModalChangeUser = (props) => {
                     <FontAwesome5 name={"times"} color={"black"} size={16} solid />
                 </Pressable>
                 <TouchableOpacity
-                    onPress={props.onPress ? props.onPress: () => {props.changeState(); props.close()}}
+                    onPress={props.onPress ? props.onPress : () => {props.changeState(); props.close()}}
                     style={styles.ButtonStyle}
                 >
                     <Text style={styles.textStyle}>

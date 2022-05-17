@@ -11,9 +11,6 @@ import { Platform } from 'react-native';
 const Stack = createStackNavigator();
 
 function HomeStack(props) {
-    const [isStudent, setIsStudent] = useState(true);
-
-    const handlerStudent = () => setIsStudent(!isStudent);
 
     return (
         <Stack.Navigator
@@ -28,13 +25,13 @@ function HomeStack(props) {
             <Stack.Screen
                 name="HomeStack"
                 options={({ navigation, route }) => ({
-                    headerLeft: (props) =>
+                    headerLeft: (otherProps) =>
                         <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
-                            <LogoTitle {...props} />
+                            <LogoTitle {...otherProps} />
                         </TouchableOpacity>,
-                    headerTitle: (props) => <UserName {...props} title={isStudent ? "Estudiante" : "Asesor"}  />,
+                    headerTitle: (otherProps) => <UserName {...otherProps} title={props.asesor ? "Asesor" : "Estudiante"}  />,
                     headerTitleAlign: 'center',
-                    headerRight: () => <UserChange state={isStudent} changeState={handlerStudent}/>,
+                    headerRight: () => <UserChange asesor={props.asesor} toggleAsesor={props.toggleAsesor}/>,
                 })}
             >
                 {(_) => <props.screen asesor={props.asesor} userId={props.userId} />}
