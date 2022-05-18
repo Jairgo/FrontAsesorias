@@ -57,7 +57,7 @@ function SingUp(props) {
       telefono.length > 0
     ) {
       if (passwordMatch(password, confirmPassword)) {
-        const data = {
+        /* const data = {
           nombre: nombre,
           apellido_paterno: apellido_paterno,
           apellido_materno: apellido_materno,
@@ -67,9 +67,22 @@ function SingUp(props) {
           semestre: semestre,
           telefono: telefono,
           // foto: foto,
-        };
+        }; */
+        let data = new FormData();
+        data.append('nombre',nombre)
+        data.append('apellido_paterno',apellido_paterno)
+        data.append('apellido_materno',apellido_materno)
+        data.append('correo',correo)
+        data.append('contrasena',password)
+        data.append('carrera',carrera)
+        data.append('semestre',semestre)
+        data.append('telefono',telefono)
+        data.append('asesor',false)
+        data.append('profile_picture_url',null)
+        console.log(data);
         axios
-          .post(endpoints.estudiantes, data)
+          .post(endpoints.estudiantes, data,
+            {headers: { "Content-Type": "multipart/form-data" }})
           .then((res) => {
             console.log(res);
           })
@@ -239,7 +252,7 @@ function SingUp(props) {
               }
               placeholder="Semestre"
             />
-            <GalleryComponenet />
+            {/* <GalleryComponenet /> */}
           </Stack>
         </Center>
         <Stack
