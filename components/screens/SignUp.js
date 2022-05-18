@@ -10,7 +10,7 @@ import {
   Select,
   CheckIcon,
 } from "native-base";
-import { StyleSheet, Text, View, ScrollView,Image,Platform } from "react-native";
+import { StyleSheet, Text, View, ScrollView, Image, Platform } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import * as Animatable from "react-native-animatable";
 import { endpoints } from "../constants/Backend";
@@ -34,6 +34,17 @@ function SingUp(props) {
   const [carrera, setCarrera] = useState("");
   const [show, setShow] = React.useState(false);
   useEffect(() => {
+    async function imagePicker() {
+      if (Platform.OS !== "web") {
+        const { status } =
+          await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (status !== "granted") {
+          alert(
+            "Sorry, Camera roll permissions are required to make this work!"
+          );
+        }
+      }
+    }
     async function getCarreras() {
       try {
         const carreras = await axios.get(
@@ -45,39 +56,76 @@ function SingUp(props) {
       }
     }
     getCarreras();
-  }, []);
-  useEffect(() => {
-    (async () => {
-      if (Platform.OS !== "web") {
-        const { status } =
-          await ImagePicker.requestMediaLibraryPermissionsAsync();
-        if (status !== "granted") {
-          alert(
-            "Sorry, Camera roll permissions are required to make this work!"
-          );
-        }
-      }
-    })();
+    imagePicker();
   }, []);
   /*
 Funcion que nos permite seleccionar una imagen de la galeria del telefono.
 */
-const chooseImg = async () => {
-  let result = await ImagePicker.launchImageLibraryAsync({
-    mediaTypes: ImagePicker.MediaTypeOptions.All,
-    aspect: [4, 3],
-    quality: 1,
-    allowsEditing: true,
-  });
+  const chooseImg = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      aspect: [4, 3],
+      quality: 1,
+      allowsEditing: true,
+    });
 
-  console.log(result);
-/*
-Si la imagen seleccionada es valida, se asigna a la variable image.
-*/
-  if (!result.cancelled) {
-    setImage(result.uri);
+    console.log(result);
+    /*
+    Si la imagen seleccionada es valida, se asigna a la variable image.
+    */
+    if (!result.cancelled) {
+      setImage(result.uri);
+    }
+  };
+
+  async function postData() {
+    const data = {
+      nombre: nombre,
+      apellido_paterno: apellido_paterno,
+      apellido_materno: apellido_materno,
+      correo: correo,
+      password: password,
+      carrera: carrera,
+      semestre: semestre,
+      telefono: telefono,
+      asesor: asesor,
+      profile_picture_url: image,
+    };
+
+    try {
+      let name = image.substr(image.lastIndexOf('/') + 1);
+      // console.log("Upload Image", name);
+      const formData = new FormData();
+      formData.append('profile_picture_url', { uri: image, type: 'image/jpeg', name: name });
+      // formData.append("profile_picture_url", image);
+      formData.append('nombre', nombre)
+      formData.append('apellido_paterno', apellido_paterno)
+      formData.append('apellido_materno', apellido_materno)
+      formData.append('correo', correo)
+      formData.append('contrasena', password)
+      formData.append('carrera', carrera)
+      formData.append('semestre', semestre)
+      formData.append('telefono', telefono)
+      formData.append('asesor', false)
+      const config = {
+        headers: {
+          "content-type": "multipart/form-data"
+        }
+      };
+      const url = "http://becasdeploy.pythonanywhere.com/estudiantes/";
+
+
+      const result = await axios.post(url, formData, config);
+      // console.log("Result: ", result);
+      console.log("Result: ", result.status);
+    } catch (error) {
+      // console.log(data);
+      console.error(error.response);
+      // console.error(error.message);
+    }
+    // console.log("Data: ", data);
   }
-};
+
   const handleSubmit = () => {
     if (
       nombre.length > 0 &&
@@ -90,26 +138,7 @@ Si la imagen seleccionada es valida, se asigna a la variable image.
       telefono.length > 0
     ) {
       if (passwordMatch(password, confirmPassword)) {
-        const data = {
-          nombre: nombre,
-          apellido_paterno: apellido_paterno,
-          apellido_materno: apellido_materno,
-          correo: correo,
-          password: password,
-          carrera: carrera,
-          semestre: semestre,
-          telefono: telefono,
-          asesor: asesor,
-          foto: foto,
-        };
-        axios
-          .post(endpoints.estudiantes, data)
-          .then((res) => {
-            console.log(res);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+        postData();
       } else {
         alert("Las contraseñas no coinciden");
       }
@@ -274,14 +303,14 @@ Si la imagen seleccionada es valida, se asigna a la variable image.
               placeholder="Semestre"
             />
             <Button
-        onPress={chooseImg}
-        leftIcon={<Icon as={Ionicons} name="cloud-upload-outline" size="sm" />}
-      >
-        Subir Foto
-      </Button>
-      {image && (
-        <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
-      )}
+              onPress={chooseImg}
+              leftIcon={<Icon as={Ionicons} name="cloud-upload-outline" size="sm" />}
+            >
+              Subir Foto {image ? "✔" : ""}
+            </Button>
+            {image && (
+              <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
+            )}
           </Stack>
         </Center>
         <Stack
