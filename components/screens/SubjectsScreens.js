@@ -164,8 +164,8 @@ export default function SubjectsScreens(props) {
             <Modal visible={materiaEdit} transparent={true} animationType="slide">
                 <ModalEdit onClose={() => setMateriaEdit(false)} onAccept={(lim_al, lim_te) => {
                     axios.put(endpoints.updatelimites(), {
-                        asesor: 2,
-                        materia: 1,
+                        asesor: props.userId,
+                        materia: materiaSelected,
                         limite_alumnos: lim_al,
                         limite_temas: lim_te
                     }).then(
