@@ -2,10 +2,6 @@ import React, { useState, useMemo } from 'react';
 import HeaderApp from './components/reusables/HeaderApp';
 import LoginStack from './components/stacks/LoginStack'
 import { UserContext } from './components/UserContext';
-<<<<<<< HEAD
-
-=======
->>>>>>> Julio
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -15,15 +11,12 @@ export default function App() {
   const [isLoguedIn, setIsLoguedIn] = useState(false);
   const handlerLoguedIn = (val) => setIsLoguedIn(val);
 
-<<<<<<< HEAD
-=======
   const toggleHandler = () => {
     if (user.asesor) {
       setAsesor(!asesor)
     }
   };
   
->>>>>>> Julio
   return (
     <UserContext.Provider value={value}>
       {
