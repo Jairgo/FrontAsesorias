@@ -4,37 +4,21 @@ import Colors from '../constants/Colors';
 import AsesorView from "./AsesorView";
 import axios from 'axios';
 
-// Vista para mostrar la lista de asesores, obtenida de la base de datos en el backend
-// Propiedades:
-// - asesores: lista de asesores
-// - carreras: lista de carreras
-// - navigation: objeto de navegación
-// - setAsesores: función para actualizar la lista de asesores
-// - setCarreras: función para actualizar la lista de carreras
-
+/**
+ * Vista para mostrar la lista de asesores, obtenida de la base de datos en el backend
+ * @param {StackNavigator} navigation - Objeto de navegación para navegar entre pantallas 
+ * @returns render de la vista, una lista de asesores con su información
+ */
 const SolicitudAsesoria = ({ navigation }) => {
     const [asesores, setAsesores] = useState([]);
-    const [carreras, setCarreras] = useState([]);
 
     const getData = () => {
         let endpoints = [
-            'http://becasdeploy.pythonanywhere.com/asesores/',
-            'http://becasdeploy.pythonanywhere.com/carreras/'
+            'http://becasdeploy.pythonanywhere.com/asesores/'
         ];
 
-        // axios.all(endpoints.map(endpoint => axios.get(endpoint)))
-        //     .then(axios.spread((asesores, carreras) => {
-        //         setAsesores(asesores.data);
-        //         setCarreras(carreras.data);
-        //     }))
-        //     .catch(err => {
-        //         console.log(err);
-        //     }
-        //     );
-
-        Promise.all(endpoints.map(endpoint => axios.get(endpoint))).then(([{ data: asesores }, { data: carreras }]) => {
+        Promise.all(endpoints.map(endpoint => axios.get(endpoint))).then(([{ data: asesores }]) => {
             setAsesores(asesores)
-            setCarreras(carreras)
         }).catch(err => {
             console.log(err);
         }
@@ -44,15 +28,6 @@ const SolicitudAsesoria = ({ navigation }) => {
     useEffect(() => {
         getData();
     }, []);
-
-    const findCarrera = (idCarrera) => {
-        if (carreras.length > 0 && carreras !== undefined && idCarrera !== undefined && idCarrera !== null) {
-            let carrera = carreras.find(e => e.id === idCarrera);
-            return carrera.nombre;
-        } else {
-            return "-";
-        }
-    };
 
     return (
         <View style={styles.screen}>
@@ -64,13 +39,7 @@ const SolicitudAsesoria = ({ navigation }) => {
                     asesores.map((asesor) => (
                         <AsesorView
                             key={asesor.id}
-                            asesorId={asesor.id}
-                            asesorName={asesor.nombre}
-                            asesorApellidoPat={asesor.apellido_paterno}
-                            asesorApellidoMat={asesor.apellido_materno}
-                            asesorCarrera={asesor.carrera.nombre}
-                            asesorSemestre={asesor.semestre}
-                            asesorImg={asesor.profile_picture_url}
+                            asesor={asesor}
                             navigation={navigation}
                         />
                     ))

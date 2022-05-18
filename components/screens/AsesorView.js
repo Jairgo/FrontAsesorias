@@ -1,4 +1,4 @@
-import react, { useState, useContext } from "react";
+import { useContext } from "react";
 import {
     View,
     Text,
@@ -6,22 +6,23 @@ import {
     StyleSheet,
     Image
 } from "react-native";
-
-import { FontAwesome5 } from '@expo/vector-icons';
 import { UserContext } from "../UserContext";
-
 import Colors from '../constants/Colors';
 
+/**
+ * Componente que funciona como un botón para seleccionar un asesor
+ * Al ser presionado, se navega a la pantalla de perfil del asesor
+ * @param {*} props - Propiedades del componente: asesor, navigation. 
+ * @param {Object} props.asesor - Asesor seleccionado.
+ * @param {Object} props.navigation - Objeto de navegación para navegar entre pantallas.
+ * @returns Componente de botón para seleccionar un asesor.
+ */
 const AsesorView = (props) => {
     const { user, setUser } = useContext(UserContext);
     return (
         <Pressable
             onPress={() => props.navigation.navigate('PerfilAsesor', {
-                asesor: props.asesorName + " " + props.asesorApellidoPat + " " + props.asesorApellidoMat,
-                carrera: props.asesorCarrera,
-                semestre: props.asesorSemestre,
-                asesorId: props.asesorId,
-                asesorImg: props.asesorImg,
+                asesor: props.asesor,
             })}
             style={({ pressed }) => [{
                 borderRadius: 10,
@@ -30,27 +31,23 @@ const AsesorView = (props) => {
             }]}
         >
             <View style={styles.viewContainer}>
-
                 <View style={styles.iconContainer}>
-
                     <Text style={{ width: 60, textAlign: 'center' }}>
-                        <View style={{ borderRadius: 50, overflow: 'hidden'}}>
+                        <View style={{ borderRadius: 50, overflow: 'hidden' }}>
                             <Image
                                 style={styles.tinyLogo}
-                                source={{ uri: user ? props.asesorImg: 'https://www.jing.fm/clipimg/detail/375-3757880_my-account-profile-icon-transparent-white.png' }}
+                                source={{ uri: user ? props.asesor.profile_picture_url : 'https://www.jing.fm/clipimg/detail/375-3757880_my-account-profile-icon-transparent-white.png' }}
                             />
                         </View>
-
-                        {/* <FontAwesome5 name={"user"} color={Colors.blancoColor} size={50} solid /> */}
                     </Text>
 
                 </View>
                 <View style={styles.contentContainer}>
                     <Text style={styles.asesorName}>
-                        {props.asesorName} {props.asesorApellidoPat}
+                        {props.asesor.nombre} {props.asesor.apellido_paterno}
                     </Text>
                     <Text style={styles.asesorCarrera}>
-                        {props.asesorCarrera}, {props.asesorSemestre} semestre
+                        {props.asesor.carrera.nombre}, {props.asesor.semestre}° semestre
                     </Text>
                 </View>
 
@@ -67,7 +64,6 @@ const styles = StyleSheet.create({
         marginRight: 15,
         padding: 15,
         borderRadius: 15,
-        // width: '100%',
         backgroundColor: Colors.naranjaColor,
         display: 'flex',
         flexDirection: 'row',

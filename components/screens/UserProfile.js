@@ -1,18 +1,21 @@
-import React, {useContext} from 'react';
-import {View, SafeAreaView, StyleSheet, Text, TouchableOpacity, Image} from 'react-native';
+import React, {useContext,useState} from 'react';
+import {View, SafeAreaView, StyleSheet, Text, TouchableOpacity, Image,
+        Modal} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { main_endpoint } from '../constants/Backend';
+import ModalUpdateUser from '../items/ModalUpdateUser';
 import { UserContext } from '../UserContext';
 
 
 function ProfileScreen() {
   const {user, setUser} = useContext(UserContext);
+  const [showModal, setShowModal] = useState(false);
 
   return (
     <SafeAreaView style={styles.container}>
 
       <View style={styles.userInfoSection}>
-        <View style={{flexDirection: 'row', marginTop: 15}}>
+        <View style={styles.mainUser}>
           <View style={{marginLeft: 20}}>
             <Text style={[styles.title, {
               marginTop:15,
@@ -22,8 +25,10 @@ function ProfileScreen() {
               {user ? user.correo : ""}
             </Text>
           </View>
-          <View style={{}}>
-            <Icon reverse name="pencil" color="black" size={20}/>
+          <View style={{marginLeft: 8, marginTop:20}}>
+            <TouchableOpacity onPress={()=>{setShowModal(true)}}>
+              <Icon reverse name="pencil" color="#FD5A04" size={20}/>
+            </TouchableOpacity>
           </View>
         </View>
       </View>
@@ -35,7 +40,7 @@ function ProfileScreen() {
         </View>
         <View style={styles.row}>
           <Icon name="phone" color="#777777" size={20}/>
-          <Text style={styles.listText}>+52 951 123 4567</Text>
+          <Text style={styles.listText}>{user ? user.telefono : ""}</Text>
         </View>
         <View style={styles.row}>
           <Icon name="email" color="#777777" size={20}/>
@@ -62,6 +67,12 @@ function ProfileScreen() {
         </TouchableOpacity>
       </View>
 
+      <Modal visible={showModal} transparent={true} animationType="fade">
+        <ModalUpdateUser
+          nombre={`${user.nombre} ${user.apellido_paterno} ${user.apellido_materno}`}
+          close={() => setShowModal(false)}
+        />
+      </Modal>
 
     </SafeAreaView>
   );
@@ -106,5 +117,11 @@ const styles = StyleSheet.create({
   },
   centerView:{
     alignItems: 'center',
+  },
+  mainUser:{
+    flexDirection: 'row', 
+    marginTop: 15,
+    flexWrap: 'wrap',
+    justifyContent: 'flex-start'
   }
 });
