@@ -1,13 +1,25 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View, TextInput, Dimensions, TouchableOpacity, ScrollView } from 'react-native';
-import Svg, { Path, Defs, LinearGradient, Stop } from "react-native-svg"
-import ButtonGradient from './ButtonGradient';
-import * as Animatable from 'react-native-animatable';
-const { width, height } = Dimensions.get('window')
+import { StatusBar } from "expo-status-bar";
+import React from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  Dimensions,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
+import Svg, { Path, Defs, LinearGradient, Stop } from "react-native-svg";
+import ButtonGradient from "./ButtonGradient";
+import * as Animatable from "react-native-animatable";
+const { width, height } = Dimensions.get("window");
+
+/*
+Esta pantalla es la pantalla de recuperar contraseña, donde se puede ingresar con un correo siemppre y cuando el usuario exista en la base de datos.
+SOLAMENTE ES PANTALLA VISUAL NO FUNCIONAL
+*/
 
 export default function ForgotPassword(props) {
-
   function SvgTop() {
     return (
       <Svg
@@ -50,75 +62,67 @@ export default function ForgotPassword(props) {
           </LinearGradient>
         </Defs>
       </Svg>
-    )
+    );
   }
+
 
   return (
     <ScrollView style={styles.mainContainer}>
-      
-        <View style={styles.containerSVG}>
-          <SvgTop />
-        </View>
-        <View style={styles.container}>
-          <Animatable.View animation="fadeInRight">
-            <Text style={styles.titulo}>Recuperación</Text>
-          </Animatable.View>
-          <Text style={styles.subTitle}>Ingresa tu correo para recibir un código de recuperación</Text>
-          <TextInput
-            placeholder="usuario@anahuac.mx"
-            style={styles.textInput}
-          />
-          <Animatable.View style={{marginTop: 20}} animation="fadeInUp">
-            <ButtonGradient
-              navigation={props.navigation} />
-          </Animatable.View>
-          <StatusBar style="auto" />
-
-        </View>
-     
+      <View style={styles.containerSVG}>
+        <SvgTop />
+      </View>
+      <View style={styles.container}>
+        <Animatable.View animation="fadeInRight">
+          <Text style={styles.titulo}>Recuperación</Text>
+        </Animatable.View>
+        <Text style={styles.subTitle}>
+          Ingresa tu correo para recibir un código de recuperación
+        </Text>
+        <TextInput placeholder="usuario@anahuac.mx" style={styles.textInput} />
+        <Animatable.View style={{ marginTop: 20 }} animation="fadeInUp">
+          <ButtonGradient navigation={props.navigation} />
+        </Animatable.View>
+        <StatusBar style="auto" />
+      </View>
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   mainContainer: {
-    backgroundColor: 'white',
+    backgroundColor: "white",
     flex: 1,
   },
   container: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   containerSVG: {
     width: width,
-    justifyContent: 'flex-start',
-    alignItems: 'center',
+    justifyContent: "flex-start",
+    alignItems: "center",
   },
   titulo: {
     fontSize: 60,
-    color: '#34434D',
-    fontWeight: 'bold',
+    color: "#34434D",
+    fontWeight: "bold",
   },
   subTitle: {
     fontSize: 20,
-    color: 'gray',
+    color: "gray",
   },
   textInput: {
     padding: 10,
     paddingStart: 30,
-    width: '80%',
+    width: "80%",
     height: 50,
     marginTop: 20,
     borderRadius: 30,
-    backgroundColor: '#ededed',
+    backgroundColor: "#ededed",
   },
   forgotPassword: {
     fontSize: 14,
-    color: 'gray',
-    marginTop: 20
+    color: "gray",
+    marginTop: 20,
   },
-
-
 });
-
-

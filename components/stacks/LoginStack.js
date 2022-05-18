@@ -5,7 +5,10 @@ import reset from '../screens/ForgotPassword';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Login from '../screens/Login';
-
+/*
+Stack de navegación para la pantalla de login.
+Permite moverse entre login principal, el registro y la pantalla de olvido de contraseña.
+*/
 const Stack = createStackNavigator();
 
 function LoginStack(props) {
