@@ -1,4 +1,3 @@
-import react, { useState } from "react";
 import {
     View,
     Text,
@@ -9,6 +8,16 @@ import {
 import { FontAwesome5 } from '@expo/vector-icons';
 
 import Colors from "../../constants/Colors";
+
+/**
+ * Función que muestra la vista de los horarios seleccionados por el usuario para dar asesorias
+ * @param {startHour, endHour, place, showInfo()} props 
+ * props.startHour: Variable con la hora de inicio de la asesoría.
+ * props.endHour: Variable con la hora de fin de la asesoría.
+ * props.place: Variable con el lugar de la asesoría.
+ * props.showInfo(): Función para mostrar la información de la asesoría.
+ * @returns Regresa una lista de horarios que seleccionó el asesor.
+ */
 
 const TimesView = (props) => {
     return (

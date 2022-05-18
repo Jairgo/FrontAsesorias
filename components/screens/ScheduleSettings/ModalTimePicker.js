@@ -1,4 +1,4 @@
-import react, { useEffect, useState } from "react";
+import react, { useState } from "react";
 
 import {
     View,
@@ -18,6 +18,15 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import axios from "axios";
 import { endpoints } from "../../constants/Backend";
+
+/**
+ * Función del modal para Escoger una hora y lugar para la asesoría.
+ * @param {close, day, id_Asesor} props 
+ * props.close: Función para cerra el modal.
+ * props.day: Variable que guarda el dia de la asesoria.
+ * props.idAsesor: Variable con el id del asesor.
+ * @returns Regresa un modal para escoger el horario y lugar de la asesoría.
+ */
 
 const ModalTimePicker = (props) => {
 
@@ -204,13 +213,3 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
 });
-
-
-{/* 
-<PickTime title="Hora de inicio" hoursInfo={hoursInfo}/>
-props.hoursInfo['startHour'] = VALOR;
-// <PickTime title="Hora de inicio" setHoursInfo={(data) => setHoursInfo((actValue) => {return {...actValue, ...data}})}/>
-// props.setHoursInfo({startHour: VALOR})
-<PickTime title="Hora de inicio" setHoursInfo={(key, value) => hoursInfo[key] = value; }/> 
-props.setHoursInfo('startHour', VALOR);
-*/}
