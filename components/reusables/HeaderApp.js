@@ -13,6 +13,16 @@ import UserProfile from '../screens/UserProfile';
 
 const Drawer = createDrawerNavigator();
 
+/**
+ * Función para abrir la barra lateral izquierda al precionar el logo del usuario
+ * @param {asesor, userId, toggleAsesor *} props 
+ * props.asesor: Contiene un booleano para saber si es hacer o no.
+ * props.userId: Contiene el id del usuario.
+ * props.toggleAsesor: Contiene la función para cambiar de estudiante a asesor y viceversa.
+ * @returns Regresa la barra laterail de la izquierda que se abre al precionar el logo del usuario, 
+ * para navegar entre las vista como son inicio, perfil, configuración de horario, acerca de, y cerrar sesión
+ */
+
 function HeaderApp(props) {
     return (
         <NavigationContainer>
@@ -37,7 +47,7 @@ function HeaderApp(props) {
                         ),
                     }} 
                 >
-                    {(_) => <HomeStack asesor={props.asesor} userId={props.userId} screen={BottomApp} />}
+                    {(_) => <HomeStack asesor={props.asesor} userId={props.userId} screen={BottomApp} toggleAsesor={props.toggleAsesor}/>}
                 </Drawer.Screen>
                 <Drawer.Screen
                     name="Perfil"
@@ -47,7 +57,7 @@ function HeaderApp(props) {
                         ),
                     }} 
                 >
-                    {(_) => <HomeStack asesor={props.asesor} userId={props.userId} screen={UserProfile} />}
+                    {(_) => <HomeStack asesor={props.asesor} userId={props.userId} screen={UserProfile} toggleAsesor={props.toggleAsesor}/>}
                 </Drawer.Screen>
                 {
                     props.asesor ? (
@@ -58,7 +68,7 @@ function HeaderApp(props) {
                                     <Ionicons name="settings-outline" size={22} color={color} />
                                 ),
                             }} >
-                            {(_) => <HomeStack asesor={props.asesor} userId={props.userId} screen={SchedulesSettingsScreen} />}
+                            {(_) => <HomeStack asesor={props.asesor} userId={props.userId} screen={SchedulesSettingsScreen} toggleAsesor={props.toggleAsesor}/>}
                         </Drawer.Screen>
                     ) : <></>
                 }
@@ -69,7 +79,7 @@ function HeaderApp(props) {
                             <Ionicons name="information-circle-outline" size={22} color={color} />
                         ),
                     }} >
-                        {(_) => <HomeStack asesor={props.asesor} userId={props.userId} screen={About} />}
+                        {(_) => <HomeStack asesor={props.asesor} userId={props.userId} screen={About} toggleAsesor={props.toggleAsesor}/>}
                     </Drawer.Screen>
             </Drawer.Navigator>
         </NavigationContainer>

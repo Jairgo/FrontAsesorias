@@ -1,56 +1,39 @@
-// Custom Navigation Drawer / Sidebar with Image and Icon in Menu Options
-// https://aboutreact.com/custom-navigation-drawer-sidebar-with-image-and-icon-in-menu-options/
-
 import React, { useContext } from 'react';
 import {
   SafeAreaView,
   View,
   StyleSheet,
   Image,
-  ImageBackground,
   Text,
-  Linking,
   TouchableOpacity,
 } from 'react-native';
 
 import {
   DrawerContentScrollView,
   DrawerItemList,
-  DrawerItem,
 } from '@react-navigation/drawer';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import NotificationsScreen from '../screens/NotificationsScreen';
 import { UserContext } from "../UserContext";
 import { main_endpoint } from '../constants/Backend';
 
-// import NotificationsScreen from '../stacks/NotificationsStack';
-// import ProfileScreen from '../stacks/ProfileStack';
-// import SchedulesSettingsScreen from '../stacks/SchedulesSettingsStack';
-// import SecurityScreen from '../stacks/SecurityStack';
-// import TermsAndConditionsScreen from '../stacks/TermsAndConditionsStack';
+/**
+ * Función para personalizar la barra lateral que se abre al precionar el logo del usuario
+ * @param {*} props 
+ * En props recibe los stacks y estilos que provienen de la función HeaderApp
+ * @returns Regresa una barra lateral personalizada con los colores y estilos establecidos
+ */
+
 
 const CustomSidebarMenu = (props) => {
   const {user, setUser} = useContext(UserContext);
-  
-  const BASE_PATH =
-    'https://raw.githubusercontent.com/AboutReact/sampleresource/master/';
-  const proileImage = 'react_logo.png';
 
   return (
     <SafeAreaView style={{flex: 1}}>
-      {/*Top Large Image */}
-      {/* <Image
-        source={
-            require('../pictures/perfil.jpeg')
-        }
-        style={styles.tinyLogo}
-      /> */}
       <DrawerContentScrollView 
-      {...props}
-      contentContainerStyle={{backgroundColor: '#f4511e'}}
+        {...props}
+        contentContainerStyle={{backgroundColor: '#f4511e'}}
       >
       <View
-          // source={require('../pictures/orange_Background.png')}
           style={{padding: 20, backgroundColor: '#f4511e'}}
           >
           <View style={{flexDirection: 'row'}}>
@@ -82,7 +65,6 @@ const CustomSidebarMenu = (props) => {
                 }}>
                 {user ? user.semestre : ""}º semestre
               </Text>
-                {/* <FontAwesome5 name="coins" size={14} color="#fff" /> */}
             </View>
           </View>
         </View>

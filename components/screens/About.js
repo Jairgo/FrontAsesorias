@@ -1,5 +1,9 @@
 import React from 'react'
 import { View, Text, StyleSheet, Image } from 'react-native'
+
+/* 
+    función que regresa la vista estática de la información de la aplicación
+ */
 const About = ()=>{
     return (
     <View style={styles.screen}>

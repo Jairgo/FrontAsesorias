@@ -16,7 +16,15 @@ import AsesoriaInfoModal from "./Schedule/AsesoriaViewInfo";
 
 import { endpoints } from "../constants/Backend";
 import axios from "axios";
-import { parse } from "react-native-svg";
+
+
+/**
+ * Componente ScheduleScreen
+ * @param {asesor, userId} props 
+ * props.asesor: boolean, índica si el usuario actual está logueado como asesor (true) o estudiante (false)
+ * props.userId: integer, el id del usuario logueado actualmente
+ * @returns JSX.Element, Vista de horario, tanto del alumno como del asesor dependiendo de si props.asesor es true or false
+ */
 
 export default function ScheduleScreen(props) {
     const [selectedDay, setSelectedDay] = useState(0);
@@ -25,6 +33,12 @@ export default function ScheduleScreen(props) {
     const [subjects, setSubjects] = useState([]);
 
     useEffect(() => {
+        /**
+         * Funcion flecha to12Hours
+         * @param {string} horaString 
+         * horaString: string, hora recibida de la base
+         * @returns string, hora en formato 12hrs
+         */
         const to12Hours = (horaString) => {
             let parts = horaString.split(':');
             let hour = parseInt(parts[ 0 ])
@@ -33,6 +47,9 @@ export default function ScheduleScreen(props) {
         };
 
         if (props.asesor) {
+
+            // Peticion al endpoint de horario del backend pasando como parametros el id del usuario, el día seleccionado
+            // Y si la solicitud se hace desde la vista de asesor o de estudiante
             axios.get(endpoints.horario(props.userId), {
                 params: {
                     day: week[selectedDay].day,
@@ -43,15 +60,33 @@ export default function ScheduleScreen(props) {
                 (response) => {
                     if (response.status == 200) {
                         let weekFromBack = [];
-    
+
+                        /**
+                         * Funcion flecha getAsesoria
+                         * @param {integer} horarioId 
+                         * horarioId: integer, id de algun horario de la base
+                         * @returns La asesoria asociada con el horario proporcionado
+                         */
                         const getAsesoria = (horarioId) => {
                             return (response.data.asesorias.filter((asesoria) => asesoria.horario == horarioId))[0];
                         };
     
+                        /**
+                         * Funcion flecha getLimits
+                         * @param {integer} materiaId 
+                         * materiaId: integer, id de alguna materia
+                         * @returns datos recibidos de la base relacionados con ese id
+                         */
                         const getLimits = (materiaId) => {
                             return (response.data.materiasImpartidas.filter((materia) => materia.materias.id == materiaId))[0];
                         };
 
+                        /**
+                         * Funcion flecha getAlumnosTemas
+                         * @param {integer} asesoriaId 
+                         * asesoriaId: integer, recibe un id de una asesoria
+                         * @returns un array de objetos de los datos sobre los alumnos y temas relacionados con la asesoria del id proporcionado
+                         */
                         const getAlumnosTemas = (asesoriaId) => {
                             return (response.data.asesoriasDetalles.filter((as_det) => as_det.asesoria == asesoriaId));
                         };
@@ -85,6 +120,8 @@ export default function ScheduleScreen(props) {
                                 ...as_ho_data
                             })
                         }
+
+                        // Ordenamiento de los datos recibidos en base a la hora para mostrarlos en orden
                         weekFromBack.sort((a, b) => {
                             let a_staHour = a.startHour.split(':');
                             let b_staHour = b.startHour.split(':');
@@ -108,12 +145,7 @@ export default function ScheduleScreen(props) {
                             }
                         })
                         setSubjects(weekFromBack);
-                        // console.log(weekFromBack)
                     }
-                    else {
-                        // console.log(response.data);
-                    }
-
                 },
                 (err) => {
                     console.log(err);
@@ -121,6 +153,7 @@ export default function ScheduleScreen(props) {
             )
         }
         else {
+            // Post con procesamiento distinto de datos en caso de que el usuario sea estudiante
             let weekFromBack = [];
             axios.get(endpoints.horario(props.userId), {
                 params: {
@@ -158,6 +191,7 @@ export default function ScheduleScreen(props) {
         }
     }, [selectedDay])
 
+    // Obtener los 7 dias siguientes a partir de hoy
     const week = [ ...Array(7).keys() ].map((i) => {
         let date = new Date();
         date.setDate(date.getDate() + i);
