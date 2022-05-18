@@ -78,7 +78,14 @@ const ModalEdit = (props) => {
                         value={maxAlumnos}
                         keyboardType='number-pad'
                         onChangeText={text => {
-                            setMaxAlumnos(text)
+                            const e = new RegExp('^[1-9][0-9]*$');
+
+                            if (e.test(text)) {
+                                setMaxAlumnos(text)
+                            }
+                            else if (text === "") {
+                                setMaxAlumnos("");
+                            }
                         }}
                         style={{
                             borderBottomColor: Colors.orange,
@@ -106,7 +113,14 @@ const ModalEdit = (props) => {
                         value={maxTopics}
                         keyboardType='number-pad'
                         onChangeText={text => {
-                            setMaxTopics(text)
+                            const e = new RegExp('^[1-9][0-9]*$');
+
+                            if (e.test(text)) {
+                                setMaxTopics(text)
+                            }
+                            else if (text === "") {
+                                setMaxTopics("");
+                            }
                         }}
                         style={{
                             borderBottomColor: Colors.orange,
@@ -131,7 +145,7 @@ const ModalEdit = (props) => {
                             borderRadius: 16,
                             overflow: 'hidden'
                         } ]}
-                        onPress={() => props.onAccept()}
+                        onPress={() => props.onAccept(maxAlumnos, maxTopics)}
                     >
                         <Text style={{
                             color: Colors.white,
