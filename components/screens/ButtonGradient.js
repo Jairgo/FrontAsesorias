@@ -8,7 +8,7 @@ Componente boton con degradado de colores ocupada principalmente en la pantalla 
 export default function ButtonGradient(props) {
   return (
     <View style={styles.buttons}>
-      <TouchableOpacity style={styles.container} onPress={() => props.login()}>
+      <TouchableOpacity style={styles.container}  onPress={() => props.close ? props.navigation.goBack() : props.login()}>
         <LinearGradient colors={["#f49e73", "#ff5900"]} style={styles.button}>
           <Text style={styles.text}>Enviar</Text>
         </LinearGradient>

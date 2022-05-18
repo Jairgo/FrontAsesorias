@@ -79,7 +79,7 @@
           </Text>
           <TextInput placeholder="usuario@anahuac.mx" style={styles.textInput} />
           <Animatable.View style={{ marginTop: 20 }} animation="fadeInUp">
-            <ButtonGradient navigation={props.navigation} />
+            <ButtonGradient navigation={props.navigation} close={props.navigation}/>
           </Animatable.View>
           <StatusBar style="auto" />
         </View>

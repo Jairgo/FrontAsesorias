@@ -83,7 +83,7 @@ const ModalEdit = (props) => {
                     marginTop: 10
                 }}>
                     <Text>
-                        Limite temas:
+                        Limite alumnos:
                     </Text>
                     <TextInput
                         keyboardType='number-pad'
