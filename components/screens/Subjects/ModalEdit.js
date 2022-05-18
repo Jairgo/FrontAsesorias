@@ -9,7 +9,19 @@ import {
 import Colors from "../../constants/Colors";
 import { FontAwesome5 } from "@expo/vector-icons";
 
+/**
+ * Componente modalEdit
+ * @param {maxAlumnos, maxTopics, onClose, onAccept} props 
+ * - props.maxAlumnos: integer, valor actual del maximo de alumnos
+ * - props.maxTopics: integer, valor actual del maximo de temas
+ * - props.onClose: function, callback a llamar al cerrar el modal
+ * - props.onAccept: function, callback a llamar cuando se aceptan los cambios
+ * @returns JSX.Element, componente vista del modal para editar los limites
+ */
 const ModalEdit = (props) => {
+    const [maxAlumnos, setMaxAlumnos] = useState(props.maxAlumnos);
+    const [maxTopics, setMaxTopics] = useState(props.maxTopics);
+
     return <View style={{
         height: '100%',
         width: '100%',
@@ -60,9 +72,14 @@ const ModalEdit = (props) => {
                     marginTop: 10
                 }}>
                     <Text>
-                        Limite temas:
+                        Limite alumnos:
                     </Text>
                     <TextInput
+                        value={maxAlumnos}
+                        keyboardType='number-pad'
+                        onChangeText={text => {
+                            setMaxAlumnos(text)
+                        }}
                         style={{
                             borderBottomColor: Colors.orange,
                             fontSize: 16,
@@ -86,7 +103,11 @@ const ModalEdit = (props) => {
                         Limite temas:
                     </Text>
                     <TextInput
+                        value={maxTopics}
                         keyboardType='number-pad'
+                        onChangeText={text => {
+                            setMaxTopics(text)
+                        }}
                         style={{
                             borderBottomColor: Colors.orange,
                             fontSize: 16,

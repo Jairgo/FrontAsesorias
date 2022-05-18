@@ -10,6 +10,16 @@ import { FontAwesome5 } from '@expo/vector-icons';
 
 import Colors from "../../constants/Colors";
 
+
+/**
+ * Componente AsesoriaView
+ * @param {showInfo, startHour, endHour, place} props 
+ * props.showInfo: funcion, callback para mostrar el modal de informacion de la asesoria
+ * props.startHour: string, hora de inicio de la asesoria en formato 12hrs
+ * props.endHour: string, hora de fin de la asesoria en formato 12hrs
+ * props.place: string, lugar en el que se llevara la asesoria
+ * @returns JSX.Element, Componente que muestra información general de una asesoria en el horario
+ */
 const AsesoriaView = (props) => {
     return (
         <View style={{ ...styles.viewContainer, backgroundColor: Colors.orange }}>

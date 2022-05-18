@@ -3,11 +3,8 @@ import {
     View,
     Text,
     Modal,
-    ScrollView,
     StyleSheet,
     Pressable,
-    TextInput, 
-    Button,
 } from "react-native";
 
 import { Picker } from "@react-native-picker/picker";
@@ -19,6 +16,12 @@ import ModalEdit from "./Subjects/ModalEdit";
 import axios from "axios";
 import { endpoints } from "../constants/Backend";
 
+/**
+ * Componente SubjectsScreens
+ * @param {userId} props 
+ * - userId: integer, id del usuario
+ * @returns JSX.Element, vista de materias del asesor
+ */
 export default function SubjectsScreens(props) {
     const [ materiaSelected, setMateriaSelected ] = useState(0);
     const [ materiaEdit, setMateriaEdit ] = useState(false);

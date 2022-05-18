@@ -10,6 +10,17 @@ import { FontAwesome5 } from '@expo/vector-icons';
 
 import Colors from "../../constants/Colors";
 
+/**
+ * Componente SubjectView
+ * @param {reserved, showInfo, startHour, endHour, subjectName, place} props 
+ * - reserved: boolean, indica si la asesoria esta reservada o no
+ * - showInfo: function, callback para mostrar la informacion de la asesoria
+ * - startHour: string, hora de inicio de la asesoria en formato 12hrs
+ * - endHour: string, hora de fin de la asesoria en formato 12hrs
+ * - subjectName: string, nombre de la materia relacionada con la asesoria
+ * - place: string, lugar de la asesoria
+ * @returns JSX.Element, componente visual que muestra informacion general de una asesoria
+ */
 const SubjectView = (props) => {
     return (
         <View style={{...styles.viewContainer, backgroundColor: props.reserved ? Colors.orange : Colors.lightOrange}}>
