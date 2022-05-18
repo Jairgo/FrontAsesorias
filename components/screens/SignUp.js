@@ -10,17 +10,17 @@ import {
   Select,
   CheckIcon,
 } from "native-base";
-import { StyleSheet, Text, View, ScrollView } from "react-native";
+import { StyleSheet, Text, View, ScrollView,Image,Platform } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import * as Animatable from "react-native-animatable";
 import { endpoints } from "../constants/Backend";
 import { Ionicons } from "@expo/vector-icons";
-import axios from "axios";
-import GalleryComponenet from "../screens/Gallery_component.js";
-
 import * as ImagePicker from "expo-image-picker";
+import axios from "axios";
+
 
 function SingUp(props) {
+  const [image, setImage] = useState(null);
   const [nombre, setNombre] = useState("");
   const [apellido_paterno, setApellido_paterno] = useState("");
   const [apellido_materno, setApellido_materno] = useState("");
@@ -29,6 +29,7 @@ function SingUp(props) {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [semestre, setSemestre] = useState("");
   const [telefono, setTelefono] = useState("");
+  const [asesor, setAsesor] = useState("false");
   const [carreras, setCarreras] = useState([]);
   const [carrera, setCarrera] = useState("");
   const [show, setShow] = React.useState(false);
@@ -45,6 +46,38 @@ function SingUp(props) {
     }
     getCarreras();
   }, []);
+  useEffect(() => {
+    (async () => {
+      if (Platform.OS !== "web") {
+        const { status } =
+          await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (status !== "granted") {
+          alert(
+            "Sorry, Camera roll permissions are required to make this work!"
+          );
+        }
+      }
+    })();
+  }, []);
+  /*
+Funcion que nos permite seleccionar una imagen de la galeria del telefono.
+*/
+const chooseImg = async () => {
+  let result = await ImagePicker.launchImageLibraryAsync({
+    mediaTypes: ImagePicker.MediaTypeOptions.All,
+    aspect: [4, 3],
+    quality: 1,
+    allowsEditing: true,
+  });
+
+  console.log(result);
+/*
+Si la imagen seleccionada es valida, se asigna a la variable image.
+*/
+  if (!result.cancelled) {
+    setImage(result.uri);
+  }
+};
   const handleSubmit = () => {
     if (
       nombre.length > 0 &&
@@ -66,7 +99,8 @@ function SingUp(props) {
           carrera: carrera,
           semestre: semestre,
           telefono: telefono,
-          // foto: foto,
+          asesor: asesor,
+          foto: foto,
         };
         axios
           .post(endpoints.estudiantes, data)
@@ -239,7 +273,15 @@ function SingUp(props) {
               }
               placeholder="Semestre"
             />
-            <GalleryComponenet />
+            <Button
+        onPress={chooseImg}
+        leftIcon={<Icon as={Ionicons} name="cloud-upload-outline" size="sm" />}
+      >
+        Subir Foto
+      </Button>
+      {image && (
+        <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
+      )}
           </Stack>
         </Center>
         <Stack

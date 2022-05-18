@@ -14,6 +14,11 @@ import ButtonGradient from "./ButtonGradient";
 import * as Animatable from "react-native-animatable";
 const { width, height } = Dimensions.get("window");
 
+/*
+Esta pantalla es la pantalla de recuperar contraseña, donde se puede ingresar con un correo siemppre y cuando el usuario exista en la base de datos.
+SOLAMENTE ES PANTALLA VISUAL NO FUNCIONAL
+*/
+
 export default function ForgotPassword(props) {
   function SvgTop() {
     return (
@@ -59,6 +64,7 @@ export default function ForgotPassword(props) {
       </Svg>
     );
   }
+
 
   return (
     <ScrollView style={styles.mainContainer}>

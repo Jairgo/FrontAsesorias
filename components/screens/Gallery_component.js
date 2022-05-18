@@ -4,9 +4,14 @@ import { Ionicons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import { Image, View, Platform } from "react-native";
 
+/*
+Componente que nos permite solicitar acceso a la galeria del telefono para la seleccion de una imagen.
+*/
 export default function GalleryComponenet() {
   const [image, setImage] = useState(null);
-
+/*
+  Funcion que nos permite seleccionar una imagen de la galeria del telefono.
+*/
   useEffect(() => {
     (async () => {
       if (Platform.OS !== "web") {
@@ -20,7 +25,9 @@ export default function GalleryComponenet() {
       }
     })();
   }, []);
-
+/*
+Funcion que nos permite seleccionar una imagen de la galeria del telefono.
+*/
   const chooseImg = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -30,12 +37,16 @@ export default function GalleryComponenet() {
     });
 
     console.log(result);
-
+/*
+Si la imagen seleccionada es valida, se asigna a la variable image.
+*/
     if (!result.cancelled) {
       setImage(result.uri);
     }
   };
-
+/*
+Funcion que nos permite mostrar la imagen seleccionada.
+*/
   return (
     <NativeBaseProvider>
       <Button
