@@ -9,6 +9,15 @@ import {
 
 import Colors from "../../constants/Colors";
 
+/**
+ * Componente WeekDay
+ * @param {selected, day, num, onPress} props
+ * - selected: boolean, indica si el día está siendo seleccionado actualmente
+ * - day: string, día de la semana solo con tres dígitos
+ * - num: integer, dia del mes
+ * - onPress: function, callback a ejecutar cuando el dia sea presionado
+ * @returns JSX.Element, componente visual de un dia de la semana
+ */
 const WeekDay = (props) => {
     const styles = StyleSheet.create({
         container: {

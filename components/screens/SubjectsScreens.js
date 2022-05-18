@@ -3,11 +3,8 @@ import {
     View,
     Text,
     Modal,
-    ScrollView,
     StyleSheet,
     Pressable,
-    TextInput, 
-    Button,
 } from "react-native";
 
 import { Picker } from "@react-native-picker/picker";
@@ -19,6 +16,12 @@ import ModalEdit from "./Subjects/ModalEdit";
 import axios from "axios";
 import { endpoints } from "../constants/Backend";
 
+/**
+ * Componente SubjectsScreens
+ * @param {userId} props 
+ * - userId: integer, id del usuario
+ * @returns JSX.Element, vista de materias del asesor
+ */
 export default function SubjectsScreens(props) {
     const [ materiaSelected, setMateriaSelected ] = useState(0);
     const [ materiaEdit, setMateriaEdit ] = useState(false);
@@ -28,6 +31,7 @@ export default function SubjectsScreens(props) {
     useEffect(() => {
         axios.get(endpoints.materias(props.userId)).then(
             (response) => {
+                console.log(response);
                 for (let key of Object.keys(Materias)) 
                     Materias[key] = undefined;
 
@@ -158,7 +162,21 @@ export default function SubjectsScreens(props) {
                 </View>
             </View>
             <Modal visible={materiaEdit} transparent={true} animationType="slide">
-                <ModalEdit onClose={() => setMateriaEdit(false)} onAccept={() => setMateriaEdit(false)}/>
+                <ModalEdit onClose={() => setMateriaEdit(false)} onAccept={(lim_al, lim_te) => {
+                    axios.put(endpoints.updatelimites(), {
+                        asesor: 2,
+                        materia: 1,
+                        limite_alumnos: lim_al,
+                        limite_temas: lim_te
+                    }).then(
+                        (res) => {
+                            Materias[ materiaSelected ].LimiteAlumnos = lim_al;
+                            Materias[ materiaSelected ].LimiteTemas = lim_te;
+                            setMaterias(Materias);
+                        }
+                    )
+                    setMateriaEdit(false)
+                }} />
             </Modal>
         </View>
     );

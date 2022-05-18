@@ -12,6 +12,21 @@ import { FontAwesome5 } from '@expo/vector-icons';
 
 import Colors from "../../constants/Colors";
 
+/**
+ * Componente AsesoriaInfoModal
+ * @param {close, materiaInfo} props 
+ * props.close: function, callback para cerrar el modal
+ * props.materiaInfo: Object, objeto que contiene la informacion que se mostrara de la materia
+ *  - subject: string, maTeria de la asesoria
+ *  - startHour: string, hora de inicio de la asesoria en formato 12hrs
+ *  - endHour: string, hora de fin de la asesoria en formato 12hrs
+ *  - lugar: string, lugar donde se llevara a cabo la asesoria
+ *  - asesor: Object, contiene información del asesor
+ *    - nombre: string, nombre del asesor
+ *    - apellido_paterno: string, apellido paterno del asesor
+ *    - apellido_materno string, apellido materno del asesor
+ * @returns JSX.Element, componente vista del modal de información sobre una asesoría
+ */
 const AsesoriaInfoModal = (props) => {
     return (
         <View style={styles.screenContainer}>

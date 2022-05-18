@@ -1,5 +1,4 @@
 import react, { useState } from "react";
-
 import {
     View,
     Text,
@@ -7,12 +6,27 @@ import {
     ScrollView,
     StyleSheet,
 } from "react-native";
-
 import { FontAwesome5 } from '@expo/vector-icons';
-
 import Colors from "../../constants/Colors";
-import { fonts } from "@rneui/base";
 
+/**
+ * Componente InfoModal
+ * @param {close, materiaInfo} props 
+ * props.close: function, callback para cerrar el modal de informacion
+ * props.materiaInfo: Object, contiene informacion de la materia para mostrar
+ *  - reserved: boolean, indica si el horario ya tiene algun alumno registrado
+ *  - subject: string, nombre de la materia asociada a la asesoria
+ *  - startHour: string, hora de inicio de la asesoria en formato 12hrs
+ *  - endHour: string, hora de fin de la asesoria en formato 12hrs
+ *  - students: array of objects, alumnos inscritos en la asesoria
+ *    - nombre: string, nombre del alumno inscrito
+ *    - semestre: integer, semestre que cursa el alumno
+ *  - topics: array of strings, temas relacionados con la asesoria
+ *  - maxTopics: integer, numero maximo de temas que puede tener la asesoria
+ *  - maxStudents: integer, numero maximo de alumnos que pueden inscribirse a la asesoria
+ *  - lugar: string, lugar de la asesoria
+ * @returns JSX.Element, modal de informacion de una asesoria
+ */
 const InfoModal = (props) => {
     return (
         <View style={styles.screenContainer}>
