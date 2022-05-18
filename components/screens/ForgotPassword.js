@@ -6,7 +6,6 @@
     View,
     TextInput,
     Dimensions,
-    TouchableOpacity,
     ScrollView,
   } from "react-native";
   import Svg, { Path, Defs, LinearGradient, Stop } from "react-native-svg";

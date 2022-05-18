@@ -11,21 +11,6 @@ export default function NotificationsScreen() {
   * un listado de las acciones de la semana.
   */
 
-  // const [notifications, setNotifications] = useState();
-  // const getNotifications = () => {
-
-  //   // let endpoint = 'http://becasdeploy.pythonanywhere.com/notificaciones/'
-
-  //   // console.log("Entre")
-  //   // axios.get(endpoint).then((response) => {
-  //   //   console.log(JSON.stringify(response.data));
-  //   //   setNotifications(notifications)
-  //   // }).catch(err => {
-  //   //   console.log(err);
-  //   // }
-  //   // );
-  // }
-
   const notifications = [
     {
       "id": 6,

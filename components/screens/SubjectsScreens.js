@@ -3,11 +3,8 @@ import {
     View,
     Text,
     Modal,
-    ScrollView,
     StyleSheet,
     Pressable,
-    TextInput, 
-    Button,
 } from "react-native";
 
 import { Picker } from "@react-native-picker/picker";
