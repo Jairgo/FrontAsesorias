@@ -9,6 +9,7 @@ const endpoints = {
     horarioAsesorView: (id_asesor) => `${main_endpoint}/horarioAsesor/${id_asesor != undefined ? id_asesor + '/' : ''}`,
     estudiantes: () => `${main_endpoint}/estudiantes/`,
     updateEstudiantes: (id) => `${main_endpoint}/estudiantes/${id}/`,
+    updatelimites: () => `${main_endpoint}/updatelimitematerias/`
 };
 
 export {
