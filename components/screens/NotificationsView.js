@@ -7,6 +7,14 @@ import {
 import Colors from "../constants/Colors";
 import { Ionicons } from '@expo/vector-icons';
 
+/*
+* @param {nombre, descripcion, fecha} props
+* props.nombre: Contiene un texto con el nombre de la notificaion
+* props.descripcion: Contiene un texto con una breve descripcion.
+* props.fecha: Contiene la fecha en la que se recibio la notificaion
+* @returns Regresa un recuadro donde se muestra la informacion obtenida por props
+*/
+
 const NotificationsView = (props) => {
     return (
         <View style={styles.viewContainer}>

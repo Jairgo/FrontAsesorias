@@ -6,7 +6,7 @@ import { UserContext } from './components/UserContext';
 export default function App() {
   const [user, setUser] = useState(null);
   const value = useMemo(() => ({ user, setUser }), [user, setUser]);
-  const [ asesor, setAsesor ] = useState(false);
+  const [asesor, setAsesor] = useState(false);
 
   const [isLoguedIn, setIsLoguedIn] = useState(false);
   const handlerLoguedIn = (val) => setIsLoguedIn(val);
@@ -16,7 +16,7 @@ export default function App() {
       setAsesor(!asesor)
     }
   };
-  
+
   return (
     <UserContext.Provider value={value}>
       {

@@ -6,23 +6,25 @@ import axios from 'axios';
 
 export default function NotificationsScreen() {
 
+  /*
+  * Es la vista encargada de recibir las notificaciones realizadas por el usuario, regresando
+  * un listado de las acciones de la semana.
+  */
+
   // const [notifications, setNotifications] = useState();
   // const getNotifications = () => {
 
-  //   let endpoint = 'http://10.0.2.2:8000/notificaciones/'
+  //   // let endpoint = 'http://becasdeploy.pythonanywhere.com/notificaciones/'
 
-  //   axios.get(endpoint).then((response) => {
-  //     console.log(JSON.stringify(response.data));
-  //     setNotifications(notifications)
-  //   }).catch(err => {
-  //     console.log(err);
-  //   }
-  //   );
+  //   // console.log("Entre")
+  //   // axios.get(endpoint).then((response) => {
+  //   //   console.log(JSON.stringify(response.data));
+  //   //   setNotifications(notifications)
+  //   // }).catch(err => {
+  //   //   console.log(err);
+  //   // }
+  //   // );
   // }
-
-  // useEffect(() => {
-  //   getNotifications();
-  // }, []);
 
   const notifications = [
     {
@@ -81,14 +83,12 @@ export default function NotificationsScreen() {
     }
   ];
 
-  // console.log(notifications)
-
   return (
     <View style={styles.screen}>
       <Text style={styles.title}>
         Notificaciones
       </Text>
-      <View style={{paddingBottom: 100}}>
+      <View style={{ paddingBottom: 100 }}>
         <ScrollView>
           {
             notifications.map((notifications) => (
