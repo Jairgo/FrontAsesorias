@@ -10,15 +10,22 @@ import {
   Select,
   CheckIcon,
 } from "native-base";
-import { StyleSheet, Text, View, ScrollView, Image, Platform } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  Image,
+  Platform,
+} from "react-native";
 import { Feather } from "@expo/vector-icons";
 import * as Animatable from "react-native-animatable";
-import { endpoints } from "../constants/Backend";
 import { Ionicons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import axios from "axios";
-
-
+/*
+Componente encargado del registro de usuarios, se encarga de mandar la informacion del frontend al backend para que se registre en la base de datos.
+*/
 function SingUp(props) {
   const [image, setImage] = useState(null);
   const [nombre, setNombre] = useState("");
@@ -29,10 +36,12 @@ function SingUp(props) {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [semestre, setSemestre] = useState("");
   const [telefono, setTelefono] = useState("");
-  const [asesor, setAsesor] = useState("false");
   const [carreras, setCarreras] = useState([]);
   const [carrera, setCarrera] = useState("");
   const [show, setShow] = React.useState(false);
+  /*
+  Funcion para abrir la camara del dispositivo para tomar la foto del usuario.
+  */
   useEffect(() => {
     async function imagePicker() {
       if (Platform.OS !== "web") {
@@ -45,6 +54,9 @@ function SingUp(props) {
         }
       }
     }
+    /*
+Se hace la peticion Get para obtener las carreras registradas en el servidor.
+    */
     async function getCarreras() {
       try {
         const carreras = await axios.get(
@@ -68,7 +80,6 @@ Funcion que nos permite seleccionar una imagen de la galeria del telefono.
       quality: 1,
       allowsEditing: true,
     });
-
     console.log(result);
     /*
     Si la imagen seleccionada es valida, se asigna a la variable image.
@@ -77,55 +88,50 @@ Funcion que nos permite seleccionar una imagen de la galeria del telefono.
       setImage(result.uri);
     }
   };
-
+/*
+Funcion que nos permite registrar un usuario en el servidor mediante un metodo post.
+*/
   async function postData() {
-    const data = {
-      nombre: nombre,
-      apellido_paterno: apellido_paterno,
-      apellido_materno: apellido_materno,
-      correo: correo,
-      password: password,
-      carrera: carrera,
-      semestre: semestre,
-      telefono: telefono,
-      asesor: asesor,
-      profile_picture_url: image,
-    };
-
     try {
-      let name = image.substr(image.lastIndexOf('/') + 1);
-      // console.log("Upload Image", name);
+      let name = image.substr(image.lastIndexOf("/") + 1);
       const formData = new FormData();
-      formData.append('profile_picture_url', { uri: image, type: 'image/jpeg', name: name });
-      // formData.append("profile_picture_url", image);
-      formData.append('nombre', nombre)
-      formData.append('apellido_paterno', apellido_paterno)
-      formData.append('apellido_materno', apellido_materno)
-      formData.append('correo', correo)
-      formData.append('contrasena', password)
-      formData.append('carrera', carrera)
-      formData.append('semestre', semestre)
-      formData.append('telefono', telefono)
-      formData.append('asesor', false)
+      formData.append("profile_picture_url", {
+        uri: image,
+        type: "image/jpeg",
+        name: name,
+      });
+      formData.append("nombre", nombre);
+      formData.append("apellido_paterno", apellido_paterno);
+      formData.append("apellido_materno", apellido_materno);
+      formData.append("correo", correo);
+      formData.append("contrasena", password);
+      formData.append("carrera", carrera);
+      formData.append("semestre", semestre);
+      formData.append("telefono", telefono);
+      formData.append("asesor", false);
       const config = {
         headers: {
-          "content-type": "multipart/form-data"
-        }
+          "content-type": "multipart/form-data",
+        },
       };
       const url = "http://becasdeploy.pythonanywhere.com/estudiantes/";
-
-
+/*
+Se hace la peticion post para registrar el usuario en el servidor.
+*/
       const result = await axios.post(url, formData, config);
-      // console.log("Result: ", result);
-      console.log("Result: ", result.status);
+/*
+Si el usuario se registro correctamente, se redirecciona al login.
+*/
+      if (result.status === 201) {
+        props.navigation.navigate("Login");
+      }
     } catch (error) {
-      // console.log(data);
       console.error(error.response);
-      // console.error(error.message);
     }
-    // console.log("Data: ", data);
   }
-
+/*
+Funcion que nos permite validar que los campos esten llenos.
+*/
   const handleSubmit = () => {
     if (
       nombre.length > 0 &&
@@ -145,10 +151,16 @@ Funcion que nos permite seleccionar una imagen de la galeria del telefono.
     } else {
       alert("Todos los campos son requeridos");
     }
+    /*
+    Al ser una aplicación institucional, se requiere que el usuario sea un estudiante anahuac, por lo que se le muestra una alerta si no es un estudiante de la universidad.
+    */
     if (!correo.includes("@anahuac.mx")) {
       alert("El correo debe ser un correo institucional");
     }
   };
+  /*
+  Regresa la vista de inputs para que el usuario rellene los campos.
+  */
   return (
     <NativeBaseProvider>
       <ScrollView>
@@ -304,12 +316,17 @@ Funcion que nos permite seleccionar una imagen de la galeria del telefono.
             />
             <Button
               onPress={chooseImg}
-              leftIcon={<Icon as={Ionicons} name="cloud-upload-outline" size="sm" />}
+              leftIcon={
+                <Icon as={Ionicons} name="cloud-upload-outline" size="sm" />
+              }
             >
-              Subir Foto {image ? "✔" : ""}
+              Subir Foto
             </Button>
             {image && (
-              <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
+              <Image
+                source={{ uri: image }}
+                style={{ width: 200, height: 200 }}
+              />
             )}
           </Stack>
         </Center>
@@ -348,6 +365,9 @@ Funcion que nos permite seleccionar una imagen de la galeria del telefono.
     </NativeBaseProvider>
   );
 }
+/*
+Funcion para validar en el front que las contraseñas coincidan, al back solamente se manda una contraseña
+*/
 function passwordMatch(password, confirmPassword) {
   return password === confirmPassword;
 }
