@@ -6,8 +6,12 @@ import { main_endpoint } from '../constants/Backend';
 import ModalUpdateUser from '../items/ModalUpdateUser';
 import { UserContext } from '../UserContext';
 
-
+/* 
+  funcion para mostrar los datos del usuario actual
+  @returns la vista del perfil del usuario
+ */
 function ProfileScreen() {
+  
   const {user, setUser} = useContext(UserContext);
   const [showModal, setShowModal] = useState(false);
 

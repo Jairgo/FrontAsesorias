@@ -2,6 +2,9 @@ import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
+/*
+Componente boton con degradado de colores ocupada principalmente en la pantalla de login.
+*/
 export default function ButtonGradient(props) {
   return (
     <View style={styles.buttons}>

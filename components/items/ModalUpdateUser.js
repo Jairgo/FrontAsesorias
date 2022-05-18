@@ -19,6 +19,14 @@ import ModalChangeUser from './ModalChangeUser';
 import axios from 'axios';
 import { endpoints } from '../constants/Backend';
 
+/* 
+    función para actualizar el teléfono y/o la foto de perfil del usuario
+    @param {props}
+    props contiene la función para cerrar el modal al igual que la información del usuario
+    logueado en la aplicación
+    @returns regresa el contenido del modal donde se ingresan los datos nuevos
+ */
+
 const ModalUpdateUser = (props) => {
     const [image, setImage] = useState(null);
     const [showLoader, setLoader] = useState(false);
@@ -28,6 +36,10 @@ const ModalUpdateUser = (props) => {
         text: "",
         isOpen: false
     });
+
+    /*
+        useEffect para preguntar por los permisos a la galería y subir un archivo
+     */
     useEffect(() => {
         (async () => {
             if (Platform.OS !== 'web') {
@@ -38,6 +50,9 @@ const ModalUpdateUser = (props) => {
             }
         })();
     }, []);
+    /* 
+        función para abrir la galería del usuario y guardar el uri de la imagen
+     */
     const chooseImg = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -50,6 +65,11 @@ const ModalUpdateUser = (props) => {
             setImage(result.uri);
         }
     };
+    /* 
+        función para validar los caracteres que se ingresan en el campo teléfono
+        @param {input}
+        input contiene el texto ingresado en el front
+     */
     const setPhoneNumber = (input) => {
         if (input.length != 10) {
             setPhoneError('Número de caracteres inválido')
@@ -58,6 +78,10 @@ const ModalUpdateUser = (props) => {
             setPhoneError('');
         }
     }
+    /* 
+        función que guarda los cambios ingresados por el usuario para actualizar la información
+        de su perfil, contiene petición PATCH al endpoint con los datos ingresados por el usuario
+     */
     const saveChanges = () => {
         if (phoneError == '') {
             setLoader(true);
