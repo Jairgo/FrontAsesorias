@@ -6,15 +6,11 @@ import { NativeBaseProvider, TextArea, FormControl, Select, CheckIcon, WarningOu
 import axios from 'axios';
 
 function SolicitudAsesoria({ route, navigation }) {
-    const { asesor, horarioId, horarioNombre, dia } = route.params;
-    const [materiaId, setMateriaId] = React.useState("");
-    const [materiaNombre, setMateriaNombre] = React.useState("");
+    const { asesor, dia, horario } = route.params;
+    const [materia, setMateria] = React.useState("");
     const [selected, setSelected] = useState(false);
-
-    // const onChange = (event, itemValue) => {
-    //     setMateria(itemValue)
-    //     setSelected(true);
-    // };
+    const [temas, onChangetemas] = React.useState('');
+    const [disabled, setDisabled] = useState(false);
 
     const [materias, setMaterias] = useState([]);
     useEffect(() => {
@@ -23,6 +19,11 @@ function SolicitudAsesoria({ route, navigation }) {
                 // TODO: Arreglar el horario para que tome la fecha de uno de los dias actuales
                 const materias = await axios.get('http://becasdeploy.pythonanywhere.com/materias/');
                 setMaterias(materias.data);
+                if (materias.data.length > 0) {
+                    setDisabled(false);
+                } else {
+                    setDisabled(true);
+                }
             } catch (error) {
                 console.log(error);
             }
@@ -33,8 +34,7 @@ function SolicitudAsesoria({ route, navigation }) {
     const findMateria = (idMateria) => {
         if (materias.length > 0 && materias !== undefined && idMateria !== undefined && idMateria !== null) {
             let materia = materias.find(e => e.id === idMateria);
-            setMateriaNombre(materia.nombre);
-            setMateriaId(idMateria);
+            setMateria(materia);
         }
     };
 
@@ -65,24 +65,24 @@ function SolicitudAsesoria({ route, navigation }) {
                     {
                         // TODO: Revisar porque no se muestra el mensaje de error
                         selected && (<FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size="xs" />}>
-                            {materia}
+                            {/* {materia} */}
                         </FormControl.ErrorMessage>)
                     }
 
                 </FormControl>
 
-                <Text style={styles.descripcionText}>Describe el tema que te gustaría revisar:</Text>
-                <TextArea color={Colors.negroColor} bg={Colors.naranjaSecundarioColor} h={40} placeholder="Ingresa información acerca del tema que te gustaría revisar" w="100%" maxW="350" />
+                <Text style={styles.descripcionText}>Describe el tema que te gustaría revisar: </Text>
+                <TextArea color={Colors.negroColor} h={40} placeholder="Ingresa información acerca del tema que te gustaría revisar" w="100%" maxW="350" 
+                value={temas} onChangeText={text => onChangetemas(text)} />
                 <TouchableOpacity
                     onPress={() => navigation.navigate('SolicitudAsesoriaAgendada', {
                         asesor: asesor,
-                        materiaId: materiaId,
-                        materiaNombre: materiaNombre,
-                        horarioId: horarioId,
-                        horarioNombre: horarioNombre,
-                        lugar: "Lugar predefinido",
+                        materia: materia,
+                        horario: horario,
                         dia: dia,
+                        temas: temas
                     })}
+                    disabled={materia !== "" ? disabled : true}
                     style={styles.siguienteButton}
                     underlayColor='#fff'>
                     <Text style={styles.siguienteText} >{Strings.nextButton}</Text>
@@ -95,7 +95,7 @@ function SolicitudAsesoria({ route, navigation }) {
 
 const styles = StyleSheet.create({
     screen: {
-        padding: 70
+        padding: 40
     },
     siguienteButton: {
         marginRight: 40,
@@ -122,6 +122,7 @@ const styles = StyleSheet.create({
     descripcionText: {
         fontSize: 20,
         textAlign: 'center',
+        marginTop: 20,
         marginBottom: 20
     }
 });

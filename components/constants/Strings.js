@@ -16,4 +16,5 @@ export default {
     seleccionarFecha: 'Selecciona una fecha',
     seleccionarAsesor: 'Selecciona un asesor',
     solicitarAsesoria: 'Solicitar asesoría',
+    error: 'Ha ocurrido un error',
 }

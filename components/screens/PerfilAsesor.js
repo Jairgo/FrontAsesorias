@@ -7,10 +7,11 @@ import { VStack, Box, NativeBaseProvider, Select, CheckIcon, FormControl } from 
 import axios from 'axios';
 
 function PerfilAsesor({ route, navigation }) {
-    const { asesor, carrera, semestre, asesorId, asesorImg } = route.params;
+    const { asesor } = route.params;
     const [date, setDate] = useState(new Date())
     const [horarios, setHorarios] = useState([]);
     const [horarioId, setHorarioId] = React.useState("");
+    const [horario, setHorario] = React.useState("");
     const [horarioNombre, setHorarioNombre] = React.useState("");
     const [disabled, setDisabled] = useState(false);
     var dia = "no definido";
@@ -18,8 +19,7 @@ function PerfilAsesor({ route, navigation }) {
     useEffect(() => {
         async function getHorarios() {
             try {
-                const horarios = await axios.get('http://becasdeploy.pythonanywhere.com/horarios/?asesor=' + asesorId);
-                // console.log(horarios.data);
+                const horarios = await axios.get('http://becasdeploy.pythonanywhere.com/horarios/?asesor=' + asesor.id);
                 setHorarios(horarios.data);
                 if (horarios.data.length > 0) {
                     setDisabled(false);
@@ -66,6 +66,7 @@ function PerfilAsesor({ route, navigation }) {
     const detailsHorario = (idHorario) => {
         if (horarios.length > 0 && horarios !== undefined && idHorario !== undefined && idHorario !== null) {
             let horario = horarios.find(e => e.id === idHorario);
+            setHorario(horario);
             setHorarioNombre(horario.hora_inicio + " - " + horario.hora_fin);
             setHorarioId(idHorario);
         }
@@ -75,14 +76,12 @@ function PerfilAsesor({ route, navigation }) {
         <NativeBaseProvider>
             <ScrollView style={{ paddingTop: 20 }}>
                 <View style={styles.screen}>
-                    <Image style={styles.image} source={{ uri: asesorImg }}/>
-                    <Text style={styles.tituloText}>  {asesor}</Text>
+                    <Image style={styles.image} source={{ uri: asesor.profile_picture_url }}/>
+                    <Text style={styles.tituloText}>  {asesor.nombre} {asesor.apellido_paterno} {asesor.apellido_materno}</Text>
                 </View>
                 <View style={styles.screen}>
                     <CardInfoPersonal
                         asesor={asesor}
-                        carrera={carrera}
-                        semestre={semestre}
                     />
                 </View>
                 <Text style={styles.instruccionText}>Selecciona una fecha y hora:</Text>
@@ -115,11 +114,10 @@ function PerfilAsesor({ route, navigation }) {
                     <TouchableOpacity
                         onPress={() => navigation.navigate('SolicitudAsesoria', {
                             asesor: asesor,
-                            horarioId: horarioId,
-                            horarioNombre: horarioNombre,
+                            horario: horario,
                             dia: dia,
                         })}
-                        disabled={disabled}
+                        disabled={horario !== "" ? disabled : true}
                         style={disabled ? styles.siguienteButtonDisabled : styles.siguienteButton}
                         underlayColor='#fff'>
                         <Text style={styles.siguienteText} >{Strings.solicitarAsesoria}</Text>
@@ -142,15 +140,15 @@ function CardInfoPersonal(props) {
                         <VStack space="3" >
                             <Text>
                                 <Text style={styles.boldText}>  Nombre: </Text>
-                                <Text> {props.asesor}</Text>
+                                <Text> {props.asesor.nombre}</Text>
                             </Text>
                             <Text>
                                 <Text style={styles.boldText}>  Carerra: </Text>
-                                <Text> {props.carrera}</Text>
+                                <Text> {props.asesor.carrera.nombre}</Text>
                             </Text>
                             <Text>
                                 <Text style={styles.boldText}>  Semestre: </Text>
-                                <Text> {props.semestre}</Text>
+                                <Text> {props.asesor.semestre}</Text>
                             </Text>
                         </VStack>
                     </Box>

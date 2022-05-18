@@ -17,11 +17,7 @@ const AsesorView = (props) => {
     return (
         <Pressable
             onPress={() => props.navigation.navigate('PerfilAsesor', {
-                asesor: props.asesorName + " " + props.asesorApellidoPat + " " + props.asesorApellidoMat,
-                carrera: props.asesorCarrera,
-                semestre: props.asesorSemestre,
-                asesorId: props.asesorId,
-                asesorImg: props.asesorImg,
+                asesor: props.asesor,
             })}
             style={({ pressed }) => [{
                 borderRadius: 10,
@@ -37,7 +33,7 @@ const AsesorView = (props) => {
                         <View style={{ borderRadius: 50, overflow: 'hidden'}}>
                             <Image
                                 style={styles.tinyLogo}
-                                source={{ uri: user ? props.asesorImg: 'https://www.jing.fm/clipimg/detail/375-3757880_my-account-profile-icon-transparent-white.png' }}
+                                source={{ uri: user ? props.asesor.profile_picture_url : 'https://www.jing.fm/clipimg/detail/375-3757880_my-account-profile-icon-transparent-white.png' }}
                             />
                         </View>
 
@@ -47,10 +43,10 @@ const AsesorView = (props) => {
                 </View>
                 <View style={styles.contentContainer}>
                     <Text style={styles.asesorName}>
-                        {props.asesorName} {props.asesorApellidoPat}
+                        {props.asesor.nombre} {props.asesor.apellido_paterno}
                     </Text>
                     <Text style={styles.asesorCarrera}>
-                        {props.asesorCarrera}, {props.asesorSemestre} semestre
+                        {props.asesor.carrera.nombre}, {props.asesor.semestre}° semestre
                     </Text>
                 </View>
 

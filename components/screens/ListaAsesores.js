@@ -64,13 +64,7 @@ const SolicitudAsesoria = ({ navigation }) => {
                     asesores.map((asesor) => (
                         <AsesorView
                             key={asesor.id}
-                            asesorId={asesor.id}
-                            asesorName={asesor.nombre}
-                            asesorApellidoPat={asesor.apellido_paterno}
-                            asesorApellidoMat={asesor.apellido_materno}
-                            asesorCarrera={asesor.carrera.nombre}
-                            asesorSemestre={asesor.semestre}
-                            asesorImg={asesor.profile_picture_url}
+                            asesor={asesor}
                             navigation={navigation}
                         />
                     ))

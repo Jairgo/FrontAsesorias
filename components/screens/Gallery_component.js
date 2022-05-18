@@ -33,8 +33,8 @@ export default function GalleryComponenet() {
 
 	return (
 
-		<NativeBaseProvider style={styles.container}>
-
+		<NativeBaseProvider >
+{/* style={styles.container} */}
 			<Button onPress={chooseImg} leftIcon={<Icon as={Ionicons} name="cloud-upload-outline" size="sm" />}>
 				Subir Foto
 			</Button>
