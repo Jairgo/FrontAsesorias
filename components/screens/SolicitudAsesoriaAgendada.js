@@ -7,15 +7,24 @@ import { Feather } from '@expo/vector-icons';
 import axios from 'axios';
 import { UserContext } from "../UserContext";
 
+/** 
+ * Componente que crea una nueva asesoria, si se crea correctamente, se muestra un mensaje de éxito, en caso contrario, se muestra un mensaje de error
+ * - usuario: Objeto con la información del usuario que está logueado actualmente
+ * @param {Object} navigation - Objeto de navegación para poder navegar entre las pantallas 
+ * @param {Object} route - Objeto que contiene la información de la ruta actual y sus parámetros
+ * @returns 
+ */
 function SolicitudAsesoriaAgendada({ route, navigation }) {
     const { asesor, materia, horario, dia, temas } = route.params;
     const [error, setError] = useState(false);
-    const [idAsesoria, setIdAsesoria] = useState("");
     const {user, setUser} = useContext(UserContext);
     const [diaMostrar, setDiaMostrar] = useState("");
 
     useEffect(() => {
+        // Funcion que envia los datos de la nueva asesoria a la API
         async function postAsesoria() {
+            // Se hace la logica para obtener el dia de la semana, basado en el id del dia
+            // Se obtiene la fecha en la que se realizará la asesoria
             var today = new Date();
             today.toLocaleDateString('es-MX', {
                 timeZone: 'America/Mexico_City'}
@@ -34,6 +43,7 @@ function SolicitudAsesoriaAgendada({ route, navigation }) {
             var days = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
             setDiaMostrar(days[numAsDia] + " " + fechaAs + "/" + (today.getMonth() + 1) + "/" + today.getFullYear());
 
+            // Envío de datos a la API, try catch para manejar errores
             try {
                 const response = await axios.post(`http://becasdeploy.pythonanywhere.com/asesorias/`, {
                     estado: 1,
@@ -45,12 +55,8 @@ function SolicitudAsesoriaAgendada({ route, navigation }) {
                     lugar: horario.lugar,
                 });
                 if (response.status === 201) {
-                    // console.log(`Haz agregado una nueva asesoria: ${JSON.stringify(response.data)}`);
-                    console.log("El id de la asesoria es: " + response.data.id);
-                    setIdAsesoria(response.data.id);
                     postDetalleAsesoria(response.data);
                 } else {
-                    console.log(`Error al agregar la asesoria: ${JSON.stringify(response.data)}`);
                     setError(true);
                 }
             } catch (error) {
@@ -59,6 +65,7 @@ function SolicitudAsesoriaAgendada({ route, navigation }) {
             }
         }
 
+        // Funcion que envia los detalles de la nueva asesoria a la API, basado en el id de la asesoria creada
         async function postDetalleAsesoria(newAsesoria) {
             try {
                 const response = await axios.post(`http://becasdeploy.pythonanywhere.com/asesoriasdetalle/`, {
@@ -84,6 +91,7 @@ function SolicitudAsesoriaAgendada({ route, navigation }) {
         postAsesoria();
     }, []);
 
+    // Renderiza el componente, en caso de que se haya creado correctamente, muestra un mensaje de éxito, en caso contrario, muestra un mensaje de error
     return (
         <NativeBaseProvider>
             {
@@ -113,7 +121,6 @@ function SolicitudAsesoriaAgendada({ route, navigation }) {
                                     <Text> {horario.hora_inicio}</Text>
                                 </Text>
                                 <Text>
-                                    {/* TODO: Agregar lugar en el serializer del back */}
                                     <Text style={styles.boldText}>  Lugar: </Text>
                                     <Text> {horario.lugar}</Text>
                                 </Text>
@@ -129,7 +136,6 @@ function SolicitudAsesoriaAgendada({ route, navigation }) {
             </View>
             }
         </NativeBaseProvider>
-
     );
 }
 

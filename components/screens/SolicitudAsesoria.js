@@ -1,22 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, ScrollView, TouchableOpacity } from 'react-native';
 import Strings from '../constants/Strings';
 import Colors from '../constants/Colors';
-import { NativeBaseProvider, TextArea, FormControl, Select, CheckIcon, WarningOutlineIcon } from 'native-base';
+import { NativeBaseProvider, TextArea, FormControl, Select, CheckIcon } from 'native-base';
 import axios from 'axios';
 
+/**
+ * Componente que se encarga de hacer la solicitud de asesoría
+ * - asesor: objeto que contiene la información del asesor
+ * - dia: objeto que contiene la información del día
+ * - horario: objeto que contiene la información del horario
+ * - materia: objeto que contiene la información de la materia
+ * - temas: objeto que contiene la información del tema
+ * @param {Object} navigation - Objeto de navegación para poder navegar entre las pantallas 
+ * @returns render de la vista, con la informacion que se necesita para hacer la solicitud
+ */
 function SolicitudAsesoria({ route, navigation }) {
     const { asesor, dia, horario } = route.params;
     const [materia, setMateria] = React.useState("");
-    const [selected, setSelected] = useState(false);
     const [temas, onChangetemas] = React.useState('');
     const [disabled, setDisabled] = useState(false);
-
     const [materias, setMaterias] = useState([]);
+
+    // Función que obtiene todas las materias a las que puede asesorar el asesor
     useEffect(() => {
         async function getMaterias() {
             try {
-                // TODO: Arreglar el horario para que tome la fecha de uno de los dias actuales
                 const materias = await axios.get('http://becasdeploy.pythonanywhere.com/materias/');
                 setMaterias(materias.data);
                 if (materias.data.length > 0) {
@@ -31,6 +40,7 @@ function SolicitudAsesoria({ route, navigation }) {
         getMaterias();
     }, []);
 
+    // Funcion que obtiene el nombre del dia de la semana, basado en el id del dia
     const findMateria = (idMateria) => {
         if (materias.length > 0 && materias !== undefined && idMateria !== undefined && idMateria !== null) {
             let materia = materias.find(e => e.id === idMateria);
@@ -38,11 +48,11 @@ function SolicitudAsesoria({ route, navigation }) {
         }
     };
 
+    // Renderiza el componente, si aun no se ha seleccionado una materia, deshabilita el botón de solicitar asesoría
     return (
         <NativeBaseProvider>
             <ScrollView style={styles.screen}>
                 <Text style={styles.tituloText}>{Strings.seleccionarMateria}</Text>
-
                 <FormControl maxW="100%" isRequired>
                     <FormControl.Label>Elige la materia: </FormControl.Label>
                     <Select minWidth="200" accessibilityLabel="Elegir materia" placeholder="Elige la materia que desees" _selectedItem={{
@@ -62,18 +72,10 @@ function SolicitudAsesoria({ route, navigation }) {
                             ))
                         }
                     </Select>
-                    {
-                        // TODO: Revisar porque no se muestra el mensaje de error
-                        selected && (<FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size="xs" />}>
-                            {/* {materia} */}
-                        </FormControl.ErrorMessage>)
-                    }
-
                 </FormControl>
-
                 <Text style={styles.descripcionText}>Describe el tema que te gustaría revisar: </Text>
-                <TextArea color={Colors.negroColor} h={40} placeholder="Ingresa información acerca del tema que te gustaría revisar" w="100%" maxW="350" 
-                value={temas} onChangeText={text => onChangetemas(text)} />
+                <TextArea color={Colors.negroColor} h={40} placeholder="Ingresa información acerca del tema que te gustaría revisar" w="100%" maxW="350"
+                    value={temas} onChangeText={text => onChangetemas(text)} />
                 <TouchableOpacity
                     onPress={() => navigation.navigate('SolicitudAsesoriaAgendada', {
                         asesor: asesor,
@@ -89,7 +91,6 @@ function SolicitudAsesoria({ route, navigation }) {
                 </TouchableOpacity>
             </ScrollView>
         </NativeBaseProvider>
-
     );
 }
 
