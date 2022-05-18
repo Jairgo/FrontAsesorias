@@ -8,7 +8,7 @@ export default function App() {
   const value = useMemo(() => ({ user, setUser }), [user, setUser]);
   const [asesor, setAsesor] = useState(false);
 
-  const [isLoguedIn, setIsLoguedIn] = useState(true);
+  const [isLoguedIn, setIsLoguedIn] = useState(false);
   const handlerLoguedIn = (val) => setIsLoguedIn(val);
 
   const toggleHandler = () => {
